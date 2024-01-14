@@ -19,6 +19,7 @@ enum Decor{
 
 //牌大小
 enum Number{
+    Num_A=1,
     Num_2=2,
     Num_3=3,
     Num_4=4,
@@ -31,7 +32,6 @@ enum Number{
     Num_J=11,
     Num_Q=12,
     Num_K=13,
-    Num_A=1,
 };
 
 //牌 一张牌由花色和数字组成
@@ -263,6 +263,15 @@ inline BrandType checkBranchType(Cards cards){
     bool pairs = isTwoPair(cards);//两对
     bool pair = isOnePair(cards);//一对
 
+    qDebug()<<"同花"<<flush;
+    qDebug()<<"A"<<a;
+    qDebug()<<"顺子"<<straight;
+    qDebug()<<"四条"<<four;
+    qDebug()<<"葫芦"<<fullhouse;
+    qDebug()<<"三条"<<three;
+    qDebug()<<"两对"<<pairs;
+    qDebug()<<"一对"<<pair;
+
     //从顶往下判断
     //是否是皇家同花顺
     if(flush && a && straight) return BrandType::RoyalFlush;
@@ -289,7 +298,7 @@ inline BrandType checkBranchType(Cards cards){
     if(!flush && !straight && pairs) return TwoPair;
 
     //一对
-    if(!flush && !straight && pairs && pair) return OnePair;
+    if(!flush && !straight && !pairs && pair) return OnePair;
 
     //高牌
     if(!flush && !straight && !four && !fullhouse && !three && !pairs && !pair) return HighCard;
@@ -307,8 +316,7 @@ inline bool isWin(Cards cards1,Cards cards2){
             return true;
         }else if(cards1.status == cards2.status){
             //两个牌型相同
-
-        }else if(cards1.status > cards2.status){
+        }else{
             return false;
         }
     }else{
@@ -322,6 +330,20 @@ class Poker
 {
 public:
     Poker();
+
+    static Poker* instance();
+
+    void clearExistCard();
+    Card getCard();
+    bool checkExistCard(Card c);
+
+    void checkCards(QList<Card> cards, Cards &output);//检测7张牌
+
+    QString getBrandType(BrandType bt);
+
+private:
+    QList<Card> existCard;//已经发过的牌
+    static Poker *sinstance;
 };
 
 #endif // POKER_H
