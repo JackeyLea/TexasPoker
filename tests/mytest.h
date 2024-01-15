@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QtTest>
-#include "poker.h"
+#include "../texaspoker/poker.h"
 
 class MyTest : public QObject
 {
