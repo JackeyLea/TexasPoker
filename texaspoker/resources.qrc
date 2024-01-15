@@ -54,5 +54,6 @@
         <file>resources/images/010.png</file>
         <file>resources/images/background.png</file>
         <file>resources/images/back.png</file>
+        <file>resources/images/poker.svg</file>
     </qresource>
 </RCC>
