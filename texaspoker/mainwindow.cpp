@@ -49,13 +49,27 @@ void MainWindow::on_btnPlay_clicked()
 
 void MainWindow::on_compare_clicked()
 {
-    Cards resultCards;
-    QList<Card> inputCards;
+    //用户1
+    Cards user1OutputCards;
+    QList<Card> user1Cards;
     for(int i=0;i<7;i++){
-        inputCards.append(curCards[i]);
+        user1Cards.append(curCards[i]);
     }
-    Poker::instance()->checkCards(inputCards,resultCards);
-    qDebug()<<resultCards.status;
-    ui->lineUser1Type->setText(Poker::instance()->getBrandType(resultCards.status));
+    Poker::instance()->checkCards(user1Cards,user1OutputCards);
+    qDebug()<<user1OutputCards.status;
+    ui->lineUser1Type->setText(Poker::instance()->getBrandType(user1OutputCards.status));
+
+    //用户2
+    Cards user2OutputCards;
+    QList<Card> user2Cards;
+    //公共牌
+    for(int i=0;i<5;i++){
+        user2Cards.append(curCards[i]);
+    }
+    user2Cards.append(curCards[7]);
+    user2Cards.append(curCards[8]);
+    Poker::instance()->checkCards(user2Cards,user2OutputCards);
+    qDebug()<<user2OutputCards.status;
+    ui->lineUser2Type->setText(Poker::instance()->getBrandType(user2OutputCards.status));
 }
 
