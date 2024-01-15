@@ -71,5 +71,15 @@ void MainWindow::on_compare_clicked()
     Poker::instance()->checkCards(user2Cards,user2OutputCards);
     qDebug()<<user2OutputCards.status;
     ui->lineUser2Type->setText(Poker::instance()->getBrandType(user2OutputCards.status));
+
+    //结果
+    char r = isWin(user1OutputCards,user2OutputCards);
+    if(r==1){
+        ui->lineResult->setText("用户2胜");
+    }else if(r==0){
+        ui->lineResult->setText("用户1胜");
+    }else if(r==-1){
+        ui->lineResult->setText("状态异常");
+    }
 }
 

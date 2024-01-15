@@ -308,22 +308,23 @@ inline BrandType checkBranchType(Cards cards){
 
 //只比牌判断输赢，不处理牌
 //true为2赢
-inline bool isWin(Cards cards1,Cards cards2){
+inline char isWin(Cards cards1,Cards cards2){
     //如果两者有状态就比较
     if(cards1.status!=None && cards2.status!=None){
         //先比牌型
         if(cards1.status < cards2.status){
-            return true;
+            return 1;
         }else if(cards1.status == cards2.status){
             //两个牌型相同
         }else{
-            return false;
+            return 0;
         }
     }else{
         qDebug()<<"Please check branch type first.";
+        return -1;//状态异常
     }
 
-    return false;
+    return -1;
 }
 
 class Poker
@@ -337,7 +338,7 @@ public:
     Card getCard();
     bool checkExistCard(Card c);
 
-    void checkCards(QList<Card> cards, Cards &output);//检测7张牌
+    void checkCards(QList<Card> cards, Cards &output);//从7张牌中检测出最大的牌
 
     QString getBrandType(BrandType bt);
 
