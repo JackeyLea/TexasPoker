@@ -38,6 +38,11 @@ void MainWindow::on_btnPlay_clicked()
     Poker::instance()->clearExistCard();
     curCards.clear();
 
+    //清空状态
+    ui->lineResult->clear();
+    ui->lineUser1Type->clear();
+    ui->lineUser2Type->clear();
+
     for(int i=0;i<9;i++){
         Card c = Poker::instance()->getCard();
         curCards.append(c);

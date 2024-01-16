@@ -59,7 +59,7 @@ void Poker::checkCards(QList<Card> cards, Cards &output)
 {
     assert(cards.size()==7);
 
-    BrandType bt=None;
+    BrandType bt=HighCard;//默认情况下是高牌
 
     for(int a=0;a<3;a++){
         for(int b=a+1;b<4;b++){

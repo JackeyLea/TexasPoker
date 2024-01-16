@@ -55,18 +55,67 @@ enum BrandType{
     RoyalFlush,//皇家同花顺 同色的10JQKA
 };
 
+//高牌结构体
+struct HighCards{
+    Number c1;
+    Number c2;
+    Number c3;
+    Number c4;
+    Number c5;
+};
+//一对
+struct OnePairCards{
+    Number pairc;//一对的那个数值
+    Number c1;
+    Number c2;
+    Number c3;
+};
+//两对
+struct TwoPairCards{
+    Number pairc1;//两对数值
+    Number pairc2;//两对数小的那个
+    Number c1;
+};
+//三条
+struct ThreeCards{
+    Number threec;//三条的数
+    Number c1;
+    Number c2;
+};
+//顺子
+struct StraightCards{
+    Number start;//顺子启动
+    Number end;//顺子结束
+};
+//同花
+struct FlushCards{
+    Number c1;
+    Number c2;
+    Number c3;
+    Number c4;
+    Number c5;
+};
+//葫芦
+struct FullHouseCards{
+    Number threec;//三条
+    Number twoc;//两张
+};
+//四条
+struct FourCards{
+    Number fourc;//四条
+    Number c1;
+};
+//同花顺
+struct StraightFlushCards{
+    Number start;//顺子启动
+    Number end;//顺子结束
+};
+//皇家同花顺只有一个，不论什么颜色都是平局
 // 结果牌，一般5张
 struct Cards{
     BrandType status;//是杂牌还是对子、顺子，减少后续判断时间
     Card card[5];//5张牌
-
-    Cards(){
-        status = None;
-        memset(card,0,sizeof(card));
-    }
-    Cards(Card _card[5]){
-        memcpy(card,_card,sizeof(card));
-    }
+    Number highCardNum;//高牌时使用，最大数
 };
 //一对
 inline bool isOnePair(Cards cards){
@@ -252,7 +301,7 @@ inline bool isStraight(Cards cards){
 }
 
 //检查牌型
-inline BrandType checkBranchType(Cards cards){
+inline BrandType checkBranchType(Cards &cards){
     //采用进阶式判断 已经是顺子，颜色一样就是同花顺，最大是A就是皇家同花顺
     bool flush=isFlush(cards);//同花
     bool a=isA(cards);//A
@@ -316,7 +365,50 @@ inline char isWin(Cards cards1,Cards cards2){
             return 1;
         }else if(cards1.status == cards2.status){
             //两个牌型相同
+            switch(cards1.status){
+            case RoyalFlush:
+                break;//一副牌不可能有两个皇家同花顺
+            case StraightFlush://同花顺
+            {
+                break;
+            }
+            case FourOfaKind://四条
+                {
+                break;
+            }
+            case FullHouse://葫芦
+            {
+                break;
+            }
+            case Flush://同花
+            {
+                break;
+            }
+            case Straight://顺子
+            {
+                break;
+            }
+            case ThreeOfaKind://三条
+            {
+                break;
+            }
+            case TwoPair://两对
+            {
+                break;
+            }
+            case OnePair://一对
+            {
+                break;
+            }
+            case HighCard://高牌
+            {
+                break;
+            }
+            default:
+                return -1;
+            }
         }else{
+            //用户1赢
             return 0;
         }
     }else{
