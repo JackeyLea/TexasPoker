@@ -2,6 +2,7 @@
 #define TEXASWIDGET_H
 
 #include <QWidget>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,17 +18,14 @@ public:
     TexasWidget(QWidget *parent = nullptr);
     ~TexasWidget();
 
-    void displayCard();
-
 private slots:
-    void on_comboBoxNum_currentTextChanged(const QString &txt);
-
-    void on_comboBoxDecor_currentTextChanged(const QString &txt);
+    void on_btn_Gen_clicked();
 
 private:
     Ui::TexasWidget *ui;
 
     int decor;
     int num;
+    QLabel* label[5];
 };
 #endif // TEXASWIDGET_H

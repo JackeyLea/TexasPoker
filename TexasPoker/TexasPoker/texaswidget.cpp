@@ -1,16 +1,25 @@
 #include "texaswidget.h"
 #include "ui_texaswidget.h"
 
+#include "card.h"
+#include "generator.h"
+
 TexasWidget::TexasWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TexasWidget)
-    ,decor(0)
-    ,num(2)
 {
     ui->setupUi(this);
 
+    label[0] = ui->labelImg1;
+    label[1] = ui->labelImg2;
+    label[2] = ui->labelImg3;
+    label[3] = ui->labelImg4;
+    label[4] = ui->labelImg5;
+
     //设置默认图片
-    ui->labelImg->setPixmap(QPixmap(":/resources/images/back.svg"));
+    for(int i=0;i<5;i++){
+        label[i]->setPixmap(QPixmap(":/resources/images/back.svg"));
+    }
 }
 
 TexasWidget::~TexasWidget()
@@ -18,23 +27,16 @@ TexasWidget::~TexasWidget()
     delete ui;
 }
 
-void TexasWidget::displayCard()
+
+void TexasWidget::on_btn_Gen_clicked()
 {
-    QString path = QString(":/resources/images/%1%2.svg").arg(decor).arg(num);
-    ui->labelImg->setPixmap(QPixmap(path));
-}
+    QList<Card> cards = Generator::instance()->getCards();
+    assert(cards.size()==5);
 
-
-void TexasWidget::on_comboBoxNum_currentTextChanged(const QString &txt)
-{
-    num = txt.toInt();
-    displayCard();
-}
-
-
-void TexasWidget::on_comboBoxDecor_currentTextChanged(const QString &txt)
-{
-    decor = txt.toInt();
-    displayCard();
+    for(int i=0;i<5;i++){
+        Card c = cards[i];
+        QString path = QString(":/resources/images/%1%2.svg").arg(c.CardDecor).arg(c.CardNum);
+        label[i]->setPixmap(QPixmap(path));
+    }
 }
 

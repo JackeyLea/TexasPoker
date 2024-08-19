@@ -25,7 +25,7 @@ Card Generator::getCard()
     Card c;
     do{
         int decor= QRandomGenerator::global()->bounded(0,4);
-        int num = QRandomGenerator::global()->bounded(1,14);
+        int num = QRandomGenerator::global()->bounded(2,15);
         //qDebug()<<decor<<num;
         c.CardDecor=(Decor)decor;
         c.CardNum=(Number)num;

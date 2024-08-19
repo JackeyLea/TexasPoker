@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1010</width>
-    <height>278</height>
+    <width>1150</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,14 +18,14 @@
     <widget class="QLabel" name="labelImg1">
      <property name="minimumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="text">
@@ -40,14 +40,14 @@
     <widget class="QLabel" name="labelImg2">
      <property name="minimumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="text">
@@ -62,14 +62,14 @@
     <widget class="QLabel" name="labelImg3">
      <property name="minimumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="text">
@@ -84,14 +84,14 @@
     <widget class="QLabel" name="labelImg4">
      <property name="minimumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="text">
@@ -106,14 +106,14 @@
     <widget class="QLabel" name="labelImg5">
      <property name="minimumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>172</width>
-       <height>256</height>
+       <width>200</width>
+       <height>310</height>
       </size>
      </property>
      <property name="text">
