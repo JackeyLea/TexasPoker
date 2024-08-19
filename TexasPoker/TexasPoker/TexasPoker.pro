@@ -13,6 +13,7 @@ SOURCES += \
     texaswidget.cpp
 
 HEADERS += \
+    Card.h \
     texaswidget.h
 
 FORMS += \
