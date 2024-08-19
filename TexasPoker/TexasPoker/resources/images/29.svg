@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="74mm"
+   height="105mm"
+   viewBox="0 0 74 105"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="Diamond_9.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.98603159"
+     inkscape:cx="397.55319"
+     inkscape:cy="236.80783"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="club" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="club1"
+     inkscape:groupmode="layer"
+     id="club"
+     transform="translate(-81.85335,-116.02149)">
+    <g
+       id="rect"
+       transform="matrix(0.33468551,0,0,0.35634692,90.738379,208.24221)">
+      <path
+         style="fill:#ffffff;stroke:#000000;stroke-width:2.5"
+         d="m 0,0 c 0,3.78 3.09,6.87 6.87,6.87 h 152.845 c 3.77,0 6.86,-3.09 6.86,-6.87 v -228.4 c 0,-3.78 -3.09,-6.87 -6.86,-6.87 H 6.87 c -3.78,0 -6.87,3.09 -6.87,6.87 z"
+         id="path1" />
+    </g>
+    <g
+       id="number"
+       transform="matrix(3.0716273,0,0,1.44778,89.649466,172.53578)"
+       style="fill:#ff0000">
+      <text
+         transform="scale(0.56453,1.05741)"
+         font-family="'Bitstream Vera Serif'"
+         font-weight="bold"
+         font-size="43px"
+         id="9"
+         style="fill:#ff0000">9</text>
+    </g>
+    <g
+       id="use567"
+       transform="matrix(-1.953125,0,0,-1.8891688,129.85335,194.02149)">
+      <path
+         style="fill:#e6180a"
+         d="m 0,0 c -2.56,0 -5.12,0 -7.68,0 0.8747,0.039 1.619,0.605 2.322,1.0728 C -3.779,2.264 -2.3,3.63 -1.132,5.228 -0.587,6.032 -0.0144,6.936 0,7.94 M -7.68,0 c 1.11,-0.035 2.058,-0.7413 2.904,-1.393 1.495,-1.255 2.789,-2.748 3.881,-4.364 C -0.494,-6.426 -0.022,-7.135 0,-7.94 0,-5.293 0,-2.647 0,0 m 0,-7.94 c 0.038,1.182 0.758,2.206 1.438,3.12 1.212,1.51 2.648,2.846 4.228,3.963 C 6.28,-0.474 6.932,-0.0185 7.68,0 5.12,0 2.56,0 0,0 M 7.68,0 C 6.57,0.035 5.622,0.741 4.776,1.392 3.281,2.648 1.987,4.141 0.895,5.757 0.494,6.426 0.0225,7.135 0,7.94 0,5.293 0,2.647 0,0"
+         id="path2" />
+    </g>
+  </g>
+</svg>
