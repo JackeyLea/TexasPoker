@@ -11,7 +11,7 @@ public:
     static Generator* instance();
 
     void clearExistCard();
-    Card getCard();
+    Card getIndepentCard();
     QList<Card> getCards();
 
     bool checkExistCard(Card c);

@@ -1,6 +1,7 @@
 #include "generator.h"
 
 #include <QRandomGenerator>
+#include <QDebug>
 
 Generator* Generator::s_instance = NULL;
 
@@ -20,15 +21,13 @@ void Generator::clearExistCard()
     existCard.clear();
 }
 
-Card Generator::getCard()
+Card Generator::getIndepentCard()
 {
     Card c;
+    c.clear();
     do{
-        int decor= QRandomGenerator::global()->bounded(0,4);
-        int num = QRandomGenerator::global()->bounded(2,15);
-        //qDebug()<<decor<<num;
-        c.CardDecor=(Decor)decor;
-        c.CardNum=(Number)num;
+        c = getCard();
+        //qDebug()<<c.CardDecor<<c.CardNum;
     }while(checkExistCard(c));
     existCard.append(c);
 
@@ -39,7 +38,7 @@ QList<Card> Generator::getCards()
 {
     QList<Card> cards;
     for(int i=0;i<5;i++){
-        Card c = getCard();
+        Card c = getIndepentCard();
         cards.append(c);
     }
 
