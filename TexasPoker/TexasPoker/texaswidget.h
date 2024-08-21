@@ -24,8 +24,6 @@ private slots:
 private:
     Ui::TexasWidget *ui;
 
-    int decor;
-    int num;
-    QLabel* label[5];
+    QLabel* label[10];
 };
 #endif // TEXASWIDGET_H
