@@ -243,7 +243,7 @@ inline bool isStraight(Cards &cards){
             return false;
         }
     }
-    return false;
+    return true;
 }
 
 
@@ -623,12 +623,12 @@ inline char CardsCompare(Cards cards1,Cards cards2){
                 break;
             case TwoPair:
                 //两对
-                qDebug()<<cards1.Data.pairs.pairc1
-                         <<cards1.Data.pairs.pairc2
-                         <<cards1.Data.pairs.c1;
-                qDebug()<<cards2.Data.pairs.pairc1
-                         <<cards2.Data.pairs.pairc2
-                         <<cards2.Data.pairs.c1;
+                // qDebug()<<cards1.Data.pairs.pairc1
+                //          <<cards1.Data.pairs.pairc2
+                //          <<cards1.Data.pairs.c1;
+                // qDebug()<<cards2.Data.pairs.pairc1
+                //          <<cards2.Data.pairs.pairc2
+                //          <<cards2.Data.pairs.c1;
                 //大的那个
                 if(cards1.Data.pairs.pairc2 > cards2.Data.pairs.pairc2){
                     return 1;
