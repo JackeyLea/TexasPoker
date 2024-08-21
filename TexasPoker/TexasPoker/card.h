@@ -546,9 +546,9 @@ inline void checkBranchType(Cards &cards){
         cards.Data.pairs.pairc2 = cards.card[2].CardNum;
         //剩余的数值
         cards.Data.pairs.c1 = cards.card[4].CardNum;
-        qDebug()<<cards.Data.pairs.pairc1
-                 <<cards.Data.pairs.pairc2
-                 <<cards.Data.pairs.c1;
+        // qDebug()<<cards.Data.pairs.pairc1
+        //          <<cards.Data.pairs.pairc2
+        //          <<cards.Data.pairs.c1;
         return;
     }
 
