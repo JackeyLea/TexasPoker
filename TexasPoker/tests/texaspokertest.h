@@ -20,6 +20,10 @@ public:
     TexasPokerTest();
 
 private slots:
+    /*
+     * 检测getBrandType函数
+     */
+    void case_checkGetBrandType();
     /* 检测各个独立的牌型检测函数是否正常
      */
     void case_checkOnePair();

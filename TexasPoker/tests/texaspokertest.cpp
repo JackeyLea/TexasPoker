@@ -134,6 +134,20 @@ TexasPokerTest::TexasPokerTest()
     c0.status=None;
 }
 
+void TexasPokerTest::case_checkGetBrandType()
+{
+    QVERIFY(getBrandType(HighCard)=="高牌");//高牌
+    QVERIFY(getBrandType(OnePair)=="一对");//高牌
+    QVERIFY(getBrandType(TwoPair)=="两对");//高牌
+    QVERIFY(getBrandType(ThreeOfaKind)=="三条");//高牌
+    QVERIFY(getBrandType(Straight)=="顺子");//高牌
+    QVERIFY(getBrandType(Flush)=="同花");//高牌
+    QVERIFY(getBrandType(FullHouse)=="葫芦");//高牌
+    QVERIFY(getBrandType(FourOfaKind)=="四条");//高牌
+    QVERIFY(getBrandType(StraightFlush)=="同花顺");//高牌
+    QVERIFY(getBrandType(RoyalFlush)=="皇家同花顺");//高牌
+}
+
 void TexasPokerTest::case_checkOnePair()
 {
     QVERIFY(isOnePair(c9)==false);//皇家同花顺
