@@ -43,7 +43,7 @@ private slots:
     /*
      * 检测牌型对比功能是否正常
      */
-    //void case_CardsCompare();
+    void case_CardsCompare();//不同的牌型对比
 
 private:
     //高牌

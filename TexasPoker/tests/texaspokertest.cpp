@@ -288,3 +288,61 @@ void TexasPokerTest::case_checkBrandType()
     QVERIFY(c0.status==BrandType::HighCard);
 }
 
+void TexasPokerTest::case_CardsCompare()
+{
+    //高牌
+    QVERIFY(CardsCompare(c0,c1)==2);//高牌-一对
+    QVERIFY(CardsCompare(c0,c2)==2);//高牌-两对
+    QVERIFY(CardsCompare(c0,c3)==2);//高牌-三条
+    QVERIFY(CardsCompare(c0,c4)==2);//高牌-顺子
+    QVERIFY(CardsCompare(c0,c5)==2);//高牌-同花
+    QVERIFY(CardsCompare(c0,c6)==2);//高牌-葫芦
+    QVERIFY(CardsCompare(c0,c7)==2);//高牌-四条
+    QVERIFY(CardsCompare(c0,c8)==2);//高牌-同花顺
+    QVERIFY(CardsCompare(c0,c9)==2);//高牌-皇家同花顺
+    //一对
+    QVERIFY(CardsCompare(c1,c2)==2);//一对-两对
+    QVERIFY(CardsCompare(c1,c3)==2);//一对-三条
+    QVERIFY(CardsCompare(c1,c4)==2);//一对-顺子
+    QVERIFY(CardsCompare(c1,c5)==2);//一对-同花
+    QVERIFY(CardsCompare(c1,c6)==2);//一对-葫芦
+    QVERIFY(CardsCompare(c1,c7)==2);//一对-四条
+    QVERIFY(CardsCompare(c1,c8)==2);//一对-同花顺
+    QVERIFY(CardsCompare(c1,c9)==2);//一对-皇家同花顺
+    //两对
+    QVERIFY(CardsCompare(c2,c3)==2);//两对-三条
+    QVERIFY(CardsCompare(c2,c4)==2);//两对-顺子
+    QVERIFY(CardsCompare(c2,c5)==2);//两对-同花
+    QVERIFY(CardsCompare(c2,c6)==2);//两对-葫芦
+    QVERIFY(CardsCompare(c2,c7)==2);//两对-四条
+    QVERIFY(CardsCompare(c2,c8)==2);//两对-同花顺
+    QVERIFY(CardsCompare(c2,c9)==2);//两对-皇家同花顺
+    //三条
+    QVERIFY(CardsCompare(c3,c4)==2);//三条-顺子
+    QVERIFY(CardsCompare(c3,c5)==2);//三条-同花
+    QVERIFY(CardsCompare(c3,c6)==2);//三条-葫芦
+    QVERIFY(CardsCompare(c3,c7)==2);//三条-四条
+    QVERIFY(CardsCompare(c3,c8)==2);//三条-同花顺
+    QVERIFY(CardsCompare(c3,c9)==2);//三条-皇家同花顺
+    //顺子
+    QVERIFY(CardsCompare(c4,c5)==2);//顺子-同花
+    QVERIFY(CardsCompare(c4,c6)==2);//顺子-葫芦
+    QVERIFY(CardsCompare(c4,c7)==2);//顺子-四条
+    QVERIFY(CardsCompare(c4,c8)==2);//顺子-同花顺
+    QVERIFY(CardsCompare(c4,c9)==2);//顺子-皇家同花顺
+    //同花
+    QVERIFY(CardsCompare(c5,c6)==2);//同花-葫芦
+    QVERIFY(CardsCompare(c5,c7)==2);//同花-四条
+    QVERIFY(CardsCompare(c5,c8)==2);//同花-同花顺
+    QVERIFY(CardsCompare(c5,c9)==2);//同花-皇家同花顺
+    //葫芦
+    QVERIFY(CardsCompare(c6,c7)==2);//葫芦-四条
+    QVERIFY(CardsCompare(c6,c8)==2);//葫芦-同花顺
+    QVERIFY(CardsCompare(c6,c9)==2);//葫芦-皇家同花顺
+    //四条
+    QVERIFY(CardsCompare(c7,c8)==2);//四条-同花顺
+    QVERIFY(CardsCompare(c7,c9)==2);//四条-皇家同花顺
+    //同花顺
+    QVERIFY(CardsCompare(c8,c9)==2);//同花顺-皇家同花顺
+}
+
