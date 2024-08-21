@@ -10,7 +10,6 @@ class Generator
 public:
     static Generator* instance();
 
-    void clearExistCard();
     Card getIndepentCard();
     QList<Card> getCards();
 

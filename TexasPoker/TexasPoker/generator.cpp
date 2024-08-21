@@ -11,18 +11,16 @@ Generator *Generator::instance()
         s_instance = new Generator();
     }
 
-    s_instance->clearExistCard();
-
     return s_instance;
-}
-
-void Generator::clearExistCard()
-{
-    existCard.clear();
 }
 
 Card Generator::getIndepentCard()
 {
+    //当前牌不够数量的时候开启新牌
+    if(existCard.size()>=52){
+        qDebug()<<"new cards";
+        existCard.clear();
+    }
     Card c;
     c.clear();
     do{
@@ -49,6 +47,7 @@ bool Generator::checkExistCard(Card c)
 {
     int num = existCard.size();
     if(num==0) return false;
+    if(num>=52) return true;
 
     for(int i=0;i<num;i++){
         Card temp = existCard.at(i);

@@ -35,7 +35,6 @@ TexasWidget::~TexasWidget()
 
 void TexasWidget::on_btn_Gen_clicked()
 {
-    Generator::instance()->clearExistCard();
     QList<Card> cards = Generator::instance()->getCards();
     assert(cards.size()==5);
 
