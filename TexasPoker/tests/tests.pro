@@ -4,7 +4,7 @@
 ### \brief 单元测试
 ########################################
 
-QT -= gui
+QT += core testlib
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
