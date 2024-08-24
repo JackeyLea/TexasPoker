@@ -1,6 +1,5 @@
 #include "texaspokertest.h"
 
-//检测一对
 TexasPokerTest::TexasPokerTest()
 {
     //皇家同花顺
@@ -14,7 +13,7 @@ TexasPokerTest::TexasPokerTest()
     c9.card[3].CardNum=Num_K;
     c9.card[4].CardDecor=Decor::Spade;
     c9.card[4].CardNum=Num_A;
-    c9.status=None;
+    c9.status=RoyalFlush;
 
     //同花顺 不能是皇家同花顺
     c8.card[0].CardDecor=Decor::Spade;
@@ -27,7 +26,7 @@ TexasPokerTest::TexasPokerTest()
     c8.card[3].CardNum=Num_6;
     c8.card[4].CardDecor=Decor::Spade;
     c8.card[4].CardNum=Num_7;
-    c8.status=None;
+    c8.status=StraightFlush;
 
     //四条
     c7.card[0].CardDecor=Decor::Spade;
@@ -40,7 +39,7 @@ TexasPokerTest::TexasPokerTest()
     c7.card[3].CardNum=Num_4;
     c7.card[4].CardDecor=Decor::Club;
     c7.card[4].CardNum=Num_7;
-    c7.status=None;
+    c7.status=FourOfaKind;
 
     //葫芦
     c6.card[0].CardDecor=Decor::Spade;
@@ -53,7 +52,7 @@ TexasPokerTest::TexasPokerTest()
     c6.card[3].CardNum=Num_7;
     c6.card[4].CardDecor=Decor::Diamond;
     c6.card[4].CardNum=Num_7;
-    c6.status=None;
+    c6.status=FullHouse;
 
     //同花 不能是顺子 不能是皇家同花顺
     c5.card[0].CardDecor=Decor::Heart;
@@ -66,7 +65,7 @@ TexasPokerTest::TexasPokerTest()
     c5.card[3].CardNum=Num_K;
     c5.card[4].CardDecor=Decor::Heart;
     c5.card[4].CardNum=Num_Q;
-    c5.status=None;
+    c5.status=Flush;
 
     //顺子不能是同花、不能是皇家同花顺
     c4.card[0].CardDecor=Decor::Club;
@@ -79,7 +78,7 @@ TexasPokerTest::TexasPokerTest()
     c4.card[3].CardNum=Num_8;
     c4.card[4].CardDecor=Decor::Club;
     c4.card[4].CardNum=Num_7;
-    c4.status=None;
+    c4.status=Straight;
 
     //三条不能是葫芦不能是四条
     c3.card[0].CardDecor=Decor::Spade;
@@ -92,7 +91,7 @@ TexasPokerTest::TexasPokerTest()
     c3.card[3].CardNum=Num_8;
     c3.card[4].CardDecor=Decor::Diamond;
     c3.card[4].CardNum=Num_7;
-    c3.status=None;
+    c3.status=ThreeOfaKind;
 
     //两对
     c2.card[0].CardDecor=Decor::Spade;
@@ -105,7 +104,7 @@ TexasPokerTest::TexasPokerTest()
     c2.card[3].CardNum=Num_7;
     c2.card[4].CardDecor=Decor::Diamond;
     c2.card[4].CardNum=Num_7;
-    c2.status=None;
+    c2.status=TwoPair;
 
     //一对不能含两对和葫芦
     c1.card[0].CardDecor=Decor::Spade;
@@ -118,20 +117,20 @@ TexasPokerTest::TexasPokerTest()
     c1.card[3].CardNum=Num_8;
     c1.card[4].CardDecor=Decor::Diamond;
     c1.card[4].CardNum=Num_7;
-    c1.status=None;
+    c1.status=OnePair;
 
     //高牌，什么也不是
     c0.card[0].CardDecor=Decor::Spade;
     c0.card[0].CardNum=Num_A;
     c0.card[1].CardDecor=Decor::Heart;
-    c0.card[1].CardNum=Num_4;
+    c0.card[1].CardNum=Num_9;
     c0.card[2].CardDecor=Decor::Diamond;
-    c0.card[2].CardNum=Num_9;
+    c0.card[2].CardNum=Num_8;
     c0.card[3].CardDecor=Decor::Club;
-    c0.card[3].CardNum=Num_8;
+    c0.card[3].CardNum=Num_7;
     c0.card[4].CardDecor=Decor::Diamond;
-    c0.card[4].CardNum=Num_7;
-    c0.status=None;
+    c0.card[4].CardNum=Num_4;
+    c0.status=HighCard;
 }
 
 void TexasPokerTest::case_checkGetBrandType()
@@ -147,7 +146,7 @@ void TexasPokerTest::case_checkGetBrandType()
     QVERIFY(getBrandType(StraightFlush)=="同花顺");//高牌
     QVERIFY(getBrandType(RoyalFlush)=="皇家同花顺");//高牌
 }
-
+// WARNING 以下几个函数会将5张牌按由小到大进行排序
 void TexasPokerTest::case_checkOnePair()
 {
     QVERIFY(isOnePair(c9)==false);//皇家同花顺
@@ -266,6 +265,7 @@ void TexasPokerTest::case_checkA()
 
 void TexasPokerTest::case_checkBrandType()
 {
+    // WARNING 此处会修改牌型
     checkBranchType(c9);
     QVERIFY(c9.status==BrandType::RoyalFlush);//皇家同花顺
     checkBranchType(c8);
@@ -344,5 +344,118 @@ void TexasPokerTest::case_CardsCompare()
     QVERIFY(CardsCompare(c7,c9)==2);//四条-皇家同花顺
     //同花顺
     QVERIFY(CardsCompare(c8,c9)==2);//同花顺-皇家同花顺
+}
+
+void TexasPokerTest::case_HighCardCompare()
+{
+    // A > B
+    Cards temp;
+    temp.card[0].CardDecor=Decor::Diamond;
+    temp.card[0].CardNum=Num_2;
+    temp.card[1].CardDecor=Decor::Spade;
+    temp.card[1].CardNum=Num_4;
+    temp.card[2].CardDecor=Decor::Club;
+    temp.card[2].CardNum=Num_6;
+    temp.card[3].CardDecor=Decor::Spade;
+    temp.card[3].CardNum=Num_J;
+    temp.card[4].CardDecor=Decor::Heart;
+    temp.card[4].CardNum=Num_A;
+    temp.status=HighCard;
+    QVERIFY(CardsCompare(temp,c0)==1);
+    // A<B
+    QVERIFY(CardsCompare(c0,temp)==2);
+    // A==B
+    temp.card[0].CardDecor=Decor::Diamond;
+    temp.card[0].CardNum=Num_4;
+    temp.card[1].CardDecor=Decor::Spade;
+    temp.card[1].CardNum=Num_7;
+    temp.card[2].CardDecor=Decor::Club;
+    temp.card[2].CardNum=Num_8;
+    temp.card[3].CardDecor=Decor::Spade;
+    temp.card[3].CardNum=Num_9;
+    temp.card[4].CardDecor=Decor::Heart;
+    temp.card[4].CardNum=Num_A;
+    temp.status=HighCard;
+    QVERIFY(CardsCompare(temp,c0)==0);
+}
+
+void TexasPokerTest::case_OnePairCompare()
+{
+    // A > B 对子大
+    Cards temp;
+    temp.card[0].CardDecor=Decor::Diamond;
+    temp.card[0].CardNum=Num_2;
+    temp.card[1].CardDecor=Decor::Spade;
+    temp.card[1].CardNum=Num_2;
+    temp.card[2].CardDecor=Decor::Club;
+    temp.card[2].CardNum=Num_A;
+    temp.card[3].CardDecor=Decor::Spade;
+    temp.card[3].CardNum=Num_J;
+    temp.card[4].CardDecor=Decor::Heart;
+    temp.card[4].CardNum=Num_6;
+    temp.status=OnePair;
+    temp.Data.pair.pairc=Num_2;
+    temp.Data.pair.c[0]=Num_6;
+    temp.Data.pair.c[1]=Num_J;
+    temp.Data.pair.c[2]=Num_A;
+    QVERIFY(CardsCompare(c1,temp)==1);//a > b
+    QVERIFY(CardsCompare(temp,c1)==2);//a < b
+    // A > B 对子一样 但是单牌大
+    temp.card[0].CardDecor=Decor::Diamond;
+    temp.card[0].CardNum=Num_4;
+    temp.card[1].CardDecor=Decor::Spade;
+    temp.card[1].CardNum=Num_4;
+    temp.card[2].CardDecor=Decor::Club;
+    temp.card[2].CardNum=Num_10;
+    temp.card[3].CardDecor=Decor::Spade;
+    temp.card[3].CardNum=Num_8;
+    temp.card[4].CardDecor=Decor::Heart;
+    temp.card[4].CardNum=Num_7;
+    temp.status=OnePair;
+    temp.Data.pair.pairc=Num_4;
+    temp.Data.pair.c[0]=Num_10;
+    temp.Data.pair.c[1]=Num_8;
+    temp.Data.pair.c[2]=Num_7;
+    QVERIFY(CardsCompare(temp,c1)==1);//a > b
+    QVERIFY(CardsCompare(c1,temp)==2);//a < b
+    // A = B
+    temp.card[0].CardDecor=Decor::Diamond;
+    temp.card[0].CardNum=Num_4;
+    temp.card[1].CardDecor=Decor::Spade;
+    temp.card[1].CardNum=Num_4;
+    temp.card[2].CardDecor=Decor::Club;
+    temp.card[2].CardNum=Num_9;
+    temp.card[3].CardDecor=Decor::Spade;
+    temp.card[3].CardNum=Num_8;
+    temp.card[4].CardDecor=Decor::Heart;
+    temp.card[4].CardNum=Num_7;
+    temp.status=OnePair;
+    temp.Data.pair.pairc=Num_4;
+    temp.Data.pair.c[0]=Num_9;
+    temp.Data.pair.c[1]=Num_8;
+    temp.Data.pair.c[2]=Num_7;
+    QVERIFY(CardsCompare(c1,temp)==0);//a > b
+}
+
+void TexasPokerTest::case_TwoPairCompare()
+{
+    // A > B 对子比较大
+    Cards temp;
+    temp.card[0].CardDecor=Decor::Diamond;
+    temp.card[0].CardNum=Num_A;
+    temp.card[1].CardDecor=Decor::Spade;
+    temp.card[1].CardNum=Num_A;
+    temp.card[2].CardDecor=Decor::Club;
+    temp.card[2].CardNum=Num_J;
+    temp.card[3].CardDecor=Decor::Spade;
+    temp.card[3].CardNum=Num_J;
+    temp.card[4].CardDecor=Decor::Heart;
+    temp.card[4].CardNum=Num_6;
+    temp.status=TwoPair;
+    temp.Data.pairs.pairc1=Num_A;
+    temp.Data.pairs.pairc2=Num_J;
+    temp.Data.pairs.c=Num_6;
+    QVERIFY(CardsCompare(temp,c2)==1);//A>B
+    QVERIFY(CardsCompare(c2,temp)==2);//A<B
 }
 

@@ -44,6 +44,9 @@ private slots:
      * 检测牌型对比功能是否正常
      */
     void case_CardsCompare();//不同的牌型对比
+    void case_HighCardCompare();//不同高牌对比
+    void case_OnePairCompare();//不同一对对比
+    void case_TwoPairCompare();//不同两对对比
 
 private:
     //高牌
