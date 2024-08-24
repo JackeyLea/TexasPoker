@@ -15,7 +15,7 @@
 /*
  * 德州扑克不使用鬼牌
  * A最大
- * 相同牌不分花色
+ * 相同牌型不分花色
  */
 
 /////////////////////////////以下是扑克牌的定义////////////////////
@@ -54,10 +54,11 @@ struct Card{
     Decor CardDecor;//花色
     Number CardNum;//数字
 
+    //牌默认值
     void clear(){
         CardDecor = Spade;
         CardNum = Num_A;
-    }
+    }//clear
 };
 
 //牌型 5张牌组成一种牌型
@@ -76,7 +77,8 @@ enum BrandType{
 };
 
 ///////////////////
-/// \brief The OnePairCards class 一对
+/// 一对
+/// \brief 一对牌值
 ///
 struct OnePairCards{
     Number pairc;//一对对应的数值
@@ -86,7 +88,7 @@ struct OnePairCards{
 struct TwoPairCards{
     Number pairc1;//第一对对应数值
     Number pairc2;//
-    Number c1;
+    Number c;
 };
 
 struct ThreeKindCards{
@@ -101,7 +103,7 @@ struct FullHouseCards{
 
 struct FourKindCards{
     Number fourc;//四条
-    Number c1;
+    Number c;
 };
 
 //结果牌
@@ -118,8 +120,9 @@ struct Cards{
 };
 
 /////////////////////
-/// \brief getCard 获取一张牌，可能重复
-/// \return
+/// 获取一张牌，可能重复
+/// \brief getCard
+/// \return 一张牌
 ///
 inline Card getCard(){
     Card c;
@@ -139,7 +142,7 @@ inline Card getCard(){
 ////////////////////////////////////////
 /// \brief getBrandType 获取牌型对应的字符串
 /// \param bt
-/// \return
+/// \return 字符串
 ///
 inline QString getBrandType(BrandType bt){
     QString r=QString("异常");
@@ -186,8 +189,61 @@ inline QString getBrandType(BrandType bt){
     return r;
 }
 
+//////////////////////////////////////
+/// 捋顺5张牌顺序 从大到小
+/// \brief straightCards
+/// \param cards
+///
+inline void straightCards(Cards &cards){
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if(cards.card[i].CardNum>cards.card[j].CardNum){
+                Number t = cards.card[j].CardNum;
+                cards.card[j].CardNum = cards.card[i].CardNum;
+                cards.card[i].CardNum = t;
+            }//if
+        }//for j
+    }//for i
+}
+
+////////////////////////////////////
+/// 检测5张牌中有没有重复的牌
+/// \brief isDuplicate
+/// \param cards
+/// \return
+///
+inline bool isDuplicate(Cards cards){
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if((cards.card[i].CardDecor==cards.card[j].CardDecor) &&
+                (cards.card[i].CardNum==cards.card[j].CardNum)){
+                return true;//两张牌重复
+            }//if
+        }//j
+    }//i
+
+    return false;//没有重复的牌
+}
+
+////////////////////////////
+/// 判断5张牌的数字是否一样
+/// \brief is5
+/// \param cards
+/// \return
+///
+inline bool is5(Cards cards){
+    if((cards.card[0].CardNum == cards.card[1].CardNum) &&
+        (cards.card[0].CardNum == cards.card[2].CardNum) &&
+        (cards.card[0].CardNum == cards.card[3].CardNum) &&
+        (cards.card[0].CardNum == cards.card[4].CardNum)){
+        return true;//5张牌数字一样，这个理论上一副牌中是不可能的
+    }//if
+    return false;//5张牌数字不一样
+}
+
 ////////////////////////////////
-/// \brief isHighA 判断5张牌中是否包含A
+/// 判断5张牌中是否包含A
+/// \brief isHighA
 /// \param cards
 /// \return
 ///
@@ -196,8 +252,8 @@ inline bool isHighA(Cards cards){
         if(cards.card[i].CardNum==Num_A){
             //检测到A就可以了
             return true;
-        }
-    }
+        }//if
+    }//for
     return false;
 }
 
@@ -211,8 +267,8 @@ inline bool isFlush(Cards cards){
         if(cards.card[i].CardDecor!=cards.card[i-1].CardDecor){
             //有一个不同色就不是同花
             return false;
-        }
-    }
+        }//if
+    }//for
     return true;
 }
 
@@ -222,30 +278,17 @@ inline bool isFlush(Cards cards){
 /// \return
 ///
 inline bool isStraight(Cards &cards){
-    int num[5];
-    for(int i=0;i<5;i++){
-        num[i]=cards.card[i].CardNum;
-    }
     //排序
-    for(int i=0;i<4;i++){
-        for(int j=i+1;j<5;j++){
-            if(num[j]<num[i]){
-                int temp = num[j];
-                num[j]=num[i];
-                num[i]=temp;
-            }
-        }
-    }
+    straightCards(cards);
 
     for(int i=1;i<5;i++){
-        if(num[i]-num[i-1]!=1){
+        if(cards.card[i].CardNum-cards.card[i-1].CardNum != 1){
             //有一个不是就退出
             return false;
-        }
-    }
+        }//if
+    }//for
     return true;
 }
-
 
 ///////////////////////////////////
 /// \brief isFourKing 判断四条
@@ -253,17 +296,6 @@ inline bool isStraight(Cards &cards){
 /// \return
 ///
 inline bool isFourKing(Cards &cards){
-    //排序
-    for(int i=0;i<4;i++){
-        for(int j=i+1;j<5;j++){
-            if(cards.card[i].CardNum>cards.card[j].CardNum){
-                Number t = cards.card[j].CardNum;
-                cards.card[j].CardNum = cards.card[i].CardNum;
-                cards.card[i].CardNum = t;
-            }
-        }
-    }
-
     QMap<int,int> map;
     for(int i=0;i<5;i++){
         if(!map.contains(cards.card[i].CardNum)){
@@ -290,15 +322,7 @@ inline bool isFourKing(Cards &cards){
 ///
 inline bool isThreeKind(Cards &cards){
     //排序
-    for(int i=0;i<4;i++){
-        for(int j=i+1;j<5;j++){
-            if(cards.card[i].CardNum>cards.card[j].CardNum){
-                Number t = cards.card[j].CardNum;
-                cards.card[j].CardNum = cards.card[i].CardNum;
-                cards.card[i].CardNum = t;
-            }
-        }
-    }
+    straightCards(cards);
 
     QMap<int,int> map;
     for(int i=0;i<5;i++){
@@ -335,15 +359,7 @@ inline bool isThreeKind(Cards &cards){
 ///
 inline bool isFullHouse(Cards &cards){
     //排序
-    for(int i=0;i<4;i++){
-        for(int j=i+1;j<5;j++){
-            if(cards.card[i].CardNum>cards.card[j].CardNum){
-                Number t = cards.card[j].CardNum;
-                cards.card[j].CardNum = cards.card[i].CardNum;
-                cards.card[i].CardNum = t;
-            }
-        }
-    }
+    straightCards(cards);
 
     QMap<int,int> map;
     for(int i=0;i<5;i++){
@@ -381,15 +397,8 @@ inline bool isFullHouse(Cards &cards){
 ///
 inline bool isTwoPair(Cards &cards){
     //排序
-    for(int i=0;i<4;i++){
-        for(int j=i+1;j<5;j++){
-            if(cards.card[i].CardNum>cards.card[j].CardNum){
-                Number t = cards.card[j].CardNum;
-                cards.card[j].CardNum = cards.card[i].CardNum;
-                cards.card[i].CardNum = t;
-            }
-        }
-    }
+    straightCards(cards);
+
     //缓存是否有对
     QMap<int,int> map;
     for(int i=0;i<5;i++){
@@ -423,15 +432,8 @@ inline bool isTwoPair(Cards &cards){
 ///
 inline bool isOnePair(Cards &cards){
     //排序
-    for(int i=0;i<4;i++){
-        for(int j=i+1;j<5;j++){
-            if(cards.card[i].CardNum>cards.card[j].CardNum){
-                Number t = cards.card[j].CardNum;
-                cards.card[j].CardNum = cards.card[i].CardNum;
-                cards.card[i].CardNum = t;
-            }
-        }
-    }
+    straightCards(cards);
+
     //缓存是否有对
     QMap<int,int> map;
     for(int i=0;i<5;i++){
@@ -545,7 +547,7 @@ inline void checkBranchType(Cards &cards){
         //第二对
         cards.Data.pairs.pairc2 = cards.card[2].CardNum;
         //剩余的数值
-        cards.Data.pairs.c1 = cards.card[4].CardNum;
+        cards.Data.pairs.c = cards.card[4].CardNum;
         // qDebug()<<cards.Data.pairs.pairc1
         //          <<cards.Data.pairs.pairc2
         //          <<cards.Data.pairs.c1;
@@ -589,7 +591,7 @@ inline void checkBranchType(Cards &cards){
 /// \param cards2
 /// \return 1 表示cards1赢 0表示平局 2表示cards2赢 -1表示异常
 ///
-inline char CardsCompare(Cards cards1,Cards cards2){
+inline int CardsCompare(Cards cards1,Cards cards2){
     //首先两个玩家的牌要有效
     if(cards1.status != None && cards2.status != None){
         //此时两个玩家牌都有效
@@ -621,14 +623,14 @@ inline char CardsCompare(Cards cards1,Cards cards2){
             case ThreeOfaKind:
                 //三条
                 break;
-            case TwoPair:
-                //两对
-                // qDebug()<<cards1.Data.pairs.pairc1
-                //          <<cards1.Data.pairs.pairc2
-                //          <<cards1.Data.pairs.c1;
-                // qDebug()<<cards2.Data.pairs.pairc1
-                //          <<cards2.Data.pairs.pairc2
-                //          <<cards2.Data.pairs.c1;
+            case TwoPair://两对
+            {
+                qDebug()<<cards1.Data.pairs.pairc1
+                         <<cards1.Data.pairs.pairc2
+                         <<cards1.Data.pairs.c;
+                qDebug()<<cards2.Data.pairs.pairc1
+                         <<cards2.Data.pairs.pairc2
+                         <<cards2.Data.pairs.c;
                 //大的那个
                 if(cards1.Data.pairs.pairc2 > cards2.Data.pairs.pairc2){
                     return 1;
@@ -638,23 +640,24 @@ inline char CardsCompare(Cards cards1,Cards cards2){
                         return 1;
                     }else if(cards1.Data.pairs.pairc1 == cards2.Data.pairs.pairc1){
                         //第二对一样大
-                        if(cards1.Data.pairs.c1 > cards2.Data.pairs.c1){
+                        if(cards1.Data.pairs.c > cards2.Data.pairs.c){
                             return 1;
-                        }else if(cards1.Data.pairs.c1 == cards2.Data.pairs.c1){
+                        }else if(cards1.Data.pairs.c == cards2.Data.pairs.c){
                             //一样大
-                            return 0;
+                            return 0;//一样
                         }else{
-                            return 2;
+                            return 2;//单牌
                         }
                     }else{
-                        return 2;
+                        return 2;//对子
                     }
                 }else{
-                    return 2;
+                    return 2;//玩家2对子大
                 }
-                break;
-            case OnePair:
-                //一对
+                break;// two pair
+            }
+            case OnePair://一对
+            {
                 // qDebug()<<cards1.card[0].CardNum
                 //          <<cards1.card[1].CardNum
                 //          <<cards1.card[2].CardNum
@@ -686,24 +689,25 @@ inline char CardsCompare(Cards cards1,Cards cards2){
                         }else if(cards1.Data.pair.c[1] == cards2.Data.pair.c[1]){
                             //第三个数
                             if(cards1.Data.pair.c[2] > cards2.Data.pair.c[2]){
-                                return 1;
+                                return 1;// 玩家1大
                             }else if(cards1.Data.pair.c[2] == cards2.Data.pair.c[2]){
-                                return 0;
+                                return 0;//4张牌相同 平局
                             }else{
-                                return 2;
+                                return 2;//玩家2单牌2大
                             }
                         }else{
-                            return 2;
+                            return 2;//玩家2单牌1大
                         }
                     }else{
-                        return 2;
+                        return 2;//玩家2对子大
                     }
                 }else{
-                    return 2;
+                    return 2;//牌2型大
                 }
-                break;
-            case HighCard:
-                //高牌
+                break;//one pair
+            }
+            case HighCard://高牌
+            {
                 // qDebug()<<cards1.card[0].CardNum
                 //          <<cards1.card[1].CardNum
                 //          <<cards1.card[2].CardNum
@@ -751,15 +755,18 @@ inline char CardsCompare(Cards cards1,Cards cards2){
                     return 2;//==4
                 }
                 break;
+            }//high card
             default:
+            {
                 return -1;
                 break;
-            }
+            }//default
+            }//switch
         }else{
             return 2;//玩家2赢
         }
     }else{
-        return -1;//
+        return -1;// None & None
     }
 
     return -1;
