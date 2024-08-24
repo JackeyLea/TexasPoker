@@ -59,6 +59,3 @@ bool Generator::checkExistCard(Card c)
 
     return false;
 }
-
-Generator::Generator() {}
-

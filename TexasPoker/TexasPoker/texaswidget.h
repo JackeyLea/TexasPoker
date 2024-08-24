@@ -15,7 +15,16 @@ class TexasWidget : public QWidget
     Q_OBJECT
 
 public:
+    ///
+    /// 构造函数
+    /// \brief TexasWidget
+    /// \param parent
+    ///
     TexasWidget(QWidget *parent = nullptr);
+
+    ///
+    /// 析构函数
+    ///
     ~TexasWidget();
 
 private slots:
