@@ -1228,3 +1228,56 @@ void TexasPokerTest::case_ThreeCompare()
     c4.Data.three.c[1]=Num_6;
     QVERIFY(CardsCompare(c1,c4)==0);//A=B
 }
+
+void TexasPokerTest::case_StraightCompare()
+{
+    // A > B 三条比较大
+    Cards c1;
+    c1.card[0].CardDecor=Decor::Diamond;
+    c1.card[0].CardNum=Num_A;
+    c1.card[1].CardDecor=Decor::Spade;
+    c1.card[1].CardNum=Num_K;
+    c1.card[2].CardDecor=Decor::Club;
+    c1.card[2].CardNum=Num_Q;
+    c1.card[3].CardDecor=Decor::Spade;
+    c1.card[3].CardNum=Num_J;
+    c1.card[4].CardDecor=Decor::Heart;
+    c1.card[4].CardNum=Num_10;
+    c1.status=Straight;
+    c1.Data.straight.start = Num_A;
+    c1.Data.straight.end = Num_10;
+
+    Cards c2;
+    c2.card[0].CardDecor=Decor::Diamond;
+    c2.card[0].CardNum=Num_J;
+    c2.card[1].CardDecor=Decor::Spade;
+    c2.card[1].CardNum=Num_10;
+    c2.card[2].CardDecor=Decor::Club;
+    c2.card[2].CardNum=Num_9;
+    c2.card[3].CardDecor=Decor::Spade;
+    c2.card[3].CardNum=Num_8;
+    c2.card[4].CardDecor=Decor::Heart;
+    c2.card[4].CardNum=Num_7;
+    c2.status=Straight;
+    c2.Data.straight.start = Num_J;
+    c2.Data.straight.end = Num_7;
+    QVERIFY(CardsCompare(c1,c2)==1);//A>B
+    QVERIFY(CardsCompare(c2,c1)==2);//A<B
+
+    // A = B
+    Cards c3;
+    c3.card[0].CardDecor=Decor::Diamond;
+    c3.card[0].CardNum=Num_A;
+    c3.card[1].CardDecor=Decor::Spade;
+    c3.card[1].CardNum=Num_K;
+    c3.card[2].CardDecor=Decor::Club;
+    c3.card[2].CardNum=Num_Q;
+    c3.card[3].CardDecor=Decor::Spade;
+    c3.card[3].CardNum=Num_J;
+    c3.card[4].CardDecor=Decor::Heart;
+    c3.card[4].CardNum=Num_10;
+    c3.status=Straight;
+    c3.Data.straight.start = Num_A;
+    c3.Data.straight.end = Num_10;
+    QVERIFY(CardsCompare(c1,c3)==0);//A=B
+}

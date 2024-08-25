@@ -110,6 +110,8 @@ private slots:
     /// \brief case_ThreeCompare
     ///
     void case_ThreeCompare();
+
+    void case_StraightCompare();
 };
 
 #endif // TEXASPOKERTEST_H

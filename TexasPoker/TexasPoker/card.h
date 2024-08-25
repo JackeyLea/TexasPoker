@@ -107,6 +107,11 @@ struct FourKindCards{
     Number c;
 };
 
+struct StraightCards{
+    Number start;
+    Number end;
+};
+
 //结果牌
 struct Cards{
     BrandType status;//是杂牌还是对子、顺子，减少后续判断时间
@@ -117,6 +122,7 @@ struct Cards{
         ThreeKindCards three;
         FullHouseCards full;
         FourKindCards four;
+        StraightCards straight;//顺子
     }Data;
 };
 
@@ -510,6 +516,8 @@ inline void checkBranchType(Cards &cards){
     //满足 不能是同花
     if(straight && !flush){
         cards.status = BrandType::Straight;
+        cards.Data.straight.start = cards.card[0].CardNum;
+        cards.Data.straight.end = cards.card[4].CardNum;
         return;
     }
 
@@ -618,6 +626,25 @@ inline int CardsCompare(Cards cards1,Cards cards2){
             case Straight:
             {
                 //顺子
+                // qDebug()<<cards1.Data.straight.start
+                //          <<cards1.Data.straight.end;
+                // qDebug()<<cards2.Data.straight.start
+                //          <<cards2.Data.straight.end;
+                //起始点
+                if(cards1.Data.straight.start > cards2.Data.straight.start){
+                    return 1;
+                }else if(cards1.Data.straight.start == cards2.Data.straight.start){
+                    //结束点
+                    if(cards1.Data.straight.end > cards2.Data.straight.end){
+                        return 1;
+                    }else if(cards1.Data.straight.end == cards2.Data.straight.end){
+                        return 0;//一样
+                    }else{
+                        return 2;
+                    }
+                }else{
+                    return 2;
+                }
                 break;
             }
             case ThreeOfaKind:
