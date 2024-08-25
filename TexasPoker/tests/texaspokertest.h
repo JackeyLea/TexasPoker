@@ -128,6 +128,12 @@ private slots:
     /// \brief case_FullhouseCompare
     ///
     void case_FullhouseCompare();
+
+    ///
+    /// 不同四条对比
+    /// \brief case_FourCompare
+    ///
+    void case_FourCompare();
 };
 
 #endif // TEXASPOKERTEST_H

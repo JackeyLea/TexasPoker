@@ -494,6 +494,8 @@ inline void checkBranchType(Cards &cards){
     //如果是同花就优先判断为四条
     if(four && !flush){
         cards.status = BrandType::FourOfaKind;
+        cards.Data.four.fourc = cards.card[0].CardNum;
+        cards.Data.four.c = cards.card[4].CardNum;
         return;
     }
 
@@ -613,6 +615,25 @@ inline int CardsCompare(Cards cards1,Cards cards2){
             case FourOfaKind:
             {
                 //四条
+                // qDebug()<<cards1.Data.four.fourc
+                //          <<cards1.Data.four.c;
+                // qDebug()<<cards2.Data.four.fourc
+                //          <<cards2.Data.four.c;
+                //四条
+                if(cards1.Data.four.fourc > cards2.Data.four.fourc){
+                    return 1;
+                }else if(cards1.Data.four.fourc == cards2.Data.four.fourc){
+                    //四条一样，判断单牌
+                    if(cards1.Data.four.c > cards2.Data.four.c){
+                        return 1;
+                    }else if(cards1.Data.four.c == cards2.Data.four.c){
+                        return 0;//一样
+                    }else{
+                        return 2;
+                    }
+                }else{
+                    return 2;
+                }
                 break;
             }
             case FullHouse:
