@@ -1231,7 +1231,7 @@ void TexasPokerTest::case_ThreeCompare()
 
 void TexasPokerTest::case_StraightCompare()
 {
-    // A > B 三条比较大
+    // A > B 顺子比较大
     Cards c1;
     c1.card[0].CardDecor=Decor::Diamond;
     c1.card[0].CardNum=Num_A;
@@ -1279,5 +1279,52 @@ void TexasPokerTest::case_StraightCompare()
     c3.status=Straight;
     c3.Data.straight.start = Num_A;
     c3.Data.straight.end = Num_10;
+    QVERIFY(CardsCompare(c1,c3)==0);//A=B
+}
+
+void TexasPokerTest::case_FlushCompare()
+{
+    // A > B 单牌比较大
+    Cards c1;
+    c1.card[0].CardDecor=Decor::Diamond;
+    c1.card[0].CardNum=Num_A;
+    c1.card[1].CardDecor=Decor::Diamond;
+    c1.card[1].CardNum=Num_J;
+    c1.card[2].CardDecor=Decor::Diamond;
+    c1.card[2].CardNum=Num_8;
+    c1.card[3].CardDecor=Decor::Diamond;
+    c1.card[3].CardNum=Num_5;
+    c1.card[4].CardDecor=Decor::Diamond;
+    c1.card[4].CardNum=Num_2;
+    c1.status=Flush;
+
+    Cards c2;
+    c2.card[0].CardDecor=Decor::Spade;
+    c2.card[0].CardNum=Num_J;
+    c2.card[1].CardDecor=Decor::Spade;
+    c2.card[1].CardNum=Num_10;
+    c2.card[2].CardDecor=Decor::Spade;
+    c2.card[2].CardNum=Num_9;
+    c2.card[3].CardDecor=Decor::Spade;
+    c2.card[3].CardNum=Num_4;
+    c2.card[4].CardDecor=Decor::Spade;
+    c2.card[4].CardNum=Num_3;
+    c2.status=Flush;
+    QVERIFY(CardsCompare(c1,c2)==1);//A>B
+    QVERIFY(CardsCompare(c2,c1)==2);//A<B
+
+    // A = B
+    Cards c3;
+    c3.card[0].CardDecor=Decor::Club;
+    c3.card[0].CardNum=Num_A;
+    c3.card[1].CardDecor=Decor::Club;
+    c3.card[1].CardNum=Num_J;
+    c3.card[2].CardDecor=Decor::Club;
+    c3.card[2].CardNum=Num_8;
+    c3.card[3].CardDecor=Decor::Club;
+    c3.card[3].CardNum=Num_5;
+    c3.card[4].CardDecor=Decor::Club;
+    c3.card[4].CardNum=Num_2;
+    c3.status=Flush;
     QVERIFY(CardsCompare(c1,c3)==0);//A=B
 }

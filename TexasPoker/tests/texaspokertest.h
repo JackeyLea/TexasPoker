@@ -111,7 +111,17 @@ private slots:
     ///
     void case_ThreeCompare();
 
+    ///
+    ///  不同顺子对比
+    /// \brief case_StraightCompare
+    ///
     void case_StraightCompare();
+
+    ///
+    /// 不同同花比较
+    /// \brief case_FlushCompare
+    ///
+    void case_FlushCompare();
 };
 
 #endif // TEXASPOKERTEST_H

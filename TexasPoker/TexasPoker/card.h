@@ -620,9 +620,54 @@ inline int CardsCompare(Cards cards1,Cards cards2){
             }
             case Flush:
             {
-                //同花
+                // qDebug()<<cards1.card[0].CardNum
+                //          <<cards1.card[1].CardNum
+                //          <<cards1.card[2].CardNum
+                //          <<cards1.card[3].CardNum
+                //          <<cards1.card[4].CardNum;
+                // qDebug()<<cards2.card[0].CardNum
+                //          <<cards2.card[1].CardNum
+                //          <<cards2.card[2].CardNum
+                //          <<cards2.card[3].CardNum
+                //          <<cards2.card[4].CardNum;
+                if(cards1.card[0].CardNum > cards2.card[0].CardNum){
+                    return 1;
+                }else if(cards1.card[0].CardNum == cards2.card[0].CardNum){
+                    //最大的相同，比较小的
+                    if(cards1.card[1].CardNum > cards2.card[1].CardNum){
+                        return 1;
+                    }else if(cards1.card[1].CardNum == cards2.card[1].CardNum){
+                        //较大的相同，比较小的
+                        if(cards1.card[2].CardNum > cards2.card[2].CardNum){
+                            return 1;
+                        }else if(cards1.card[2].CardNum == cards2.card[2].CardNum){
+                            //最大的相同，比较小的
+                            if(cards1.card[3].CardNum > cards2.card[3].CardNum){
+                                return 1;
+                            }else if(cards1.card[3].CardNum == cards2.card[3].CardNum){
+                                //最大的相同，比较小的
+                                if(cards1.card[4].CardNum > cards2.card[4].CardNum){
+                                    return 1;
+                                }else if(cards1.card[4].CardNum == cards2.card[4].CardNum){
+                                    //5张牌都相同，平局
+                                    return 0;//
+                                }else{
+                                    return 2;//==0
+                                }
+                            }else{
+                                return 2;//==1
+                            }
+                        }else{
+                            return 2;//==2
+                        }
+                    }else{
+                        return 2;//==3
+                    }
+                }else{
+                    return 2;//==4
+                }
                 break;
-            }
+            }//flush
             case Straight:
             {
                 //顺子
