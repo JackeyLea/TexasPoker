@@ -134,6 +134,12 @@ private slots:
     /// \brief case_FourCompare
     ///
     void case_FourCompare();
+
+    ///
+    /// 不同同花顺比较
+    /// \brief case_StraightFlushCompare
+    ///
+    void case_StraightFlushCompare();
 };
 
 #endif // TEXASPOKERTEST_H

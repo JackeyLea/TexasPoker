@@ -486,6 +486,8 @@ inline void checkBranchType(Cards &cards){
     //满足 同花 + 顺子 + 最大不能是A
     if(flush && straight && !a){
         cards.status = BrandType::StraightFlush;
+        cards.Data.straight.start = cards.card[0].CardNum;
+        cards.Data.straight.end = cards.card[4].CardNum;
         return;
     }
 
@@ -610,6 +612,25 @@ inline int CardsCompare(Cards cards1,Cards cards2){
             case StraightFlush:
             {
                 //同花顺
+                // qDebug()<<cards1.Data.straight.start
+                //          <<cards1.Data.straight.end;
+                // qDebug()<<cards2.Data.straight.start
+                //          <<cards2.Data.straight.end;
+                //起始点
+                if(cards1.Data.straight.start > cards2.Data.straight.start){
+                    return 1;
+                }else if(cards1.Data.straight.start == cards2.Data.straight.start){
+                    //结束点
+                    if(cards1.Data.straight.end > cards2.Data.straight.end){
+                        return 1;
+                    }else if(cards1.Data.straight.end == cards2.Data.straight.end){
+                        return 0;//一样
+                    }else{
+                        return 2;
+                    }
+                }else{
+                    return 2;
+                }
                 break;
             }
             case FourOfaKind:
@@ -662,6 +683,7 @@ inline int CardsCompare(Cards cards1,Cards cards2){
             }
             case Flush:
             {
+                //同花
                 // qDebug()<<cards1.card[0].CardNum
                 //          <<cards1.card[1].CardNum
                 //          <<cards1.card[2].CardNum
