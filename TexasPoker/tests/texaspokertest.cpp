@@ -1328,3 +1328,74 @@ void TexasPokerTest::case_FlushCompare()
     c3.status=Flush;
     QVERIFY(CardsCompare(c1,c3)==0);//A=B
 }
+
+void TexasPokerTest::case_FullhouseCompare()
+{
+    // A > B 三条比较大
+    Cards c1;
+    c1.card[0].CardDecor=Decor::Diamond;
+    c1.card[0].CardNum=Num_A;
+    c1.card[1].CardDecor=Decor::Spade;
+    c1.card[1].CardNum=Num_A;
+    c1.card[2].CardDecor=Decor::Club;
+    c1.card[2].CardNum=Num_A;
+    c1.card[3].CardDecor=Decor::Heart;
+    c1.card[3].CardNum=Num_5;
+    c1.card[4].CardDecor=Decor::Diamond;
+    c1.card[4].CardNum=Num_5;
+    c1.status=FullHouse;
+    c1.Data.full.threec = Num_A;
+    c1.Data.full.pair = Num_5;
+
+    Cards c2;
+    c2.card[0].CardDecor=Decor::Spade;
+    c2.card[0].CardNum=Num_J;
+    c2.card[1].CardDecor=Decor::Heart;
+    c2.card[1].CardNum=Num_J;
+    c2.card[2].CardDecor=Decor::Club;
+    c2.card[2].CardNum=Num_J;
+    c2.card[3].CardDecor=Decor::Club;
+    c2.card[3].CardNum=Num_4;
+    c2.card[4].CardDecor=Decor::Spade;
+    c2.card[4].CardNum=Num_4;
+    c2.status=FullHouse;
+    c2.Data.full.threec = Num_J;
+    c2.Data.full.pair = Num_4;
+    QVERIFY(CardsCompare(c1,c2)==1);//A>B
+    QVERIFY(CardsCompare(c2,c1)==2);//A<B
+
+    // A > B 对子比较大
+    Cards c3;
+    c3.card[0].CardDecor=Decor::Spade;
+    c3.card[0].CardNum=Num_A;
+    c3.card[1].CardDecor=Decor::Diamond;
+    c3.card[1].CardNum=Num_A;
+    c3.card[2].CardDecor=Decor::Club;
+    c3.card[2].CardNum=Num_A;
+    c3.card[3].CardDecor=Decor::Spade;
+    c3.card[3].CardNum=Num_4;
+    c3.card[4].CardDecor=Decor::Club;
+    c3.card[4].CardNum=Num_4;
+    c3.status=FullHouse;
+    c3.Data.full.threec = Num_A;
+    c3.Data.full.pair = Num_4;
+    QVERIFY(CardsCompare(c1,c3)==1);//A>B
+    QVERIFY(CardsCompare(c3,c1)==2);//A<B
+
+    // A = B
+    Cards c4;
+    c4.card[0].CardDecor=Decor::Club;
+    c4.card[0].CardNum=Num_A;
+    c4.card[1].CardDecor=Decor::Spade;
+    c4.card[1].CardNum=Num_A;
+    c4.card[2].CardDecor=Decor::Diamond;
+    c4.card[2].CardNum=Num_A;
+    c4.card[3].CardDecor=Decor::Club;
+    c4.card[3].CardNum=Num_5;
+    c4.card[4].CardDecor=Decor::Diamond;
+    c4.card[4].CardNum=Num_5;
+    c4.status=FullHouse;
+    c4.Data.full.threec = Num_A;
+    c4.Data.full.pair = Num_5;
+    QVERIFY(CardsCompare(c1,c4)==0);//A=B
+}

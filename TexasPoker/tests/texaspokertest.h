@@ -122,6 +122,12 @@ private slots:
     /// \brief case_FlushCompare
     ///
     void case_FlushCompare();
+
+    ///
+    /// 不同葫芦比较
+    /// \brief case_FullhouseCompare
+    ///
+    void case_FullhouseCompare();
 };
 
 #endif // TEXASPOKERTEST_H

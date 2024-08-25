@@ -502,6 +502,8 @@ inline void checkBranchType(Cards &cards){
     // 如果是同花则优先判断为葫芦
     if(fullhouse && !flush && three && pair){
         cards.status = BrandType::FullHouse;
+        cards.Data.full.threec = cards.card[0].CardNum;
+        cards.Data.full.pair = cards.card[3].CardNum;
         return;
     }
 
@@ -616,6 +618,25 @@ inline int CardsCompare(Cards cards1,Cards cards2){
             case FullHouse:
             {
                 //葫芦
+                // qDebug()<<cards1.Data.full.threec
+                //          <<cards1.Data.full.pair;
+                // qDebug()<<cards2.Data.full.threec
+                //          <<cards2.Data.full.pair;
+                //三条
+                if(cards1.Data.full.threec > cards2.Data.full.threec){
+                    return 1;
+                }else if (cards1.Data.full.threec == cards2.Data.full.threec){
+                    //三条一样，比较对子
+                    if(cards1.Data.full.pair > cards2.Data.full.pair){
+                        return 1;
+                    }else if (cards1.Data.full.pair == cards2.Data.full.pair){
+                        return 0;//一样
+                    }else{
+                        return 2;
+                    }
+                }else{
+                    return 2;
+                }
                 break;
             }
             case Flush:
