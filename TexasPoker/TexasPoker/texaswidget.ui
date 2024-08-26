@@ -278,7 +278,7 @@
    <item row="1" column="0" rowspan="4">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="1" column="2" rowspan="2">
-      <widget class="QLabel" name="labelImg2Payer1">
+      <widget class="QLabel" name="labelImg2Player1">
        <property name="minimumSize">
         <size>
          <width>200</width>
@@ -300,7 +300,7 @@
       </widget>
      </item>
      <item row="1" column="0" rowspan="2" colspan="2">
-      <widget class="QLabel" name="labelImg1Payer1">
+      <widget class="QLabel" name="labelImg1Player1">
        <property name="minimumSize">
         <size>
          <width>200</width>
