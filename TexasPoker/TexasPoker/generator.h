@@ -30,6 +30,13 @@ public:
     QList<Card> getCards();
 
     ///
+    /// 获取2张不重复的牌
+    /// \brief get2Cards
+    /// \return
+    ///
+    QList<Card> get2Cards();
+
+    ///
     /// 检测此牌是否存在
     /// \brief checkExistCard
     /// \param c

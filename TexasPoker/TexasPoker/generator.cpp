@@ -43,6 +43,17 @@ QList<Card> Generator::getCards()
     return cards;
 }
 
+QList<Card> Generator::get2Cards()
+{
+    QList<Card> cards;
+    for(int i=0;i<2;i++){
+        Card c = getIndepentCard();
+        cards.append(c);
+    }
+
+    return cards;
+}
+
 bool Generator::checkExistCard(Card c)
 {
     int num = existCard.size();
