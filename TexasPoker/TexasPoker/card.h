@@ -866,4 +866,62 @@ inline int CardsCompare(Cards cards1,Cards cards2){
     return -1;//异常
 }
 
+///
+/// 5张公共牌，2张玩家牌，从这7张牌里面获得最大牌型的组合
+/// \brief check7Cards
+/// \param input
+/// \param output
+///
+inline void check7Cards(QList<Card> input,Cards &output){
+    assert(input.size()==7);
+
+    BrandType bt=HighCard;//默认情况下是高牌
+
+    for(int a=0;a<3;a++){
+        for(int b=a+1;b<4;b++){
+            for(int i=b+1;i<5;i++){
+                for(int j=i+1;j<6;j++){
+                    for(int z=j+1;z<7;z++){
+                        Cards cs;
+                        cs.card[0]=input[a];
+                        cs.card[1]=input[b];
+                        cs.card[2]=input[i];
+                        cs.card[3]=input[j];
+                        cs.card[4]=input[z];
+                        checkBranchType(cs);
+                        // TODO 可能会出现多个相同牌型，去最大的那个
+                        //qDebug()<<cs.status;
+                        if(cs.status>=bt){
+                            bt=cs.status;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //结果
+    for(int a=0;a<3;a++){
+        for(int b=a+1;b<4;b++){
+            for(int i=b+1;i<5;i++){
+                for(int j=i+1;j<6;j++){
+                    for(int z=j+1;z<7;z++){
+                        Cards cs;
+                        cs.card[0]=input[a];
+                        cs.card[1]=input[b];
+                        cs.card[2]=input[i];
+                        cs.card[3]=input[j];
+                        cs.card[4]=input[z];
+                        checkBranchType(cs);
+                        if(cs.status==bt){
+                            output=cs;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 #endif // CARD_H
