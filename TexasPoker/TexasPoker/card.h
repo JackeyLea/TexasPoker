@@ -875,13 +875,16 @@ inline int CardsCompare(Cards cards1,Cards cards2){
 inline void check7Cards(QList<Card> input,Cards &output){
     assert(input.size()==7);
 
-    BrandType bt=HighCard;//默认情况下是高牌
+    //当前所有可能组合中最大的那个
+    BrandType bt=None;//默认情况下是无效
 
+    //c 5 7
     for(int a=0;a<3;a++){
         for(int b=a+1;b<4;b++){
             for(int i=b+1;i<5;i++){
                 for(int j=i+1;j<6;j++){
                     for(int z=j+1;z<7;z++){
+                        //给5张牌赋值
                         Cards cs;
                         cs.card[0]=input[a];
                         cs.card[1]=input[b];
@@ -889,10 +892,24 @@ inline void check7Cards(QList<Card> input,Cards &output){
                         cs.card[3]=input[j];
                         cs.card[4]=input[z];
                         checkBranchType(cs);
-                        // TODO 可能会出现多个相同牌型，去最大的那个
+                        //可能会出现多个相同牌型，取最大的那个
                         //qDebug()<<cs.status;
-                        if(cs.status>=bt){
-                            bt=cs.status;
+                        //如果当前牌型比bt当前值大，直接赋值
+                        if(cs.status>bt){
+                            bt=cs.status;//赋值
+                            output=cs;
+                        }else if(cs.status==bt){
+                            //如果当前牌型与bt当前值一样大，需要比较那个大
+                            //这个函数是用来比较结果的，这里也能用
+                            int r= CardsCompare(cs,output);
+                            switch(r){
+                            case 1:
+                                output=cs;
+                                break;
+                            case 0:
+                            case 2:
+                                break;
+                            }
                         }
                     }
                 }
@@ -900,28 +917,14 @@ inline void check7Cards(QList<Card> input,Cards &output){
         }
     }
 
-    //结果
-    for(int a=0;a<3;a++){
-        for(int b=a+1;b<4;b++){
-            for(int i=b+1;i<5;i++){
-                for(int j=i+1;j<6;j++){
-                    for(int z=j+1;z<7;z++){
-                        Cards cs;
-                        cs.card[0]=input[a];
-                        cs.card[1]=input[b];
-                        cs.card[2]=input[i];
-                        cs.card[3]=input[j];
-                        cs.card[4]=input[z];
-                        checkBranchType(cs);
-                        if(cs.status==bt){
-                            output=cs;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    //当前检测到最大牌型为
+    qDebug()<<"max brand type";
+    qDebug()<<output.status;
+    qDebug()<<output.card[0].CardNum<<output.card[0].CardDecor;
+    qDebug()<<output.card[1].CardNum<<output.card[1].CardDecor;
+    qDebug()<<output.card[2].CardNum<<output.card[2].CardDecor;
+    qDebug()<<output.card[3].CardNum<<output.card[3].CardDecor;
+    qDebug()<<output.card[4].CardNum<<output.card[4].CardDecor;;
 }
 
 #endif // CARD_H
