@@ -140,6 +140,67 @@ private slots:
     /// \brief case_StraightFlushCompare
     ///
     void case_StraightFlushCompare();
+
+    ///
+    /// 检测7选5功能是否正常
+    /// 要能正确的检测出高牌，有多个高牌时要能正确检测出大的那个
+    /// \brief case_check7Cards
+    ///
+    void case_check7Cards_HighCards();
+
+    ///
+    /// 检测一对，并取最大的一个
+    /// \brief case_check7Cards_OnePair
+    ///
+    void case_check7Cards_OnePair();
+
+    ///
+    /// 检测两对，并取最大的一个
+    /// \brief case_check7Cards_TwoPair
+    ///
+    void case_check7Cards_TwoPair();
+
+    ///
+    /// 检测三条，并取最大的一个
+    /// \brief case_check7Cards_Three
+    ///
+    void case_check7Cards_Three();
+
+    ///
+    /// 检测顺子，并取最大的一个
+    /// \brief case_check7Cards_Straight
+    ///
+    void case_check7Cards_Straight();
+
+    ///
+    /// 检测同花，并取最大的一个
+    /// \brief case_check7Cards_Flush
+    ///
+    void case_check7Cards_Flush();
+
+    ///
+    /// 检测葫芦，并取最大的一个
+    /// \brief case_check7Cards_Fullhouse
+    ///
+    void case_check7Cards_Fullhouse();
+
+    ///
+    /// 检测四条，并取最大的一个
+    /// \brief case_check7Cards_Four
+    ///
+    void case_check7Cards_Four();
+
+    ///
+    /// 检测同花顺，并取最大的一个
+    /// \brief case_check7Cards_StraightFlush
+    ///
+    void case_check7Cards_StraightFlush();
+
+    ///
+    /// 检测皇家同花顺，并取最大的一个
+    /// \brief case_check7Cards_RoyalFlush
+    ///
+    void case_check7Cards_RoyalFlush();
 };
 
 #endif // TEXASPOKERTEST_H

@@ -1523,3 +1523,425 @@ void TexasPokerTest::case_StraightFlushCompare()
     c3.Data.straight.end = Num_10;
     QVERIFY(CardsCompare(c1,c3)==0);//A=B
 }
+
+void TexasPokerTest::case_check7Cards_HighCards()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_A;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_Q;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Diamond;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_9;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Spade;
+    c5.CardNum   = Num_6;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_5;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_2;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==HighCard);
+    QVERIFY(output.card[0].CardNum==Num_A);
+    QVERIFY(output.card[1].CardNum==Num_Q);
+    QVERIFY(output.card[2].CardNum==Num_10);
+    QVERIFY(output.card[3].CardNum==Num_9);
+    QVERIFY(output.card[4].CardNum==Num_6);
+    //*-同花顺
+    //*-皇家同花顺
+}
+
+void TexasPokerTest::case_check7Cards_OnePair()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_A;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_Q;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Diamond;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_9;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_A;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_5;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_2;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==OnePair);
+    QVERIFY(output.card[0].CardNum==Num_A);
+    QVERIFY(output.card[1].CardNum==Num_A);
+    QVERIFY(output.card[2].CardNum==Num_Q);
+    QVERIFY(output.card[3].CardNum==Num_10);
+    QVERIFY(output.card[4].CardNum==Num_9);
+}
+
+void TexasPokerTest::case_check7Cards_TwoPair()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_A;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_Q;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Diamond;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_2;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_A;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_5;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_Q;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==TwoPair);
+    QVERIFY(output.card[0].CardNum==Num_A);
+    QVERIFY(output.card[1].CardNum==Num_A);
+    QVERIFY(output.card[2].CardNum==Num_Q);
+    QVERIFY(output.card[3].CardNum==Num_Q);
+    QVERIFY(output.card[4].CardNum==Num_10);
+}
+
+void TexasPokerTest::case_check7Cards_Three()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_A;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_Q;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Diamond;
+    c3.CardNum   = Num_4;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_2;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_A;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_5;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_A;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==ThreeOfaKind);
+    QVERIFY(output.card[0].CardNum==Num_A);
+    QVERIFY(output.card[1].CardNum==Num_A);
+    QVERIFY(output.card[2].CardNum==Num_A);
+    QVERIFY(output.card[3].CardNum==Num_Q);
+    QVERIFY(output.card[4].CardNum==Num_5);
+}
+
+void TexasPokerTest::case_check7Cards_Straight()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_K;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_Q;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Diamond;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_J;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_2;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_5;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_9;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==Straight);
+    QVERIFY(output.card[0].CardNum==Num_K);
+    QVERIFY(output.card[1].CardNum==Num_Q);
+    QVERIFY(output.card[2].CardNum==Num_J);
+    QVERIFY(output.card[3].CardNum==Num_10);
+    QVERIFY(output.card[4].CardNum==Num_9);
+}
+
+void TexasPokerTest::case_check7Cards_Flush()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_K;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_4;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Club;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_J;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_2;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_5;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Club;
+    c7.CardNum   = Num_9;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==Flush);
+    QVERIFY(output.card[0].CardNum==Num_10);
+    QVERIFY(output.card[1].CardNum==Num_9);
+    QVERIFY(output.card[2].CardNum==Num_5);
+    QVERIFY(output.card[3].CardNum==Num_4);
+    QVERIFY(output.card[4].CardNum==Num_2);
+}
+
+void TexasPokerTest::case_check7Cards_Fullhouse()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_K;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Club;
+    c2.CardNum   = Num_4;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Spade;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_J;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_K;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_J;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Diamond;
+    c7.CardNum   = Num_K;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==FullHouse);
+    QVERIFY(output.card[0].CardNum==Num_K);
+    QVERIFY(output.card[1].CardNum==Num_K);
+    QVERIFY(output.card[2].CardNum==Num_K);
+    QVERIFY(output.card[3].CardNum==Num_J);
+    QVERIFY(output.card[4].CardNum==Num_J);
+}
+
+void TexasPokerTest::case_check7Cards_Four()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Spade;
+    c1.CardNum   = Num_K;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Heart;
+    c2.CardNum   = Num_K;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Spade;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_J;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Club;
+    c5.CardNum   = Num_K;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Club;
+    c6.CardNum   = Num_J;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Diamond;
+    c7.CardNum   = Num_K;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==FourOfaKind);
+    QVERIFY(output.card[0].CardNum==Num_K);
+    QVERIFY(output.card[1].CardNum==Num_K);
+    QVERIFY(output.card[2].CardNum==Num_K);
+    QVERIFY(output.card[3].CardNum==Num_K);
+    QVERIFY(output.card[4].CardNum==Num_J);
+}
+
+void TexasPokerTest::case_check7Cards_StraightFlush()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Heart;
+    c1.CardNum   = Num_2;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Heart;
+    c2.CardNum   = Num_4;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Heart;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_J;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Heart;
+    c5.CardNum   = Num_Q;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Heart;
+    c6.CardNum   = Num_9;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_K;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==StraightFlush);
+    QVERIFY(output.card[0].CardNum==Num_K);
+    QVERIFY(output.card[1].CardNum==Num_Q);
+    QVERIFY(output.card[2].CardNum==Num_J);
+    QVERIFY(output.card[3].CardNum==Num_10);
+    QVERIFY(output.card[4].CardNum==Num_9);
+}
+
+void TexasPokerTest::case_check7Cards_RoyalFlush()
+{
+    Cards output;//输出结果
+    QList<Card> high;
+    Card c1;
+    c1.CardDecor = Heart;
+    c1.CardNum   = Num_2;
+    high.append(c1);
+    Card c2;
+    c2.CardDecor = Heart;
+    c2.CardNum   = Num_A;
+    high.append(c2);
+    Card c3;
+    c3.CardDecor = Heart;
+    c3.CardNum   = Num_10;
+    high.append(c3);
+    Card c4;
+    c4.CardDecor = Heart;
+    c4.CardNum   = Num_J;
+    high.append(c4);
+    Card c5;
+    c5.CardDecor = Heart;
+    c5.CardNum   = Num_Q;
+    high.append(c5);
+    Card c6;
+    c6.CardDecor = Heart;
+    c6.CardNum   = Num_9;
+    high.append(c6);
+    Card c7;
+    c7.CardDecor = Heart;
+    c7.CardNum   = Num_K;
+    high.append(c7);
+
+    check7Cards(high,output);
+    QVERIFY(output.status==RoyalFlush);
+    QVERIFY(output.card[0].CardNum==Num_A);
+    QVERIFY(output.card[1].CardNum==Num_K);
+    QVERIFY(output.card[2].CardNum==Num_Q);
+    QVERIFY(output.card[3].CardNum==Num_J);
+    QVERIFY(output.card[4].CardNum==Num_10);
+}

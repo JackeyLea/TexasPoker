@@ -918,13 +918,13 @@ inline void check7Cards(QList<Card> input,Cards &output){
     }
 
     //当前检测到最大牌型为
-    qDebug()<<"max brand type";
-    qDebug()<<output.status;
-    qDebug()<<output.card[0].CardNum<<output.card[0].CardDecor;
-    qDebug()<<output.card[1].CardNum<<output.card[1].CardDecor;
-    qDebug()<<output.card[2].CardNum<<output.card[2].CardDecor;
-    qDebug()<<output.card[3].CardNum<<output.card[3].CardDecor;
-    qDebug()<<output.card[4].CardNum<<output.card[4].CardDecor;;
+    // qDebug()<<"max brand type";
+    // qDebug()<<output.status;
+    // qDebug()<<output.card[0].CardNum<<output.card[0].CardDecor;
+    // qDebug()<<output.card[1].CardNum<<output.card[1].CardDecor;
+    // qDebug()<<output.card[2].CardNum<<output.card[2].CardDecor;
+    // qDebug()<<output.card[3].CardNum<<output.card[3].CardDecor;
+    // qDebug()<<output.card[4].CardNum<<output.card[4].CardDecor;
 }
 
 #endif // CARD_H
