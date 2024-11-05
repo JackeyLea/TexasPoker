@@ -54,5 +54,9 @@
         <file>resources/images/112.svg</file>
         <file>resources/images/113.svg</file>
         <file>resources/images/114.svg</file>
+        <file>resources/images/dealer.svg</file>
+        <file>resources/images/fold.svg</file>
+        <file>resources/images/player_man.svg</file>
+        <file>resources/images/player_woman.svg</file>
     </qresource>
 </RCC>

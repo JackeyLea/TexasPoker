@@ -2,12 +2,12 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="74mm"
-   height="105mm"
-   viewBox="0 0 74 105"
+   width="74"
+   height="105"
+   viewBox="0 0 19.579166 27.78125"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    sodipodi:docname="back.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -25,12 +25,12 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="0.98603159"
-     inkscape:cx="397.55319"
+     inkscape:cx="397.0461"
      inkscape:cy="236.80783"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="club" />
   <defs
@@ -42,7 +42,7 @@
      transform="translate(-81.85335,-116.02149)">
     <g
        id="back"
-       transform="matrix(0.33717499,0,0,0.35609907,-22.262376,-138.1401)">
+       transform="matrix(0.11558974,0,0,0.11307274,43.267494,32.781065)">
       <g
          id="use1397"
          transform="translate(335.14999,972.54999)">
