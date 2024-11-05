@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="74mm"
-   height="105mm"
-   viewBox="0 0 74 105"
+   width="74"
+   height="105"
+   viewBox="0 0 19.579167 27.781249"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
-   sodipodi:docname="Club_8.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="38.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,12 +24,12 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="0.98603159"
-     inkscape:cx="397.55319"
+     inkscape:cx="397.0461"
      inkscape:cy="236.80783"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="club" />
   <defs
@@ -41,7 +41,7 @@
      transform="translate(-81.85335,-116.02149)">
     <g
        id="rect"
-       transform="matrix(0.33468551,0,0,0.35634692,90.738379,208.24221)">
+       transform="matrix(0.11458465,0,0,0.11314009,81.996581,142.78138)">
       <path
          style="fill:#ffffff;stroke:#000000;stroke-width:2.5"
          d="m 0,0 c 0,3.78 3.09,6.87 6.87,6.87 h 152.845 c 3.77,0 6.86,-3.09 6.86,-6.87 v -228.4 c 0,-3.78 -3.09,-6.87 -6.86,-6.87 H 6.87 c -3.78,0 -6.87,3.09 -6.87,6.87 z"
@@ -49,7 +49,7 @@
     </g>
     <g
        id="graph"
-       transform="matrix(-1.9455253,0,0,-1.8891688,129.85335,194.02149)">
+       transform="matrix(-0.66608001,0,0,-0.5998108,95.388182,138.26631)">
       <path
          d="m 3.35,4.66 c 0,-1.81 -1.51,-3.28 -3.38,-3.28 -1.87,0 -3.38,1.47 -3.38,3.28 0,1.81 1.51,3.28 3.38,3.28 1.87,0 3.38,-1.47 3.38,-3.28 z"
          id="path3" />
@@ -74,7 +74,7 @@
     </g>
     <g
        id="number"
-       transform="matrix(3.1017413,0,0,1.44778,89.618055,172.53578)">
+       transform="matrix(1.0619281,0,0,0.45966992,81.613021,131.4446)">
       <text
          transform="scale(0.56453,1.05741)"
          font-family="'Bitstream Vera Serif'"
