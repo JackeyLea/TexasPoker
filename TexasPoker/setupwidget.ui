@@ -15,16 +15,16 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="1">
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="layoutGPara">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="labelPlayerCnt">
        <property name="text">
         <string>用户数：</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="txtPlayerCnt">
        <property name="text">
         <string>3</string>
        </property>
@@ -37,28 +37,28 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="labelBB">
        <property name="text">
         <string>大盲注：</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="txtBB">
        <property name="placeholderText">
         <string>4</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="labelRaiseType">
        <property name="text">
         <string>加注类型：</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="comboBoxRaiseType">
        <item>
         <property name="text">
          <string>有限加注</string>
@@ -74,7 +74,7 @@
     </layout>
    </item>
    <item row="1" column="1">
-    <spacer name="verticalSpacer_2">
+    <spacer name="spacerVT">
      <property name="orientation">
       <enum>Qt::Orientation::Vertical</enum>
      </property>
@@ -87,7 +87,7 @@
     </spacer>
    </item>
    <item row="2" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="layoutHBtn">
      <item>
       <widget class="QPushButton" name="btnJoin">
        <property name="text">
@@ -105,7 +105,7 @@
     </layout>
    </item>
    <item row="3" column="1">
-    <spacer name="verticalSpacer">
+    <spacer name="spacerVB">
      <property name="orientation">
       <enum>Qt::Orientation::Vertical</enum>
      </property>
@@ -118,7 +118,7 @@
     </spacer>
    </item>
    <item row="0" column="2" rowspan="4">
-    <spacer name="horizontalSpacer">
+    <spacer name="spacerHR">
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
      </property>
@@ -131,7 +131,7 @@
     </spacer>
    </item>
    <item row="0" column="0" rowspan="4">
-    <spacer name="horizontalSpacer_2">
+    <spacer name="spacerHL">
      <property name="orientation">
       <enum>Qt::Orientation::Horizontal</enum>
      </property>
