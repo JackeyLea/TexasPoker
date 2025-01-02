@@ -57,7 +57,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_1">
+  <widget class="QLabel" name="labelPerflop1User1">
    <property name="geometry">
     <rect>
      <x>760</x>
@@ -259,7 +259,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_2">
+  <widget class="QLabel" name="labelPerflop2User1">
    <property name="geometry">
     <rect>
      <x>850</x>
@@ -309,7 +309,7 @@
     <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_5">
+  <widget class="QLabel" name="labelPerflop2User2">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -337,7 +337,7 @@
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_6">
+  <widget class="QLabel" name="labelPerflop1User2">
    <property name="geometry">
     <rect>
      <x>440</x>
@@ -365,7 +365,7 @@
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelUser1_4">
+  <widget class="QLabel" name="labelUser2">
    <property name="geometry">
     <rect>
      <x>470</x>
@@ -387,7 +387,7 @@
     <pixmap resource="resources.qrc">:/resources/images/player_man.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_9">
+  <widget class="QLabel" name="labelPerflop2User3">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -415,7 +415,7 @@
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelUser1_5">
+  <widget class="QLabel" name="labelUser3">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -437,7 +437,7 @@
     <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_10">
+  <widget class="QLabel" name="labelPerflop1User3">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -465,7 +465,7 @@
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="labelBet">
    <property name="geometry">
     <rect>
      <x>390</x>
@@ -476,6 +476,99 @@
    </property>
    <property name="text">
     <string>当前筹码：</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnStart">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>680</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBet">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>610</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>下注</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCheck">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>650</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>让牌</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnFold">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>690</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>弃牌</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnRaise">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>630</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>加注</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCall">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>670</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>跟注</string>
    </property>
   </widget>
  </widget>
