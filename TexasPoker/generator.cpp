@@ -56,10 +56,12 @@ QList<Card> Generator::get2Cards()
 
 bool Generator::checkExistCard(Card c)
 {
+    //如果一副牌已经发完或者还没有发
     int num = existCard.size();
     if(num==0) return false;
     if(num>=52) return true;
 
+    //花色和数值一样就是相同的牌
     for(int i=0;i<num;i++){
         Card temp = existCard.at(i);
         if((temp.CardDecor==c.CardDecor)

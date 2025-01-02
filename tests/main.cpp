@@ -1,3 +1,3 @@
 #include "texaspokertest.h"
 
-QTEST_MAIN(TexasPokerTest);
+QTEST_MAIN(TexasPokerTest)

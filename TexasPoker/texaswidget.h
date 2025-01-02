@@ -1,3 +1,9 @@
+/////////////////////
+/// \author JackeyLea
+/// \date 2024.08.19
+/// \note 人机交互界面类
+/////////////////////
+
 #ifndef TEXASWIDGET_H
 #define TEXASWIDGET_H
 
@@ -33,6 +39,6 @@ private slots:
 private:
     Ui::TexasWidget *ui;
 
-    QLabel* label[9];
+    QLabel* label[9];//对应界面两个用户的5+2+2张牌
 };
 #endif // TEXASWIDGET_H

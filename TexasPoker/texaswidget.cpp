@@ -10,6 +10,7 @@ TexasWidget::TexasWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //关联界面牌 简化操作
     label[0] = ui->labelImgPub1;
     label[1] = ui->labelImgPub2;
     label[2] = ui->labelImgPub3;
@@ -30,7 +31,6 @@ TexasWidget::~TexasWidget()
 {
     delete ui;
 }
-
 
 void TexasWidget::on_btn_Gen_clicked()
 {
