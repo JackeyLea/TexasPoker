@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>995</width>
-    <height>730</height>
+    <width>1034</width>
+    <height>749</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -309,84 +309,6 @@
     <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_3">
-   <property name="geometry">
-    <rect>
-     <x>890</x>
-     <y>480</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelUser1_2">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>610</y>
-     <width>100</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>100</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/player_man.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop1_4">
-   <property name="geometry">
-    <rect>
-     <x>800</x>
-     <y>480</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
   <widget class="QLabel" name="labelPerflop1_5">
    <property name="geometry">
     <rect>
@@ -413,28 +335,6 @@
    </property>
    <property name="pixmap">
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelUser1_3">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>610</y>
-     <width>100</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>100</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="labelPerflop1_6">
@@ -465,39 +365,11 @@
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPerflop1_7">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>480</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
   <widget class="QLabel" name="labelUser1_4">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>600</y>
+     <x>470</x>
+     <y>610</y>
      <width>100</width>
      <height>100</height>
     </rect>
@@ -513,34 +385,6 @@
    </property>
    <property name="pixmap">
     <pixmap resource="resources.qrc">:/resources/images/player_man.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop1_8">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>480</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="labelPerflop1_9">
@@ -619,6 +463,19 @@
    </property>
    <property name="pixmap">
     <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>190</y>
+     <width>53</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>当前筹码：</string>
    </property>
   </widget>
  </widget>
