@@ -9,12 +9,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ai.cpp \
     gameflow.cpp \
     generator.cpp \
     main.cpp \
     texaswidget.cpp
 
 HEADERS += \
+    ai.h \
     card.h \
     gameflow.h \
     generator.h \
