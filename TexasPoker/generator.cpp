@@ -17,9 +17,9 @@ Generator *Generator::instance()
 Card Generator::getIndepentCard()
 {
     //当前牌不够数量的时候开启新牌
-    if(existCard.size()>=52){
+    if(m_lExistCard.size()>=52){
         qDebug()<<"new cards";
-        existCard.clear();
+        m_lExistCard.clear();
     }
     Card c;
     c.clear();
@@ -27,7 +27,7 @@ Card Generator::getIndepentCard()
         c = getCard();
         //qDebug()<<c.CardDecor<<c.CardNum;
     }while(checkExistCard(c));
-    existCard.append(c);
+    m_lExistCard.append(c);
 
     return c;
 }
@@ -57,13 +57,13 @@ QList<Card> Generator::get2Cards()
 bool Generator::checkExistCard(Card c)
 {
     //如果一副牌已经发完或者还没有发
-    int num = existCard.size();
+    int num = m_lExistCard.size();
     if(num==0) return false;
     if(num>=52) return true;
 
     //花色和数值一样就是相同的牌
     for(int i=0;i<num;i++){
-        Card temp = existCard.at(i);
+        Card temp = m_lExistCard.at(i);
         if((temp.CardDecor==c.CardDecor)
             && (temp.CardNum==c.CardNum)){
             return true;
