@@ -24,12 +24,14 @@ void SetupWidget::on_btnJoin_clicked()
     blind = (blind==0 ? 4 : blind);
     //加注次数
     bool isNoLimit = ui->comboBoxRaiseType->currentIndex();
+    //初始筹码
+    uint chips = ui->txtInitChip->text().toUInt();
 
     if(m_pTexasWidget){
         delete m_pTexasWidget;
     }
     qDebug()<<QString("大盲注%1 是否为无限加注%2").arg(blind).arg(isNoLimit);
-    m_pTexasWidget = new TexasWidget(blind,isNoLimit);
+    m_pTexasWidget = new TexasWidget(blind,isNoLimit,chips);
     m_pTexasWidget->show();
     this->close();
 }

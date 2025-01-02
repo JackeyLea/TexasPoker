@@ -58,7 +58,7 @@ public:
     /// \brief TexasWidget
     /// \param parent
     ///
-    TexasWidget(uint BB,bool isNoLimit,QWidget *parent = nullptr);
+    TexasWidget(uint BB,bool isNoLimit,uint chips,QWidget *parent = nullptr);
 
     ///
     /// 析构函数

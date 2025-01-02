@@ -16,21 +16,7 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="1">
     <layout class="QGridLayout" name="layoutGWidget">
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="txtUserPwd">
-       <property name="echoMode">
-        <enum>QLineEdit::EchoMode::PasswordEchoOnEdit</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="labelUserPwd">
-       <property name="text">
-        <string>密码</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0" colspan="2">
+     <item row="5" column="0" colspan="2">
       <layout class="QHBoxLayout" name="layoutHBtn">
        <item>
         <widget class="QPushButton" name="btnJoin">
@@ -55,8 +41,18 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="txtUserName"/>
+     <item row="4" column="0" colspan="2">
+      <spacer name="spacerVM">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="txtPlayerCnt">
@@ -125,26 +121,6 @@
         <string>4</string>
        </property>
       </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="labelUserName">
-       <property name="text">
-        <string>用户名</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="2">
-      <spacer name="spacerVM">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>

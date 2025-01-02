@@ -4,7 +4,7 @@
 #include "card.h"
 #include "generator.h"
 
-TexasWidget::TexasWidget(uint BB, bool isNoLimit, QWidget *parent)
+TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TexasWidget)
 {
@@ -15,6 +15,9 @@ TexasWidget::TexasWidget(uint BB, bool isNoLimit, QWidget *parent)
     m_sTableInfo.clear();
     m_sTableInfo.bb = BB;
     m_sTableInfo.isNoLimit = isNoLimit;
+    for(int i=0;i<3;i++){
+        m_sTableInfo.user[i].bet=chips;
+    }
 
     //关联界面牌 简化操作
     // 5张公共牌
