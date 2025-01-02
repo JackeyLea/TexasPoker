@@ -50,6 +50,34 @@ enum Number{
     Num_A
 };
 
+//流程
+enum GameFlow{
+    //弃牌
+    Flod=-1,
+    //发底牌
+    Perflop=0,
+    //发公共牌
+    Flop,
+    //发第4张牌
+    Turn,
+    //发第5张牌
+    River,
+    //比牌
+    ShowHand
+};
+
+//下注流程
+enum BetFlow{
+    //下注
+    Bet=0,
+    //加注
+    Raise,
+    //跟注
+    Call,
+    //让牌
+    Check
+};
+
 //牌 一张牌由花色和数字组成，比如黑桃A
 struct Card{
     Decor CardDecor;//花色
