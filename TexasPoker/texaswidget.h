@@ -34,11 +34,19 @@ public:
     ~TexasWidget();
 
 private slots:
-    void on_btn_Gen_clicked();
+    /// 游戏开始
+    /// \brief on_btnStart_clicked
+    ///
+    void on_btnStart_clicked();
 
 private:
     Ui::TexasWidget *ui;
 
-    QLabel* label[9];//对应界面两个用户的5+2+2张牌
+    QLabel* m_pLabelPub[5];//对应界面5张公共牌
+    QLabel* m_pLabelUser1[2];//用户1
+    QLabel* m_pLabelUser2[2];//用户2
+    QLabel* m_pLabelUser3[2];//用户3
+
+    TableInfo m_sTableInfo;//记录当前状态
 };
 #endif // TEXASWIDGET_H
