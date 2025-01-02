@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1034</width>
-    <height>749</height>
+    <width>925</width>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,63 +38,16 @@
     <pixmap resource="resources.qrc">:/resources/images/dealer.svg</pixmap>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtBet">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>180</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:white;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop1User1">
-   <property name="geometry">
-    <rect>
-     <x>760</x>
-     <y>150</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>330</y>
+     <x>200</x>
+     <y>300</y>
      <width>501</width>
      <height>111</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="layoutHPublic">
     <item>
      <widget class="QLabel" name="labelFlop1">
       <property name="minimumSize">
@@ -259,230 +212,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="labelPerflop2User1">
-   <property name="geometry">
-    <rect>
-     <x>850</x>
-     <y>150</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelUser1">
-   <property name="geometry">
-    <rect>
-     <x>800</x>
-     <y>30</y>
-     <width>100</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>100</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop2User2">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>480</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop1User2">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>480</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelUser2">
-   <property name="geometry">
-    <rect>
-     <x>470</x>
-     <y>610</y>
-     <width>100</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>100</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/player_man.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop2User3">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>150</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelUser3">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>30</y>
-     <width>100</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>100</width>
-     <height>100</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelPerflop1User3">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>150</y>
-     <width>74</width>
-     <height>105</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>74</width>
-     <height>105</height>
-    </size>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelBet">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>190</y>
-     <width>53</width>
-     <height>15</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>当前筹码：</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btnStart">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>680</y>
+     <x>50</x>
+     <y>580</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -491,85 +225,434 @@
     <string>开始</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnBet">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>610</y>
-     <width>75</width>
-     <height>23</height>
+     <x>390</x>
+     <y>180</y>
+     <width>251</width>
+     <height>27</height>
     </rect>
    </property>
-   <property name="text">
-    <string>下注</string>
-   </property>
+   <layout class="QHBoxLayout" name="layoutHChips">
+    <item>
+     <widget class="QLabel" name="labelBet">
+      <property name="text">
+       <string>当前筹码：</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="txtBet">
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="btnCheck">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>650</y>
-     <width>75</width>
-     <height>23</height>
+     <x>40</x>
+     <y>30</y>
+     <width>185</width>
+     <height>242</height>
     </rect>
    </property>
-   <property name="text">
-    <string>让牌</string>
-   </property>
+   <layout class="QGridLayout" name="layoutGUser3">
+    <item row="0" column="2">
+     <spacer name="spacerHUser3R">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0">
+     <spacer name="spacerHUser3L">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="layoutHPerflopUser3">
+      <item>
+       <widget class="QLabel" name="labelPerflop1User3">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelPerflop2User3">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="labelUser3">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="QLabel" name="labelUser3Chip">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="btnFold">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>690</y>
-     <width>75</width>
-     <height>23</height>
+     <x>720</x>
+     <y>30</y>
+     <width>185</width>
+     <height>242</height>
     </rect>
    </property>
-   <property name="text">
-    <string>弃牌</string>
-   </property>
+   <layout class="QGridLayout" name="layoutGUser1">
+    <item row="0" column="0">
+     <spacer name="spacerHUser1L">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="2">
+     <spacer name="spacerHUser1R">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="layoutHPerflopUser1">
+      <item>
+       <widget class="QLabel" name="labelPerflop1User1">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelPerflop2User1">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="labelUser1">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/resources/images/player_woman.svg</pixmap>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="QLabel" name="labelUser1Chip">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="btnRaise">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>680</x>
-     <y>630</y>
-     <width>75</width>
-     <height>23</height>
+     <x>360</x>
+     <y>450</y>
+     <width>261</width>
+     <height>251</height>
     </rect>
    </property>
-   <property name="text">
-    <string>加注</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnCall">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>670</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>跟注</string>
-   </property>
+   <layout class="QGridLayout" name="layoutGUser2">
+    <item row="1" column="2">
+     <spacer name="spacerHUser2R">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="layoutHPerflopUser2">
+      <item>
+       <widget class="QLabel" name="labelPerflop1User2">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelPerflop2User2">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/resources/images/back.svg</pixmap>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <spacer name="spacerHUser2L">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="labelUser2">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/resources/images/player_man.svg</pixmap>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3" rowspan="3">
+     <layout class="QVBoxLayout" name="layoutVBtns">
+      <item>
+       <widget class="QLineEdit" name="txtChip">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnBet">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>下注</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCheck">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>让牌</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCall">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>跟注</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRaise">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>加注</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFold">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>弃牌</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="QLabel" name="labelUser2Chip">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources>
