@@ -7,6 +7,8 @@ SetupWidget::SetupWidget(QWidget *parent)
     , m_pTexasWidget(NULL)
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon(":/resources/images/poker.svg"));
 }
 
 SetupWidget::~SetupWidget()

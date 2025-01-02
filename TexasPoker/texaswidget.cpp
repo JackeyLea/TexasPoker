@@ -9,6 +9,7 @@ TexasWidget::TexasWidget(QWidget *parent)
     , ui(new Ui::TexasWidget)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/resources/images/poker.svg"));
 
     //关联界面牌 简化操作
     label[0] = ui->labelImgPub1;
