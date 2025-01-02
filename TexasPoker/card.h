@@ -52,8 +52,10 @@ enum Number{
 
 //流程
 enum GameFlow{
+    //未开始
+    NotStart=0,
     //发底牌
-    Perflop=0,
+    Perflop,
     //弃牌
     Flod,
     //发公共牌
@@ -68,8 +70,10 @@ enum GameFlow{
 
 //下注流程
 enum BetFlow{
+    //未下注
+    NoBet=0,
     //下注
-    Bet=0,
+    Bet,
     //加注
     Raise,
     //跟注

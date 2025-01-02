@@ -106,7 +106,10 @@ TexasWidget::~TexasWidget()
 void TexasWidget::on_btnStart_clicked()
 {
     ////游戏开始
+    m_sTableInfo.eGameFlow=NotStart;
+    m_sTableInfo.eBetFlow=NoBet;
     ///发底牌
+    m_sTableInfo.eGameFlow= Perflop;
     //用户1
     QList<Card> cards = Generator::instance()->get2Cards();
     assert(cards.size()==2);
@@ -132,11 +135,11 @@ void TexasWidget::on_btnStart_clicked()
     m_sTableInfo.user[2].perflop2 = cards3[1];
     m_sTableInfo.actionList.append(qMakePair(2,qMakePair(Perflop,-1)));
     ///下盲注 TODO 开发初期使用默认值
+    m_sTableInfo.eBetFlow = Bet;
     //用户1
     m_sTableInfo.user[0].bet+=m_sTableInfo.bb/2;//用户1下小盲注，为大盲注的一半
     m_sTableInfo.bet += m_sTableInfo.bb/2;
     m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Bet,m_sTableInfo.bb/2)));
     ui->txtBet->setText(QString::number(m_sTableInfo.bet));
     //用户2 需要手动操作
-    qDebug()<<m_sTableInfo.actionList;
 }

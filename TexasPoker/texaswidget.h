@@ -22,7 +22,7 @@ QT_END_NAMESPACE
 
 //用户信息
 typedef struct _user{
-    uint bet;//用户下的筹码
+    uint bet;//用户拥有的筹码
     Card perflop1;
     Card perflop2;
 }UserInfo;
