@@ -52,10 +52,10 @@ enum Number{
 
 //流程
 enum GameFlow{
-    //弃牌
-    Flod=-1,
     //发底牌
     Perflop=0,
+    //弃牌
+    Flod,
     //发公共牌
     Flop,
     //发第4张牌

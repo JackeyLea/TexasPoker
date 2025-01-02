@@ -7,15 +7,11 @@
 #ifndef GAMEFLOW_H
 #define GAMEFLOW_H
 
-#include <QThread>
 
-class GameFlow : public QThread
+class GameFlow
 {
 public:
     GameFlow();
-
-protected:
-    void run();
 };
 
 #endif // GAMEFLOW_H

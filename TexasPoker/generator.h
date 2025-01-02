@@ -57,7 +57,7 @@ private:
     ///
     Generator(){}
 
-    QList<Card> existCard;//记录已经发过的牌
+    QList<Card> m_lExistCard;//记录已经发过的牌
 
     static Generator *s_instance;//单例模式
 };
