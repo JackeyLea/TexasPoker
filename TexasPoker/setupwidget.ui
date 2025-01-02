@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>请选择游戏参数</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="1">
@@ -77,7 +77,7 @@
      <item row="3" column="1">
       <widget class="QLineEdit" name="txtInitChip">
        <property name="text">
-        <string>10000</string>
+        <string>1000</string>
        </property>
        <property name="placeholderText">
         <string>10000</string>

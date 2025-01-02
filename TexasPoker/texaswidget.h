@@ -88,6 +88,21 @@ private slots:
     ///
     void on_btnStart_clicked();
 
+    /// 跟注
+    /// \brief on_btnCall_clicked
+    ///
+    void on_btnCall_clicked();
+
+    /// 加注
+    /// \brief on_btnRaise_clicked
+    ///
+    void on_btnRaise_clicked();
+
+    /// 弃牌
+    /// \brief on_btnFold_clicked
+    ///
+    void on_btnFold_clicked();
+
 private:
     Ui::TexasWidget *ui;
 

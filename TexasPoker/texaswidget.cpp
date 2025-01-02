@@ -4,6 +4,8 @@
 #include "card.h"
 #include "generator.h"
 
+#include <QMessageBox>
+
 TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TexasWidget)
@@ -155,6 +157,7 @@ void TexasWidget::on_btnStart_clicked()
     m_sTableInfo.eBetFlow = Bet;
     //用户1
     m_sTableInfo.user[0].bet+=m_sTableInfo.bb/2;//用户1下小盲注，为大盲注的一半
+    m_sTableInfo.user[0].chip -=m_sTableInfo.bb/2;//下注后筹码减少
     m_sTableInfo.bet += m_sTableInfo.bb/2;
     m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Bet,m_sTableInfo.bb/2)));
     //用户2 需要手动操作
@@ -164,3 +167,56 @@ void TexasWidget::on_btnStart_clicked()
     ui->btnRaise->setEnabled(true);
     updateTableInfo();
 }
+
+void TexasWidget::on_btnCall_clicked()
+{
+    //计算跟注需要的筹码 上家押注-自己押注
+    uint chips = m_sTableInfo.user[0].bet - m_sTableInfo.user[1].bet;
+    m_sTableInfo.bet += chips;
+    m_sTableInfo.user[1].bet += chips;
+    m_sTableInfo.user[1].chip -= chips;
+    m_sTableInfo.actionList.append(qMakePair(1,qMakePair(Call,chips)));
+
+    //用户3
+    m_sTableInfo.user[2].bet+=m_sTableInfo.bb;//用户3下大盲注
+    m_sTableInfo.user[2].chip -=m_sTableInfo.bb;//下注后筹码减少
+    m_sTableInfo.bet += m_sTableInfo.bb;
+    m_sTableInfo.actionList.append(qMakePair(2,qMakePair(Bet,m_sTableInfo.bb)));
+
+    updateTableInfo();
+}
+
+void TexasWidget::on_btnRaise_clicked()
+{
+    //加注数值要有效
+    uint raiseValue = ui->txtChip->text().toUInt();
+    if(raiseValue <=0){
+        QMessageBox::warning(this,tr("警告"),tr("请输入有效数字"));
+        return;
+    }
+    //加注需要大于玩家1的下注
+    uint chips = m_sTableInfo.user[0].bet - m_sTableInfo.user[1].bet;
+    if(raiseValue <= chips){
+        QMessageBox::warning(this,tr("警告"),tr("加注至少要比玩家1下注多"));
+        return;
+    }
+
+    //玩家2
+    m_sTableInfo.bet += raiseValue;
+    m_sTableInfo.user[1].bet += raiseValue;
+    m_sTableInfo.user[1].chip -= raiseValue;
+    m_sTableInfo.actionList.append(qMakePair(1,qMakePair(Raise,raiseValue)));
+    //玩家3
+    m_sTableInfo.user[2].bet+=m_sTableInfo.bb;//用户3下大盲注
+    m_sTableInfo.user[2].chip -=m_sTableInfo.bb;//下注后筹码减少
+    m_sTableInfo.bet += m_sTableInfo.bb;
+    m_sTableInfo.actionList.append(qMakePair(2,qMakePair(Bet,m_sTableInfo.bb)));
+
+    updateTableInfo();
+}
+
+void TexasWidget::on_btnFold_clicked()
+{
+
+}
+
