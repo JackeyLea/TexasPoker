@@ -22,7 +22,8 @@ QT_END_NAMESPACE
 
 //用户信息
 typedef struct _user{
-    uint bet;//用户拥有的筹码
+    uint chip;//用户拥有的筹码
+    uint bet;//用户押上的筹码
     Card perflop1;
     Card perflop2;
 }UserInfo;
@@ -31,6 +32,7 @@ typedef struct _user{
 typedef struct _table{
     uint bb;//大盲注
     bool isNoLimit;//是否无限加注
+    uint raiseCnt;//当前牌局加注次数
     uint bet;//总筹码数
     GameFlow eGameFlow;//当前游戏阶段
     BetFlow eBetFlow;//当前下注阶段
