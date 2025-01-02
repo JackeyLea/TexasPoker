@@ -26,6 +26,11 @@ typedef struct _user{
     uint bet;//用户押上的筹码
     Card perflop1;
     Card perflop2;
+
+    void clear(){
+        chip = 0;
+        bet = 0;
+    }
 }UserInfo;
 
 //牌桌信息
@@ -45,7 +50,11 @@ typedef struct _table{
     void clear(){
         bb=0;
         isNoLimit = false;
+        raiseCnt = 0;
         bet = 0;
+        user[0].clear();
+        user[1].clear();
+        user[2].clear();
         actionList.clear();
     }
 }TableInfo;
