@@ -16,6 +16,27 @@ class TexasWidget;
 }
 QT_END_NAMESPACE
 
+//用户信息
+typedef struct _user{
+    uint bet;//用户下的筹码
+    Card perflop1;
+    Card perflop2;
+}UserInfo;
+
+//牌桌信息
+typedef struct _table{
+    uint bb;//大盲注
+    bool isNoLimit;//是否无限加注
+    uint bet;//总筹码数
+    GameFlow eGameFlow;//当前游戏阶段
+    BetFlow eBetFlow;//当前下注阶段
+    UserInfo user[3];//目前只有3个用户
+    Card flop[3];//3张公共牌
+    // 用户ID <操作,操作参数>
+    // 比如 用户1 下注 500
+    QList<QMap<int,QPair<int, int>>> actionList;//记录用户操作
+}TableInfo;
+
 class TexasWidget : public QWidget
 {
     Q_OBJECT
