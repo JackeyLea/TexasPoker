@@ -38,7 +38,14 @@ typedef struct _table{
     Card flop[3];//3张公共牌
     // 用户ID <操作,操作参数>
     // 比如 用户1 下注 500
-    QList<QMap<int,QPair<int, int>>> actionList;//记录用户操作
+    QList<QPair<int,QPair<int, int>>> actionList;//记录用户操作
+
+    void clear(){
+        bb=0;
+        isNoLimit = false;
+        bet = 0;
+        actionList.clear();
+    }
 }TableInfo;
 
 class TexasWidget : public QWidget

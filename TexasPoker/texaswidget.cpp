@@ -12,6 +12,7 @@ TexasWidget::TexasWidget(uint BB, bool isNoLimit, QWidget *parent)
     setWindowIcon(QIcon(":/resources/images/poker.svg"));
 
     //初始化变量
+    m_sTableInfo.clear();
     m_sTableInfo.bb = BB;
     m_sTableInfo.isNoLimit = isNoLimit;
 
@@ -111,18 +112,13 @@ void TexasWidget::on_btnStart_clicked()
     assert(cards.size()==2);
     m_sTableInfo.user[0].perflop1 = cards[0];
     m_sTableInfo.user[0].perflop2 = cards[1];
-
-    QMap<int,QPair<int,int>> tempMap;
-    tempMap.insert(0,qMakePair(Perflop,-1));
-    m_sTableInfo.actionList.append(tempMap);
+    m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Perflop,-1)));
     //用户2
     QList<Card> cards2 = Generator::instance()->get2Cards();
     assert(cards2.size()==2);
     m_sTableInfo.user[1].perflop1 = cards2[0];
     m_sTableInfo.user[1].perflop2 = cards2[1];
-
-    tempMap.insert(1,qMakePair(Perflop,-1));
-    m_sTableInfo.actionList.append(tempMap);
+    m_sTableInfo.actionList.append(qMakePair(1,qMakePair(Perflop,-1)));
     //用户2是自己，需要显示牌
     for(int i=0;i<2;i++){
         Card c = cards2[i];
@@ -134,16 +130,13 @@ void TexasWidget::on_btnStart_clicked()
     assert(cards3.size()==2);
     m_sTableInfo.user[2].perflop1 = cards3[0];
     m_sTableInfo.user[2].perflop2 = cards3[1];
-    tempMap.insert(2,qMakePair(Perflop,-1));
-    m_sTableInfo.actionList.append(tempMap);
+    m_sTableInfo.actionList.append(qMakePair(2,qMakePair(Perflop,-1)));
     ///下盲注 TODO 开发初期使用默认值
     //用户1
     m_sTableInfo.user[0].bet+=m_sTableInfo.bb/2;//用户1下小盲注，为大盲注的一半
     m_sTableInfo.bet += m_sTableInfo.bb/2;
-    tempMap.insert(0,qMakePair(Bet,m_sTableInfo.bb/2));
-    m_sTableInfo.actionList.append(tempMap);
+    m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Bet,m_sTableInfo.bb/2)));
     ui->txtBet->setText(QString::number(m_sTableInfo.bet));
     //用户2 需要手动操作
-    qDebug()<<tempMap;
     qDebug()<<m_sTableInfo.actionList;
 }

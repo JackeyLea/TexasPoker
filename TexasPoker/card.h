@@ -904,7 +904,7 @@ inline void check7Cards(QList<Card> input,Cards &output){
     assert(input.size()==7);
 
     //当前所有可能组合中最大的那个
-    BrandType bt=None;//默认情况下是无效
+    BrandType bt=BrandType::None;//默认情况下是无效
 
     //c 5 7
     for(int a=0;a<3;a++){
