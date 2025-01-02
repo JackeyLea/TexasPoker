@@ -145,4 +145,8 @@ void TexasWidget::on_btnStart_clicked()
     m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Bet,m_sTableInfo.bb/2)));
     ui->txtBet->setText(QString::number(m_sTableInfo.bet));
     //用户2 需要手动操作
+    ui->txtChip->setEnabled(true);
+    ui->btnCall->setEnabled(true);
+    ui->btnFold->setEnabled(true);
+    ui->btnRaise->setEnabled(true);
 }
