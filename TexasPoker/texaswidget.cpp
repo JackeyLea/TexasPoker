@@ -16,8 +16,10 @@ TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, QWidget *parent)
     m_sTableInfo.bb = BB;
     m_sTableInfo.isNoLimit = isNoLimit;
     for(int i=0;i<3;i++){
-        m_sTableInfo.user[i].bet=chips;
+        m_sTableInfo.user[i].chip=chips;
     }
+    //刷新界面
+    updateTableInfo();
 
     //关联界面牌 简化操作
     // 5张公共牌
@@ -40,6 +42,18 @@ TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, QWidget *parent)
 TexasWidget::~TexasWidget()
 {
     delete ui;
+}
+
+void TexasWidget::updateTableInfo()
+{
+    //玩家1
+    ui->labelUser1Chip->setText(QString::number(m_sTableInfo.user[0].chip));
+    //玩家2
+    ui->labelUser2Chip->setText(QString::number(m_sTableInfo.user[1].chip));
+    //玩家3
+    ui->labelUser3Chip->setText(QString::number(m_sTableInfo.user[2].chip));
+    //界面
+    ui->txtBet->setText(QString::number(m_sTableInfo.bet));
 }
 
 // void TexasWidget::on_btn_Gen_clicked()
@@ -143,10 +157,10 @@ void TexasWidget::on_btnStart_clicked()
     m_sTableInfo.user[0].bet+=m_sTableInfo.bb/2;//用户1下小盲注，为大盲注的一半
     m_sTableInfo.bet += m_sTableInfo.bb/2;
     m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Bet,m_sTableInfo.bb/2)));
-    ui->txtBet->setText(QString::number(m_sTableInfo.bet));
     //用户2 需要手动操作
     ui->txtChip->setEnabled(true);
     ui->btnCall->setEnabled(true);
     ui->btnFold->setEnabled(true);
     ui->btnRaise->setEnabled(true);
+    updateTableInfo();
 }

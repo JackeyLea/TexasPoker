@@ -67,6 +67,12 @@ public:
     ///
     ~TexasWidget();
 
+protected:
+    /// 统一更新界面上数据
+    /// \brief updateTableInfo
+    ///
+    void updateTableInfo();
+
 private slots:
     /// 游戏开始
     /// \brief on_btnStart_clicked
