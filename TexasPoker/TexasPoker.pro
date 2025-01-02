@@ -13,6 +13,7 @@ SOURCES += \
     gameflow.cpp \
     generator.cpp \
     main.cpp \
+    setupwidget.cpp \
     texaswidget.cpp
 
 HEADERS += \
@@ -20,9 +21,11 @@ HEADERS += \
     card.h \
     gameflow.h \
     generator.h \
+    setupwidget.h \
     texaswidget.h
 
 FORMS += \
+    setupwidget.ui \
     texaswidget.ui
 
 # Default rules for deployment.
