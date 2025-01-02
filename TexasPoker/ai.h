@@ -1,7 +1,7 @@
 ////////////
 /// \author JackeyLea
 /// \date 2025.01.02
-/// \note AI类
+/// \note AI类 根据记录的每一步的操作作出动作判断
 ////////////
 
 #ifndef AI_H
