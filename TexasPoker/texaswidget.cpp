@@ -4,12 +4,16 @@
 #include "card.h"
 #include "generator.h"
 
-TexasWidget::TexasWidget(QWidget *parent)
+TexasWidget::TexasWidget(uint BB, bool isNoLimit, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TexasWidget)
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/resources/images/poker.svg"));
+
+    //初始化变量
+    m_sTableInfo.bb = BB;
+    m_sTableInfo.isNoLimit = isNoLimit;
 
     //关联界面牌 简化操作
     // 5张公共牌
@@ -97,53 +101,49 @@ TexasWidget::~TexasWidget()
 //         break;
 //     }
 // }
+
+void TexasWidget::on_btnStart_clicked()
+{
+    ////游戏开始
+    ///发底牌
+    //用户1
+    QList<Card> cards = Generator::instance()->get2Cards();
+    assert(cards.size()==2);
+    m_sTableInfo.user[0].perflop1 = cards[0];
+    m_sTableInfo.user[0].perflop2 = cards[1];
+
+    QMap<int,QPair<int,int>> tempMap;
+    tempMap.insert(0,qMakePair(Perflop,-1));
+    m_sTableInfo.actionList.append(tempMap);
+    //用户2
     QList<Card> cards2 = Generator::instance()->get2Cards();
     assert(cards2.size()==2);
+    m_sTableInfo.user[1].perflop1 = cards2[0];
+    m_sTableInfo.user[1].perflop2 = cards2[1];
+
+    tempMap.insert(1,qMakePair(Perflop,-1));
+    m_sTableInfo.actionList.append(tempMap);
+    //用户2是自己，需要显示牌
     for(int i=0;i<2;i++){
         Card c = cards2[i];
         QString path = QString(":/resources/images/%1%2.svg").arg(c.CardDecor).arg(c.CardNum);
-        label[i+5]->setPixmap(QPixmap(path));
+        m_pLabelUser2[i]->setPixmap(QPixmap(path));
     }
-
-    //生成玩家2牌
+    //用户3
     QList<Card> cards3 = Generator::instance()->get2Cards();
     assert(cards3.size()==2);
-    for(int i=0;i<2;i++){
-        Card c = cards3[i];
-        QString path = QString(":/resources/images/%1%2.svg").arg(c.CardDecor).arg(c.CardNum);
-        label[i+7]->setPixmap(QPixmap(path));
-    }
-
-    //组合玩家1的牌
-    QList<Card> cardsPlayer1 = cards + cards2;
-    Cards r1;
-    check7Cards(cardsPlayer1,r1);
-
-    //判断牌型
-    ui->lineEditBrand->setText(getBrandType(r1.status));
-
-    //组合玩家2的牌
-    QList<Card> cardsPlayer2 = cards + cards3;
-    Cards r2;
-    check7Cards(cardsPlayer2,r2);
-
-    //判断牌型
-    ui->lineEditBrand2->setText(getBrandType(r2.status));
-
-    //对比最终结果
-    char r = CardsCompare(r1,r2);
-    switch(r){
-    case 0:
-        ui->lineEditResult->setText("平局");
-        break;
-    case 1:
-        ui->lineEditResult->setText("玩家A赢");
-        break;
-    case 2:
-        ui->lineEditResult->setText("玩家B赢");
-        break;
-    default:
-        ui->lineEditResult->setText("异常");
-        break;
-    }
+    m_sTableInfo.user[2].perflop1 = cards3[0];
+    m_sTableInfo.user[2].perflop2 = cards3[1];
+    tempMap.insert(2,qMakePair(Perflop,-1));
+    m_sTableInfo.actionList.append(tempMap);
+    ///下盲注 TODO 开发初期使用默认值
+    //用户1
+    m_sTableInfo.user[0].bet+=m_sTableInfo.bb/2;//用户1下小盲注，为大盲注的一半
+    m_sTableInfo.bet += m_sTableInfo.bb/2;
+    tempMap.insert(0,qMakePair(Bet,m_sTableInfo.bb/2));
+    m_sTableInfo.actionList.append(tempMap);
+    ui->txtBet->setText(QString::number(m_sTableInfo.bet));
+    //用户2 需要手动操作
+    qDebug()<<tempMap;
+    qDebug()<<m_sTableInfo.actionList;
 }
