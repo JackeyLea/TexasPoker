@@ -9,6 +9,7 @@
 TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TexasWidget)
+    , m_bNewGame(true)
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/resources/images/poker.svg"));
@@ -43,14 +44,52 @@ TexasWidget::~TexasWidget()
     delete ui;
 }
 
+QPair<int, int> TexasWidget::getNextAction()
+{
+    //当前是盲注状态 下注值为[1,4] * bb
+    //2张底牌
+    Card c1 = m_sTableInfo.user[1].perflop1;
+    Card c2 = m_sTableInfo.user[1].perflop2;
+
+    //同花
+    if(c1.CardDecor == c2.CardDecor){
+        //顺子
+        if(qAbs(c1.CardNum - c2.CardNum)==1){//可能是同花顺
+            if(c1.CardNum == Num_A || c2.CardNum == Num_A){//可能是皇家同花顺
+                return qMakePair(BigBlind,m_sTableInfo.bb);
+            }
+            return qMakePair(BigBlind,m_sTableInfo.bb);
+        }
+        //普通同花
+        return qMakePair(BigBlind,m_sTableInfo.bb);
+    }else if(qAbs(c1.CardNum -c2.CardNum)==1){//顺子
+        return qMakePair(BigBlind,m_sTableInfo.bb);
+    }else if(qAbs(c1.CardNum - c2.CardNum) <5){//可能凑顺子
+        return qMakePair(BigBlind,m_sTableInfo.bb);
+    }else if((c1.CardNum - c2.CardNum)==0){//可能是一对 两对 三条 四条 葫芦
+        return qMakePair(BigBlind,m_sTableInfo.bb);
+    }else{
+        //暂时无法判断，保守治疗，大盲注只能是bb或者更大
+        return qMakePair(BigBlind,m_sTableInfo.bb);
+    }
+}
+
 void TexasWidget::updateTableInfo()
 {
     //玩家1
-    ui->labelUser2Chip->setText(QString::number(m_sTableInfo.user[0].chip));
+    ui->labelUser1Chip->setText(QString::number(m_sTableInfo.user[0].chip));
     //玩家2
-    ui->labelUser1Chip->setText(QString::number(m_sTableInfo.user[1].chip));
+    ui->labelUser2Chip->setText(QString::number(m_sTableInfo.user[1].chip));
     //界面
     ui->txtBet->setText(QString::number(m_sTableInfo.bet));
+}
+
+void TexasWidget::updateUserBetInfo(int userId, int action, int value)
+{
+    m_sTableInfo.user[userId].bet+=value;//用户下注
+    m_sTableInfo.user[userId].chip -=value;//下注后筹码减少
+    m_sTableInfo.bet += value;
+    m_sTableInfo.actionList.append(qMakePair(1,qMakePair(action,value)));
 }
 
 // void TexasWidget::on_btn_Gen_clicked()
@@ -147,7 +186,7 @@ void TexasWidget::on_btnStart_clicked()
     m_sTableInfo.eBetFlow = Bet;
     //用户1 需要手动操作
     ui->txtUser1Bet->setEnabled(true);
-    ui->btnUser1Call->setEnabled(true);
+    ui->btnUser1Bet->setEnabled(true);
     ui->btnUser1Fold->setEnabled(true);
     ui->btnUser1Raise->setEnabled(true);
     //如果是新局 就是小盲注
@@ -214,29 +253,29 @@ void TexasWidget::on_btnUser1Bet_clicked()
         return;
     }
     if(m_bNewGame){
-        m_sTableInfo.user[0].bet+=unBetValue;//用户1下小盲注
-        m_sTableInfo.user[0].chip -=unBetValue;//下注后筹码减少
-        m_sTableInfo.bet += unBetValue;
-        m_sTableInfo.actionList.append(qMakePair(0,qMakePair(SmallBlind,unBetValue)));
+        unBetValue = (unBetValue <= m_sTableInfo.bb/2) ? (m_sTableInfo.bb/2) : unBetValue;
+        updateUserBetInfo(0,SmallBlind,unBetValue);
+
+        //用户2 下大盲注
+        if(m_sTableInfo.bb > unBetValue){
+            //如果大盲注大于玩家1的下注，玩家2至少要持平
+            updateUserBetInfo(1,BigBlind,m_sTableInfo.bb);
+        }else if(m_sTableInfo.bb == unBetValue){
+            //这里进行概率计算
+            QPair<int,int> result = getNextAction();
+            updateUserBetInfo(1,result.first,result.second);
+            //如果下注大于
+        }else{
+            //如果大盲注小于玩家1下注，那就至少要持平
+            updateUserBetInfo(1,BigBlind,unBetValue);
+        }
+        //从小盲注到大盲注，这里有一次加注
+        m_sTableInfo.raiseCnt++;
+        m_sTableInfo.raiseLoop=1;
+        m_bNewGame=false;
     }else{
 
     }
 
-    //用户2 下大盲注
-    if(m_sTableInfo.bb > unBetValue){
-        //如果大盲注大于玩家1的下注，玩家2至少要持平
-        m_sTableInfo.user[1].bet+=unBetValue;//用户2下大盲注
-        m_sTableInfo.user[1].chip -=unBetValue;//下注后筹码减少
-        m_sTableInfo.bet += 2;
-        m_sTableInfo.actionList.append(qMakePair(1,qMakePair(Bet,unBetValue)));
-    }else if(m_sTableInfo.bb == unBetValue){
-        //这里进行概率计算
-    }else{
-        //如果大盲注小于玩家1下注
-        m_sTableInfo.user[1].bet+=unBetValue;//用户2下大盲注
-        m_sTableInfo.user[1].chip -=unBetValue;//下注后筹码减少
-        m_sTableInfo.bet += unBetValue;
-        m_sTableInfo.actionList.append(qMakePair(1,qMakePair(Bet,unBetValue)));
-    }
+    updateTableInfo();
 }
-

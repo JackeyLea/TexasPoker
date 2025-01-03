@@ -119,6 +119,7 @@ typedef struct _table{
     uint bb;//大盲注
     bool isNoLimit;//是否无限加注
     uint raiseCnt;//当前牌局加注次数
+    uint raiseLoop;//加注轮数 一轮最多加注3次，最多有2轮
     uint bet;//总筹码数
     GameFlow eGameFlow;//当前游戏阶段
     BetFlow eBetFlow;//当前下注阶段

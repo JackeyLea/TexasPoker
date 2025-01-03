@@ -37,11 +37,25 @@ public:
     ///
     ~TexasWidget();
 
+    /// 简单的概率计算
+    /// \brief getNextAction
+    /// \return
+    ///
+    QPair<int,int> getNextAction();
+
 protected:
     /// 统一更新界面上数据
     /// \brief updateTableInfo
     ///
     void updateTableInfo();
+
+    /// 更新玩家下注数据
+    /// \brief updateUserBetInfo
+    /// \param userId 玩家索引
+    /// \param action 玩家动作
+    /// \param value 下注值
+    ///
+    void updateUserBetInfo(int userId,int action,int value);
 
 private slots:
     /// 游戏开始
