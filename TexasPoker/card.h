@@ -204,22 +204,6 @@ struct Cards{
     }Data;
 };
 
-/////////////////////
-/// 获取一张牌，可能重复
-/// \brief getCard
-/// \return 一张牌
-///
-inline Card getCard(){
-    Card c;
-    int decor= QRandomGenerator::global()->bounded(0,4);
-    int num = QRandomGenerator::global()->bounded(2,15);
-    c.CardDecor=(Decor)decor;
-    c.CardNum=(Number)num;
-    //qDebug()<<c.CardDecor<<c.CardNum;
-
-    return c;
-}
-
 ///////////////////////////牌型检测/////////////////////////
 /// 一副牌可能是对子也可能是三带二，至于哪个大不在此判断
 ///
