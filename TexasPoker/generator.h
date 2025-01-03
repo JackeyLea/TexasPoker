@@ -23,17 +23,10 @@ public:
 
     ///
     /// 获取一张不重复的牌
-    /// \brief getIndepentCard
+    /// \brief getCard
     /// \return
     ///
-    Card getIndepentCard();
-
-    ///
-    /// 获取5张不重复的牌
-    /// \brief getCards
-    /// \return
-    ///
-    QList<Card> getCards();
+    Card getCard();
 
     ///
     /// 获取2张不重复的牌
@@ -41,6 +34,12 @@ public:
     /// \return
     ///
     QList<Card> get2Cards();
+
+    /// 获取3张不重复的牌 flop
+    /// \brief get3Cards
+    /// \return
+    ///
+    QList<Card> get3Cards();
 
     ///
     /// 检测此牌是否存在

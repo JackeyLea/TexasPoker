@@ -14,7 +14,7 @@ Generator *Generator::instance()
     return s_instance;
 }
 
-Card Generator::getIndepentCard()
+Card Generator::getCard()
 {
     //当前牌不够数量的时候开启新牌
     if(m_lExistCard.size()>=52){
@@ -32,22 +32,22 @@ Card Generator::getIndepentCard()
     return c;
 }
 
-QList<Card> Generator::getCards()
+QList<Card> Generator::get2Cards()
 {
     QList<Card> cards;
-    for(int i=0;i<5;i++){
-        Card c = getIndepentCard();
+    for(int i=0;i<2;i++){
+        Card c = getCard();
         cards.append(c);
     }
 
     return cards;
 }
 
-QList<Card> Generator::get2Cards()
+QList<Card> Generator::get3Cards()
 {
     QList<Card> cards;
-    for(int i=0;i<2;i++){
-        Card c = getIndepentCard();
+    for(int i=0;i<3;i++){
+        Card c = getCard();
         cards.append(c);
     }
 
