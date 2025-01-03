@@ -122,7 +122,7 @@ typedef struct _table{
     uint bet;//总筹码数
     GameFlow eGameFlow;//当前游戏阶段
     BetFlow eBetFlow;//当前下注阶段
-    UserInfo user[3];//目前只有3个用户
+    UserInfo user[2];//目前只有2个用户
     Card flop[3];//3张公共牌
     // 用户ID <操作,操作参数>
     // 比如 用户1 下注 500

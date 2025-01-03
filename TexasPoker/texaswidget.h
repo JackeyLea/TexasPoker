@@ -52,17 +52,22 @@ private slots:
     /// 跟注
     /// \brief on_btnCall_clicked
     ///
-    void on_btnCall_clicked();
+    void on_btnUser1Call_clicked();
 
     /// 加注
     /// \brief on_btnRaise_clicked
     ///
-    void on_btnRaise_clicked();
+    void on_btnUser1Raise_clicked();
 
     /// 弃牌
     /// \brief on_btnFold_clicked
     ///
-    void on_btnFold_clicked();
+    void on_btnUser1Fold_clicked();
+
+    /// 下注
+    /// \brief on_btnUser1Bet_clicked
+    ///
+    void on_btnUser1Bet_clicked();
 
 private:
     Ui::TexasWidget *ui;
@@ -73,5 +78,7 @@ private:
     QLabel* m_pLabelUser3[2];//用户3
 
     TableInfo m_sTableInfo;//记录当前状态
+
+    bool m_bNewGame;//是否是新游戏
 };
 #endif // TEXASWIDGET_H
