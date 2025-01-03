@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     ai.cpp \
-    gameflow.cpp \
     generator.cpp \
     main.cpp \
     setupwidget.cpp \
@@ -19,7 +18,6 @@ SOURCES += \
 HEADERS += \
     ai.h \
     card.h \
-    gameflow.h \
     generator.h \
     setupwidget.h \
     texaswidget.h
