@@ -79,7 +79,9 @@ enum BetFlow{
     //跟注
     Call,
     //让牌
-    Check
+    Check,
+    //全押
+    AllIn
 };
 
 //牌 一张牌由花色和数字组成，比如黑桃A
