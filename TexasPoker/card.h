@@ -1,12 +1,11 @@
 //////////////
 /// \author JackeyLea
 /// \date 2025.01.06
-/// \note 一张扑克牌
+/// \note 一张扑克牌，德州扑克不使用鬼牌，A最大，相同牌型不分花色
 //////////////
 
 #ifndef CARD_H
 #define CARD_H
-
 
 class Card
 {
@@ -45,7 +44,7 @@ public:
         Num_A
     };
     Card();
-    Card(Decor dec,Number num);
+    Card(Decor dec=DecorNone,Number num=NumNone);
 
     /// 获取花色
     /// \brief decor

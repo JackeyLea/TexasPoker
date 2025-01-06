@@ -12,12 +12,6 @@
 #include <QMap>
 #include <QDebug>
 
-/*
- * 德州扑克不使用鬼牌
- * A最大
- * 相同牌型不分花色
- */
-
 /////////////////////////////以下是扑克牌的定义////////////////////
 
 //流程
@@ -57,20 +51,6 @@ enum BetFlow{
     //全押
     AllIn
 };
-
-//用户信息
-typedef struct _user{
-    uint seat;//用户所处的座次，以荷官左手边为1，顺时针排序
-    uint chip;//用户拥有的筹码
-    uint bet;//用户押上的筹码
-    Card perflop1;
-    Card perflop2;
-
-    void clear(){
-        chip = 0;
-        bet = 0;
-    }
-}UserInfo;
 
 //牌桌信息
 typedef struct _table{
