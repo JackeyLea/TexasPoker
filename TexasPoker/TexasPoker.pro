@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     ai.cpp \
     card.cpp \
+    gameplayer.cpp \
     generator.cpp \
     main.cpp \
     setupwidget.cpp \
@@ -20,6 +21,7 @@ HEADERS += \
     ai.h \
     card.h \
     cardcommon.h \
+    gameplayer.h \
     generator.h \
     setupwidget.h \
     texaswidget.h
