@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     ai.cpp \
+    card.cpp \
     generator.cpp \
     main.cpp \
     setupwidget.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     ai.h \
+    card.h \
     cardcommon.h \
     generator.h \
     setupwidget.h \
