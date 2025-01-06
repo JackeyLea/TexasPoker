@@ -1,6 +1,21 @@
 #include "gametable.h"
 
 GameTable::GameTable()
+    :m_unBigBlind(0)
+    ,m_bNoLimitRaise(false)
+    ,m_unRaiseTime(0)
+    ,m_unRaiseLoop(0)
+    ,m_unTotalChips(0)
+{
+    // NOTHING
+}
+
+GameTable::GameTable(uint bb, bool noLimit)
+    :m_unBigBlind(bb)
+    ,m_bNoLimitRaise(noLimit)
+    ,m_unRaiseTime(0)
+    ,m_unRaiseLoop(0)
+    ,m_unTotalChips(0)
 {
     // NOTHING
 }

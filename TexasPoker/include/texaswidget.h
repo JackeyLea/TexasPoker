@@ -12,7 +12,6 @@
 #include <QMap>
 #include <QList>
 
-#include "card.h"
 #include "gametable.h"
 
 QT_BEGIN_NAMESPACE

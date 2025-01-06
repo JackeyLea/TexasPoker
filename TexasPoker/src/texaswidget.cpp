@@ -21,13 +21,11 @@ TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, uint compareType, 
     m_sTableInfo.setBigBlind(BB);
     m_sTableInfo.setNoLimitRaise(isNoLimit);
     // 添加玩家1
-    GamePlayer player1;
-    player1.setChips(chips);
+    GamePlayer player1(0,0,chips);
     // 添加玩家到牌桌
     m_sTableInfo.addPlayer(player1);
     // 添加玩家2
-    GamePlayer player2;
-    player2.setChips(chips);
+    GamePlayer player2(1,1,chips);
     m_sTableInfo.addPlayer(player2);
     //刷新界面
     updateTableInfo();

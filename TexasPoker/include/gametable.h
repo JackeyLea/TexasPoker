@@ -54,6 +54,8 @@ public:
 
     GameTable();
 
+    GameTable(uint bb,bool noLimit);
+
     /// 设置大盲注大小
     /// \brief setBigBlind
     /// \param bb
