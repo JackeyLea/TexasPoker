@@ -46,11 +46,23 @@ public:
     Card();
     Card(Decor dec=DecorNone,Number num=NumNone);
 
+    /// 设置花色
+    /// \brief setDecor
+    /// \param dec
+    ///
+    void setDecor(Decor dec);
+
     /// 获取花色
     /// \brief decor
     /// \return
     ///
     Decor decor();
+
+    /// 设置牌数字
+    /// \brief setNum
+    /// \param num
+    ///
+    void setNum(Number num);
 
     /// 获取数值
     /// \brief num

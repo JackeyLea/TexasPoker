@@ -14,6 +14,16 @@ Card::Card(Decor dec, Number num)
     // NOTHING
 }
 
+void Card::setDecor(Decor dec)
+{
+    m_eDecor = dec;
+}
+
+void Card::setNum(Number num)
+{
+    m_eNumber = num;
+}
+
 Card::Number Card::num()
 {
     return m_eNumber;
