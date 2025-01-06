@@ -8,15 +8,7 @@ CONFIG += c++17
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    src/card.cpp \
-    src/comparecards.cpp \
-    src/gameplayer.cpp \
-    src/gametable.cpp \
-    src/generator.cpp \
-    src/main.cpp \
-    src/setupwidget.cpp \
-    src/texaswidget.cpp
+INCLUDEPATH += $$PWD/include
 
 HEADERS += \
     include/card.h \
@@ -27,14 +19,24 @@ HEADERS += \
     include/setupwidget.h \
     include/texaswidget.h
 
+SOURCES += \
+    src/card.cpp \
+    src/comparecards.cpp \
+    src/gameplayer.cpp \
+    src/gametable.cpp \
+    src/generator.cpp \
+    src/main.cpp \
+    src/setupwidget.cpp \
+    src/texaswidget.cpp
+
 FORMS += \
     ui/setupwidget.ui \
     ui/texaswidget.ui
+
+RESOURCES += \
+    resources.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES += \
-    resources.qrc
