@@ -4,8 +4,8 @@
 /// \brief 扑克牌基础定义
 //////////////
 
-#ifndef CARD_H
-#define CARD_H
+#ifndef CARDCOMMON_H
+#define CARDCOMMON_H
 
 #include <QString>
 #include <QRandomGenerator>
@@ -1007,4 +1007,4 @@ inline void check7Cards(QList<Card> input,Cards &output){
     // qDebug()<<output.card[4].CardNum<<output.card[4].CardDecor;
 }
 
-#endif // CARD_H
+#endif // CARDCOMMON_H

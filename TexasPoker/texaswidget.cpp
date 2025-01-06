@@ -1,7 +1,7 @@
 #include "texaswidget.h"
 #include "ui_texaswidget.h"
 
-#include "card.h"
+#include "cardcommon.h"
 #include "generator.h"
 
 #include <QMessageBox>

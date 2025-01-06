@@ -12,7 +12,7 @@
 #include <QMap>
 #include <QList>
 
-#include "card.h"
+#include "cardcommon.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

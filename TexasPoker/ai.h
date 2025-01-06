@@ -7,7 +7,7 @@
 #ifndef AI_H
 #define AI_H
 
-#include "card.h"
+#include "cardcommon.h"
 
 #include <QPair>
 

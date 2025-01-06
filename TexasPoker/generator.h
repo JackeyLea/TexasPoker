@@ -7,7 +7,7 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
-#include "card.h"
+#include "cardcommon.h"
 
 #include <QList>
 

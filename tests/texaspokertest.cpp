@@ -1,6 +1,6 @@
 #include "texaspokertest.h"
 
-#include "../TexasPoker/card.h"
+#include "../TexasPoker/cardcommon.h"
 
 void TexasPokerTest::case_checkGetBrandType()
 {

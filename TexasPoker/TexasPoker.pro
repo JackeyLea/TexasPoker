@@ -17,7 +17,7 @@ SOURCES += \
 
 HEADERS += \
     ai.h \
-    card.h \
+    cardcommon.h \
     generator.h \
     setupwidget.h \
     texaswidget.h
