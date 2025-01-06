@@ -12,6 +12,7 @@ SOURCES += \
     ai.cpp \
     card.cpp \
     gameplayer.cpp \
+    gametable.cpp \
     generator.cpp \
     main.cpp \
     setupwidget.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     card.h \
     cardcommon.h \
     gameplayer.h \
+    gametable.h \
     generator.h \
     setupwidget.h \
     texaswidget.h
