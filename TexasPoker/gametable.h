@@ -7,11 +7,51 @@
 #ifndef GAMETABLE_H
 #define GAMETABLE_H
 
+#include <QDebug>
+
 #include "gameplayer.h"
 
 class GameTable
 {
 public:
+    //流程
+    enum GameFlow{
+        //未开始
+        NotStart=0,
+        //发底牌
+        Perflop,
+        //弃牌
+        Flod,
+        //发公共牌
+        Flop,
+        //发第4张牌
+        Turn,
+        //发第5张牌
+        River,
+        //比牌
+        ShowHand
+    };
+
+    //下注流程
+    enum BetFlow{
+        //未下注
+        NoBet=0,
+        //小盲注
+        SmallBlind,
+        //大盲注
+        BigBlind,
+        //下注
+        Bet,
+        //加注
+        Raise,
+        //跟注
+        Call,
+        //让牌
+        Check,
+        //全押
+        AllIn
+    };
+
     GameTable();
 
     /// 设置大盲注大小
@@ -45,12 +85,21 @@ public:
     ///
     void delPlayer(GamePlayer existedPlayer);
 
+    /// 获取一位玩家数据
+    /// \brief player
+    /// \param seatID
+    /// \return
+    ///
+    GamePlayer player(uint seatID);
+
     /// 重置牌桌信息
     /// \brief clear
     ///
     void clear();
 
 private:
+    GameFlow m_eGameFlow;//当前游戏阶段
+    BetFlow m_eBetFlow;//当前下注阶段
     uint m_unBigBlind;//牌桌大盲注大小
     bool m_bNoLimitRaise;//是否无限加注
     uint m_unRaiseTime;//当前加注次数

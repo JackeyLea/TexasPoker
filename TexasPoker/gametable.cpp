@@ -51,6 +51,20 @@ void GameTable::delPlayer(GamePlayer existedPlayer)
     }
 }
 
+GamePlayer GameTable::player(uint seatID)
+{
+    assert(m_lPlayers.size() != 0);
+
+    GamePlayer player;
+    for(int i=0;i<m_lPlayers.size();i++){
+        GamePlayer player = m_lPlayers[i];
+        if(player.seatID() == seatID){
+            break;
+        }
+    }
+    return player;
+}
+
 void GameTable::clear()
 {
     m_lFlop.clear();
