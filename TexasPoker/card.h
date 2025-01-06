@@ -44,7 +44,7 @@ public:
         Num_A
     };
     Card();
-    Card(Decor dec=DecorNone,Number num=NumNone);
+    Card(Decor dec,Number num);
 
     /// 设置花色
     /// \brief setDecor

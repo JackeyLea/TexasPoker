@@ -1,5 +1,7 @@
 #include "card.h"
 
+#include <assert.h>
+
 Card::Card()
     :m_eDecor(DecorNone)
     ,m_eNumber(NumNone)
@@ -11,7 +13,8 @@ Card::Card(Decor dec, Number num)
     :m_eDecor(dec)
     ,m_eNumber(num)
 {
-    // NOTHING
+    assert(dec != Decor::DecorNone);
+    assert(num != Number::NumNone);
 }
 
 void Card::setDecor(Decor dec)
