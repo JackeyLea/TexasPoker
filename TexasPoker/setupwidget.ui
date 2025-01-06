@@ -141,11 +141,6 @@
          <string>判断数值</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>判断花色</string>
-        </property>
-       </item>
       </widget>
      </item>
     </layout>

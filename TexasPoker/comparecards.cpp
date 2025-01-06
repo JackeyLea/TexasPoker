@@ -52,6 +52,242 @@ QString CompareCards::getBrandType(BrandType bt)
     return r;
 }
 
+bool CompareCards::isDuplicate(Cards cards)
+{
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if((cards.card[i].decor()==cards.card[j].decor()) &&
+                (cards.card[i].num()==cards.card[j].num())){
+                return true;//两张牌重复
+            }//if
+        }//j
+    }//i
+
+    return false;//没有重复的牌
+}
+
+bool CompareCards::is5(Cards cards)
+{
+    if((cards.card[0].num() == cards.card[1].num()) &&
+        (cards.card[0].num() == cards.card[2].num()) &&
+        (cards.card[0].num() == cards.card[3].num()) &&
+        (cards.card[0].num() == cards.card[4].num())){
+        return true;//5张牌数字一样，这个理论上一副牌中是不可能的
+    }//if
+    return false;//5张牌数字不一样
+}
+
+void CompareCards::straightCards(Cards &cards)
+{
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if(cards.card[i].num()<cards.card[j].num()){
+                Card::Number t = cards.card[j].num();
+                cards.card[j].setNum(cards.card[i].num());
+                cards.card[i].setNum(t);
+            }//if
+        }//for j
+    }//for i
+}
+
+bool CompareCards::isHighA(Cards cards)
+{
+    for(int i=0;i<5;i++){
+        if(cards.card[i].num()==Card::Num_A){
+            //检测到A就可以了
+            return true;
+        }//if
+    }//for
+    return false;
+}
+
+bool CompareCards::isFlush(Cards cards)
+{
+    for(int i=1;i<5;i++){
+        if(cards.card[i].decor()!=cards.card[i-1].decor()){
+            //有一个不同色就不是同花
+            return false;
+        }//if
+    }//for
+    return true;
+}
+
+bool CompareCards::isStraight(Cards &cards)
+{
+    //排序
+    straightCards(cards);
+
+    for(int i=1;i<5;i++){
+        if((cards.card[i-1].num()-cards.card[i].num()) != 1){
+            //有一个不是就退出
+            return false;
+        }//if
+    }//for
+    return true;
+}
+
+bool CompareCards::isFourKing(Cards &cards)
+{
+    for(int w=0;w<2;w++){
+        for(int x=w+1;x<3;x++){
+            for(int y=x+1;y<4;y++){
+                for(int z=y+1;z<5;z++){
+                    if(((cards.card[w].num() == cards.card[x].num()) &&
+                        (cards.card[w].num() == cards.card[y].num())) &&
+                        (cards.card[w].num() == cards.card[z].num())){
+                        return true;//有一个就行
+                    }
+                }//z
+            }//y
+        }//x
+    }//w
+    return false;
+}
+
+bool CompareCards::isThreeKind(Cards &cards)
+{
+    for(int w=0;w<3;w++){
+        for(int x=w+1;x<4;x++){
+            for(int y=x+1;y<5;y++){
+                    if((cards.card[w].num() == cards.card[x].num()) &&
+                         (cards.card[w].num() == cards.card[y].num())){
+                        return true;//有一个就行
+                    }
+            }//y
+        }//x
+    }//w
+    return false;
+}
+
+bool CompareCards::isFullHouse(Cards &cards)
+{
+    //先检测三条
+    Card::Number three = Card::NumNone;//三条对应的数
+    for(int w=0;w<3;w++){
+        for(int x=w+1;x<4;x++){
+            for(int y=x+1;y<5;y++){
+                if((cards.card[w].num() == cards.card[x].num()) &&
+                    (cards.card[w].num() == cards.card[y].num())){
+                    three=cards.card[w].num();//有一个就行
+                    break;
+                }
+            }//y
+        }//x
+    }//w
+
+    if(three == Card::NumNone) return false;
+
+    //再检测与三条数值不同的一对
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if((cards.card[i].num() ==  cards.card[j].num()) &&
+                (cards.card[i].num() != three)){
+                return true;//有一个就行
+            }
+        }//j
+    }//i
+
+    return false;
+}
+
+bool CompareCards::isTwoPair(Cards &cards)
+{
+    //先判断第一对
+    Card::Number pair1 = Card::NumNone;
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if(cards.card[i].num() ==  cards.card[j].num()){
+                pair1=cards.card[i].num();//有一个就行
+                break;
+            }
+        }//j
+    }//i
+
+    if(pair1 == Card::NumNone) return false;
+
+    //在判断第二对
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if((cards.card[i].num() ==  cards.card[j].num()) &&
+                (cards.card[i].num() != pair1)){
+                return true;//有一个就行
+            }
+        }//j
+    }//i
+
+    //不可能有第3对
+    return false;
+}
+
+bool CompareCards::isOnePair(Cards &cards)
+{
+    for(int i=0;i<4;i++){
+        for(int j=i+1;j<5;j++){
+            if(cards.card[i].num() ==  cards.card[j].num()){
+                return true;//有一个就行
+            }
+        }//j
+    }//i
+
+    return false;
+}
+
+void CompareCards::check7Cards(QList<Card> input, Cards &output)
+{
+    assert(input.size()==7);
+
+    //当前所有可能组合中最大的那个
+    BrandType bt=BrandType::None;//默认情况下是无效
+
+    //c 5 7
+    for(int a=0;a<3;a++){
+        for(int b=a+1;b<4;b++){
+            for(int i=b+1;i<5;i++){
+                for(int j=i+1;j<6;j++){
+                    for(int z=j+1;z<7;z++){
+                        //给5张牌赋值
+                        Cards cs;
+                        cs.card[0]=input[a];
+                        cs.card[1]=input[b];
+                        cs.card[2]=input[i];
+                        cs.card[3]=input[j];
+                        cs.card[4]=input[z];
+                        checkBranchType(cs);
+                        //可能会出现多个相同牌型，取最大的那个
+                        //qDebug()<<cs.status;
+                        //如果当前牌型比bt当前值大，直接赋值
+                        if(cs.status>bt){
+                            bt=cs.status;//赋值
+                            output=cs;
+                        }else if(cs.status==bt){
+                            //如果当前牌型与bt当前值一样大，需要比较那个大
+                            //这个函数是用来比较结果的，这里也能用
+                            int r= CardsCompare(cs,output);
+                            switch(r){
+                            case 1:
+                                output=cs;
+                                break;
+                            case 0:
+                            case 2:
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //当前检测到最大牌型为
+    // qDebug()<<"max brand type";
+    // qDebug()<<output.status;
+    // qDebug()<<output.card[0].num()<<output.card[0].CardDecor;
+    // qDebug()<<output.card[1].num()<<output.card[1].CardDecor;
+    // qDebug()<<output.card[2].num()<<output.card[2].CardDecor;
+    // qDebug()<<output.card[3].num()<<output.card[3].CardDecor;
+    // qDebug()<<output.card[4].num()<<output.card[4].CardDecor;
+}
+
 void CompareCards::checkBranchType(Cards &cards)
 {
     ////////////////////判断牌是否有效////////////////////////
@@ -472,60 +708,4 @@ int CompareCards::CardsCompare(Cards cards1, Cards cards2, int compareType)
     }
 
     return -1;//异常
-}
-
-void CompareCards::check7Cards(QList<Card> input, Cards &output)
-{
-    assert(input.size()==7);
-
-    //当前所有可能组合中最大的那个
-    BrandType bt=BrandType::None;//默认情况下是无效
-
-    //c 5 7
-    for(int a=0;a<3;a++){
-        for(int b=a+1;b<4;b++){
-            for(int i=b+1;i<5;i++){
-                for(int j=i+1;j<6;j++){
-                    for(int z=j+1;z<7;z++){
-                        //给5张牌赋值
-                        Cards cs;
-                        cs.card[0]=input[a];
-                        cs.card[1]=input[b];
-                        cs.card[2]=input[i];
-                        cs.card[3]=input[j];
-                        cs.card[4]=input[z];
-                        checkBranchType(cs);
-                        //可能会出现多个相同牌型，取最大的那个
-                        //qDebug()<<cs.status;
-                        //如果当前牌型比bt当前值大，直接赋值
-                        if(cs.status>bt){
-                            bt=cs.status;//赋值
-                            output=cs;
-                        }else if(cs.status==bt){
-                            //如果当前牌型与bt当前值一样大，需要比较那个大
-                            //这个函数是用来比较结果的，这里也能用
-                            int r= CardsCompare(cs,output);
-                            switch(r){
-                            case 1:
-                                output=cs;
-                                break;
-                            case 0:
-                            case 2:
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    //当前检测到最大牌型为
-    // qDebug()<<"max brand type";
-    // qDebug()<<output.status;
-    // qDebug()<<output.card[0].num()<<output.card[0].CardDecor;
-    // qDebug()<<output.card[1].num()<<output.card[1].CardDecor;
-    // qDebug()<<output.card[2].num()<<output.card[2].CardDecor;
-    // qDebug()<<output.card[3].num()<<output.card[3].CardDecor;
-    // qDebug()<<output.card[4].num()<<output.card[4].CardDecor;
 }
