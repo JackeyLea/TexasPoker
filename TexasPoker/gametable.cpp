@@ -1,9 +1,8 @@
 #include "gametable.h"
 
-
 GameTable::GameTable()
 {
-
+    // NOTHING
 }
 
 void GameTable::setBigBlind(uint bb)
