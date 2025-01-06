@@ -54,29 +54,8 @@ enum BetFlow{
 
 //牌桌信息
 typedef struct _table{
-    uint bb;//大盲注
-    bool isNoLimit;//是否无限加注
-    uint raiseCnt;//当前牌局加注次数
-    uint raiseLoop;//加注轮数 一轮最多加注3次，最多有2轮
-    uint bet;//总筹码数
     GameFlow eGameFlow;//当前游戏阶段
     BetFlow eBetFlow;//当前下注阶段
-    UserInfo user[2];//目前只有2个用户
-    Card flop[3];//3张公共牌
-    // 用户ID <操作,操作参数>
-    // 比如 用户1 下注 500
-    QList<QPair<int,QPair<int, int>>> actionList;//记录用户操作
-
-    void clear(){
-        bb=0;
-        isNoLimit = false;
-        raiseCnt = 0;
-        bet = 0;
-        user[0].clear();
-        user[1].clear();
-        user[2].clear();
-        actionList.clear();
-    }
 }TableInfo;
 
 //牌型 5张牌组成一种牌型
