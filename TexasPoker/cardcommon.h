@@ -20,36 +20,6 @@
 
 /////////////////////////////以下是扑克牌的定义////////////////////
 
-//牌花色
-enum Decor{
-    //黑桃
-    Spade=0,
-    //红桃
-    Heart,
-    //方块
-    Diamond,
-    //梅花
-    Club,
-};
-
-//牌大小
-enum Number{
-    Num_None=0,
-    Num_2=2,
-    Num_3,
-    Num_4,
-    Num_5,
-    Num_6,
-    Num_7,
-    Num_8,
-    Num_9,
-    Num_10,
-    Num_J,
-    Num_Q,
-    Num_K,
-    Num_A
-};
-
 //流程
 enum GameFlow{
     //未开始
@@ -86,18 +56,6 @@ enum BetFlow{
     Check,
     //全押
     AllIn
-};
-
-//牌 一张牌由花色和数字组成，比如黑桃A
-struct Card{
-    Decor CardDecor;//花色
-    Number CardNum;//数字
-
-    //牌默认值
-    void clear(){
-        CardDecor = Spade;
-        CardNum = Num_A;
-    }//clear
 };
 
 //用户信息
