@@ -9,27 +9,27 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    card.cpp \
-    comparecards.cpp \
-    gameplayer.cpp \
-    gametable.cpp \
-    generator.cpp \
-    main.cpp \
-    setupwidget.cpp \
-    texaswidget.cpp
+    src/card.cpp \
+    src/comparecards.cpp \
+    src/gameplayer.cpp \
+    src/gametable.cpp \
+    src/generator.cpp \
+    src/main.cpp \
+    src/setupwidget.cpp \
+    src/texaswidget.cpp
 
 HEADERS += \
-    card.h \
-    comparecards.h \
-    gameplayer.h \
-    gametable.h \
-    generator.h \
-    setupwidget.h \
-    texaswidget.h
+    include/card.h \
+    include/comparecards.h \
+    include/gameplayer.h \
+    include/gametable.h \
+    include/generator.h \
+    include/setupwidget.h \
+    include/texaswidget.h
 
 FORMS += \
-    setupwidget.ui \
-    texaswidget.ui
+    ui/setupwidget.ui \
+    ui/texaswidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
