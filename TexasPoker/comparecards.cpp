@@ -1,9 +1,8 @@
 #include "comparecards.h"
 
-
 CompareCards::CompareCards()
 {
-
+    // NOTHING
 }
 
 QString CompareCards::getBrandType(BrandType bt)
