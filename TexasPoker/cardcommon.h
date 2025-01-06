@@ -352,7 +352,7 @@ inline bool isFullHouse(Cards &cards){
         }//x
     }//w
 
-    if(three == Num_None) return false;
+    if(three == NumNone) return false;
 
     //再检测与三条数值不同的一对
     for(int i=0;i<4;i++){

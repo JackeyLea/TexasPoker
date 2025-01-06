@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     ai.cpp \
     card.cpp \
+    comparecards.cpp \
     gameplayer.cpp \
     gametable.cpp \
     generator.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     ai.h \
     card.h \
     cardcommon.h \
+    comparecards.h \
     gameplayer.h \
     gametable.h \
     generator.h \
