@@ -653,9 +653,20 @@ inline void checkBranchType(Cards &cards){
 /// \brief CardsCompare
 /// \param cards1
 /// \param cards2
+/// \param compareType 对比颗粒度
 /// \return 1 表示cards1赢 0表示平局 2表示cards2赢 -1表示异常
-///
-inline int CardsCompare(Cards cards1,Cards cards2){
+////////////////////////////////////////////////////
+
+enum CompareType{
+    //只对比牌型
+    CardsType=0,
+    //在比牌型的基础上对比数值
+    CardNum,
+    //在数值的基础上对比花色
+    CardDecor,
+};
+
+inline int CardsCompare(Cards cards1,Cards cards2,int compareType=CardNum){
     //首先两个玩家的牌要有效
     if(cards1.status != None && cards2.status != None){
         //此时两个玩家牌都有效
@@ -664,261 +675,267 @@ inline int CardsCompare(Cards cards1,Cards cards2){
         if(cards1.status > cards2.status){
             return 1;//玩家1赢
         }else if(cards1.status == cards2.status){
-            //同牌型要对比类型
-            switch(cards1.status){
-            case RoyalFlush:
-            {
-                //皇家同花顺，如果两个用户都是皇家同花顺就是平局
+            //如果仅仅是对比牌型
+            if(compareType==CardsType){
                 return 0;
-                break;
-            }
-            case FourOfaKind:
-            {
-                //四条
-                // qDebug()<<cards1.Data.four.fourc
-                //          <<cards1.Data.four.c;
-                // qDebug()<<cards2.Data.four.fourc
-                //          <<cards2.Data.four.c;
-                //四条
-                if(cards1.Data.four.fourc > cards2.Data.four.fourc){
-                    return 1;
-                }else if(cards1.Data.four.fourc == cards2.Data.four.fourc){
-                    //四条一样，判断单牌
-                    if(cards1.Data.four.c > cards2.Data.four.c){
-                        return 1;
-                    }else if(cards1.Data.four.c == cards2.Data.four.c){
-                        return 0;//一样
-                    }else{
-                        return 2;
-                    }
-                }else{
-                    return 2;
+            }else if(compareType == CardNum){
+            // 不仅对比牌型还要对比数值
+                //同牌型要对比类型
+                switch(cards1.status){
+                case RoyalFlush:
+                {
+                    //皇家同花顺，如果两个用户都是皇家同花顺就是平局
+                    return 0;
+                    break;
                 }
-                break;
-            }
-            case FullHouse:
-            {
-                //葫芦
-                // qDebug()<<cards1.Data.full.threec
-                //          <<cards1.Data.full.pair;
-                // qDebug()<<cards2.Data.full.threec
-                //          <<cards2.Data.full.pair;
-                //三条
-                if(cards1.Data.full.threec > cards2.Data.full.threec){
-                    return 1;
-                }else if (cards1.Data.full.threec == cards2.Data.full.threec){
-                    //三条一样，比较对子
-                    if(cards1.Data.full.pair > cards2.Data.full.pair){
+                case FourOfaKind:
+                {
+                    //四条
+                    // qDebug()<<cards1.Data.four.fourc
+                    //          <<cards1.Data.four.c;
+                    // qDebug()<<cards2.Data.four.fourc
+                    //          <<cards2.Data.four.c;
+                    //四条
+                    if(cards1.Data.four.fourc > cards2.Data.four.fourc){
                         return 1;
-                    }else if (cards1.Data.full.pair == cards2.Data.full.pair){
-                        return 0;//一样
-                    }else{
-                        return 2;
-                    }
-                }else{
-                    return 2;
-                }
-                break;
-            }
-            case StraightFlush:
-            case Straight:
-            {
-                //顺子 同花顺
-                // qDebug()<<cards1.Data.straight.start
-                //          <<cards1.Data.straight.end;
-                // qDebug()<<cards2.Data.straight.start
-                //          <<cards2.Data.straight.end;
-                //起始点
-                if(cards1.Data.straight.start > cards2.Data.straight.start){
-                    return 1;
-                }else if(cards1.Data.straight.start == cards2.Data.straight.start){
-                    //结束点
-                    if(cards1.Data.straight.end > cards2.Data.straight.end){
-                        return 1;
-                    }else if(cards1.Data.straight.end == cards2.Data.straight.end){
-                        return 0;//一样
-                    }else{
-                        return 2;
-                    }
-                }else{
-                    return 2;
-                }
-                break;
-            }
-            case ThreeOfaKind:
-            {
-                //三条
-                // qDebug()<<cards1.Data.three.threec
-                //          <<cards1.Data.three.c[0]
-                //          <<cards1.Data.three.c[1];
-                // qDebug()<<cards2.Data.three.threec
-                //          <<cards2.Data.three.c[0]
-                //          <<cards2.Data.three.c[1];
-                //三条
-                if(cards1.Data.three.threec > cards2.Data.three.threec){
-                    return 1;
-                }else if(cards1.Data.three.threec == cards2.Data.three.threec){
-                    ///三条数一样大，比较两个单牌
-                    //单牌1
-                    if(cards1.Data.three.c[0] > cards2.Data.three.c[0]){
-                        return 1;
-                    }else if(cards1.Data.three.c[0] == cards2.Data.three.c[0]){
-                        //单牌2
-                        if(cards1.Data.three.c[1] > cards2.Data.three.c[1]){
+                    }else if(cards1.Data.four.fourc == cards2.Data.four.fourc){
+                        //四条一样，判断单牌
+                        if(cards1.Data.four.c > cards2.Data.four.c){
                             return 1;
-                        }else if(cards1.Data.three.c[1] == cards2.Data.three.c[1]){
-                            return 0;//相同
-                        }else{
-                            return 2;//单牌2
-                        }
-                    }else{
-                        return 2;//单牌1
-                    }
-                }else{
-                    return 2;//玩家2
-                }
-                break;
-            }
-            case TwoPair://两对
-            {
-                // qDebug()<<cards1.Data.pairs.pairc1
-                //          <<cards1.Data.pairs.pairc2
-                //          <<cards1.Data.pairs.c;
-                // qDebug()<<cards2.Data.pairs.pairc1
-                //          <<cards2.Data.pairs.pairc2
-                //          <<cards2.Data.pairs.c;
-                //大的那个
-                if(cards1.Data.pairs.pairc2 > cards2.Data.pairs.pairc2){
-                    return 1;
-                }else if(cards1.Data.pairs.pairc2 == cards2.Data.pairs.pairc2){
-                    //第一对一样大
-                    if(cards1.Data.pairs.pairc1 > cards2.Data.pairs.pairc1){
-                        return 1;
-                    }else if(cards1.Data.pairs.pairc1 == cards2.Data.pairs.pairc1){
-                        //第二对一样大
-                        if(cards1.Data.pairs.c > cards2.Data.pairs.c){
-                            return 1;
-                        }else if(cards1.Data.pairs.c == cards2.Data.pairs.c){
-                            //一样大
+                        }else if(cards1.Data.four.c == cards2.Data.four.c){
                             return 0;//一样
                         }else{
-                            return 2;//单牌
+                            return 2;
                         }
                     }else{
-                        return 2;//对子
+                        return 2;
                     }
-                }else{
-                    return 2;//玩家2对子大
+                    break;
                 }
-                break;// two pair
-            }
-            case OnePair://一对
-            {
-                // qDebug()<<cards1.card[0].CardNum
-                //          <<cards1.card[1].CardNum
-                //          <<cards1.card[2].CardNum
-                //          <<cards1.card[3].CardNum
-                //          <<cards1.card[4].CardNum;
-                // qDebug()<<cards2.card[0].CardNum
-                //          <<cards2.card[1].CardNum
-                //          <<cards2.card[2].CardNum
-                //          <<cards2.card[3].CardNum
-                //          <<cards2.card[4].CardNum;
-                // qDebug()<<cards1.Data.pair.pairc
-                //          <<cards1.Data.pair.c[0]
-                //          <<cards1.Data.pair.c[1]
-                //          <<cards1.Data.pair.c[2];
-                // qDebug()<<cards2.Data.pair.pairc
-                //          <<cards2.Data.pair.c[0]
-                //          <<cards2.Data.pair.c[1]
-                //          <<cards2.Data.pair.c[2];
-                if(cards1.Data.pair.pairc > cards2.Data.pair.pairc){
-                    return 1;
-                }else if(cards1.Data.pair.pairc == cards2.Data.pair.pairc){
-                    //对子是一样的
-                    if(cards1.Data.pair.c[0] > cards2.Data.pair.c[0]){
+                case FullHouse:
+                {
+                    //葫芦
+                    // qDebug()<<cards1.Data.full.threec
+                    //          <<cards1.Data.full.pair;
+                    // qDebug()<<cards2.Data.full.threec
+                    //          <<cards2.Data.full.pair;
+                    //三条
+                    if(cards1.Data.full.threec > cards2.Data.full.threec){
                         return 1;
-                    }else if(cards1.Data.pair.c[0] == cards2.Data.pair.c[0]){
-                        //第二个数
-                        if(cards1.Data.pair.c[1] > cards2.Data.pair.c[1]){
+                    }else if (cards1.Data.full.threec == cards2.Data.full.threec){
+                        //三条一样，比较对子
+                        if(cards1.Data.full.pair > cards2.Data.full.pair){
                             return 1;
-                        }else if(cards1.Data.pair.c[1] == cards2.Data.pair.c[1]){
-                            //第三个数
-                            if(cards1.Data.pair.c[2] > cards2.Data.pair.c[2]){
-                                return 1;// 玩家1大
-                            }else if(cards1.Data.pair.c[2] == cards2.Data.pair.c[2]){
-                                return 0;//4张牌相同 平局
+                        }else if (cards1.Data.full.pair == cards2.Data.full.pair){
+                            return 0;//一样
+                        }else{
+                            return 2;
+                        }
+                    }else{
+                        return 2;
+                    }
+                    break;
+                }
+                case StraightFlush:
+                case Straight:
+                {
+                    //顺子 同花顺
+                    // qDebug()<<cards1.Data.straight.start
+                    //          <<cards1.Data.straight.end;
+                    // qDebug()<<cards2.Data.straight.start
+                    //          <<cards2.Data.straight.end;
+                    //起始点
+                    if(cards1.Data.straight.start > cards2.Data.straight.start){
+                        return 1;
+                    }else if(cards1.Data.straight.start == cards2.Data.straight.start){
+                        //结束点
+                        if(cards1.Data.straight.end > cards2.Data.straight.end){
+                            return 1;
+                        }else if(cards1.Data.straight.end == cards2.Data.straight.end){
+                            return 0;//一样
+                        }else{
+                            return 2;
+                        }
+                    }else{
+                        return 2;
+                    }
+                    break;
+                }
+                case ThreeOfaKind:
+                {
+                    //三条
+                    // qDebug()<<cards1.Data.three.threec
+                    //          <<cards1.Data.three.c[0]
+                    //          <<cards1.Data.three.c[1];
+                    // qDebug()<<cards2.Data.three.threec
+                    //          <<cards2.Data.three.c[0]
+                    //          <<cards2.Data.three.c[1];
+                    //三条
+                    if(cards1.Data.three.threec > cards2.Data.three.threec){
+                        return 1;
+                    }else if(cards1.Data.three.threec == cards2.Data.three.threec){
+                        ///三条数一样大，比较两个单牌
+                        //单牌1
+                        if(cards1.Data.three.c[0] > cards2.Data.three.c[0]){
+                            return 1;
+                        }else if(cards1.Data.three.c[0] == cards2.Data.three.c[0]){
+                            //单牌2
+                            if(cards1.Data.three.c[1] > cards2.Data.three.c[1]){
+                                return 1;
+                            }else if(cards1.Data.three.c[1] == cards2.Data.three.c[1]){
+                                return 0;//相同
                             }else{
-                                return 2;//玩家2单牌2大
+                                return 2;//单牌2
                             }
                         }else{
-                            return 2;//玩家2单牌1大
+                            return 2;//单牌1
+                        }
+                    }else{
+                        return 2;//玩家2
+                    }
+                    break;
+                }
+                case TwoPair://两对
+                {
+                    // qDebug()<<cards1.Data.pairs.pairc1
+                    //          <<cards1.Data.pairs.pairc2
+                    //          <<cards1.Data.pairs.c;
+                    // qDebug()<<cards2.Data.pairs.pairc1
+                    //          <<cards2.Data.pairs.pairc2
+                    //          <<cards2.Data.pairs.c;
+                    //大的那个
+                    if(cards1.Data.pairs.pairc2 > cards2.Data.pairs.pairc2){
+                        return 1;
+                    }else if(cards1.Data.pairs.pairc2 == cards2.Data.pairs.pairc2){
+                        //第一对一样大
+                        if(cards1.Data.pairs.pairc1 > cards2.Data.pairs.pairc1){
+                            return 1;
+                        }else if(cards1.Data.pairs.pairc1 == cards2.Data.pairs.pairc1){
+                            //第二对一样大
+                            if(cards1.Data.pairs.c > cards2.Data.pairs.c){
+                                return 1;
+                            }else if(cards1.Data.pairs.c == cards2.Data.pairs.c){
+                                //一样大
+                                return 0;//一样
+                            }else{
+                                return 2;//单牌
+                            }
+                        }else{
+                            return 2;//对子
                         }
                     }else{
                         return 2;//玩家2对子大
                     }
-                }else{
-                    return 2;//牌2型大
+                    break;// two pair
                 }
-                break;//one pair
-            }
-            case Flush://同花
-            case HighCard://高牌
-            {
-                // qDebug()<<cards1.card[0].CardNum
-                //          <<cards1.card[1].CardNum
-                //          <<cards1.card[2].CardNum
-                //          <<cards1.card[3].CardNum
-                //          <<cards1.card[4].CardNum;
-                // qDebug()<<cards2.card[0].CardNum
-                //          <<cards2.card[1].CardNum
-                //          <<cards2.card[2].CardNum
-                //          <<cards2.card[3].CardNum
-                //          <<cards2.card[4].CardNum;
-                if(cards1.card[0].CardNum > cards2.card[0].CardNum){
-                    return 1;
-                }else if(cards1.card[0].CardNum == cards2.card[0].CardNum){
-                    //最大的相同，比较小的
-                    if(cards1.card[1].CardNum > cards2.card[1].CardNum){
+                case OnePair://一对
+                {
+                    // qDebug()<<cards1.card[0].CardNum
+                    //          <<cards1.card[1].CardNum
+                    //          <<cards1.card[2].CardNum
+                    //          <<cards1.card[3].CardNum
+                    //          <<cards1.card[4].CardNum;
+                    // qDebug()<<cards2.card[0].CardNum
+                    //          <<cards2.card[1].CardNum
+                    //          <<cards2.card[2].CardNum
+                    //          <<cards2.card[3].CardNum
+                    //          <<cards2.card[4].CardNum;
+                    // qDebug()<<cards1.Data.pair.pairc
+                    //          <<cards1.Data.pair.c[0]
+                    //          <<cards1.Data.pair.c[1]
+                    //          <<cards1.Data.pair.c[2];
+                    // qDebug()<<cards2.Data.pair.pairc
+                    //          <<cards2.Data.pair.c[0]
+                    //          <<cards2.Data.pair.c[1]
+                    //          <<cards2.Data.pair.c[2];
+                    if(cards1.Data.pair.pairc > cards2.Data.pair.pairc){
                         return 1;
-                    }else if(cards1.card[1].CardNum == cards2.card[1].CardNum){
-                        //较大的相同，比较小的
-                        if(cards1.card[2].CardNum > cards2.card[2].CardNum){
+                    }else if(cards1.Data.pair.pairc == cards2.Data.pair.pairc){
+                        //对子是一样的
+                        if(cards1.Data.pair.c[0] > cards2.Data.pair.c[0]){
                             return 1;
-                        }else if(cards1.card[2].CardNum == cards2.card[2].CardNum){
-                            //最大的相同，比较小的
-                            if(cards1.card[3].CardNum > cards2.card[3].CardNum){
+                        }else if(cards1.Data.pair.c[0] == cards2.Data.pair.c[0]){
+                            //第二个数
+                            if(cards1.Data.pair.c[1] > cards2.Data.pair.c[1]){
                                 return 1;
-                            }else if(cards1.card[3].CardNum == cards2.card[3].CardNum){
-                                //最大的相同，比较小的
-                                if(cards1.card[4].CardNum > cards2.card[4].CardNum){
-                                    return 1;
-                                }else if(cards1.card[4].CardNum == cards2.card[4].CardNum){
-                                    //5张牌都相同，平局
-                                    return 0;//
+                            }else if(cards1.Data.pair.c[1] == cards2.Data.pair.c[1]){
+                                //第三个数
+                                if(cards1.Data.pair.c[2] > cards2.Data.pair.c[2]){
+                                    return 1;// 玩家1大
+                                }else if(cards1.Data.pair.c[2] == cards2.Data.pair.c[2]){
+                                    return 0;//4张牌相同 平局
                                 }else{
-                                    return 2;//==0
+                                    return 2;//玩家2单牌2大
                                 }
                             }else{
-                                return 2;//==1
+                                return 2;//玩家2单牌1大
                             }
                         }else{
-                            return 2;//==2
+                            return 2;//玩家2对子大
                         }
                     }else{
-                        return 2;//==3
+                        return 2;//牌2型大
                     }
-                }else{
-                    return 2;//==4
+                    break;//one pair
                 }
-                break;
-            }//high card
-            default:
-            {
-                return -1;
-                break;
-            }//default
-            }//switch
+                case Flush://同花
+                case HighCard://高牌
+                {
+                    // qDebug()<<cards1.card[0].CardNum
+                    //          <<cards1.card[1].CardNum
+                    //          <<cards1.card[2].CardNum
+                    //          <<cards1.card[3].CardNum
+                    //          <<cards1.card[4].CardNum;
+                    // qDebug()<<cards2.card[0].CardNum
+                    //          <<cards2.card[1].CardNum
+                    //          <<cards2.card[2].CardNum
+                    //          <<cards2.card[3].CardNum
+                    //          <<cards2.card[4].CardNum;
+                    if(cards1.card[0].CardNum > cards2.card[0].CardNum){
+                        return 1;
+                    }else if(cards1.card[0].CardNum == cards2.card[0].CardNum){
+                        //最大的相同，比较小的
+                        if(cards1.card[1].CardNum > cards2.card[1].CardNum){
+                            return 1;
+                        }else if(cards1.card[1].CardNum == cards2.card[1].CardNum){
+                            //较大的相同，比较小的
+                            if(cards1.card[2].CardNum > cards2.card[2].CardNum){
+                                return 1;
+                            }else if(cards1.card[2].CardNum == cards2.card[2].CardNum){
+                                //最大的相同，比较小的
+                                if(cards1.card[3].CardNum > cards2.card[3].CardNum){
+                                    return 1;
+                                }else if(cards1.card[3].CardNum == cards2.card[3].CardNum){
+                                    //最大的相同，比较小的
+                                    if(cards1.card[4].CardNum > cards2.card[4].CardNum){
+                                        return 1;
+                                    }else if(cards1.card[4].CardNum == cards2.card[4].CardNum){
+                                        //5张牌都相同，平局
+                                        return 0;//
+                                    }else{
+                                        return 2;//==0
+                                    }
+                                }else{
+                                    return 2;//==1
+                                }
+                            }else{
+                                return 2;//==2
+                            }
+                        }else{
+                            return 2;//==3
+                        }
+                    }else{
+                        return 2;//==4
+                    }
+                    break;
+                }//high card
+                default:
+                {
+                    return -1;
+                    break;
+                }//default
+                }//switch
+            }// if CardNum
         }else{
             return 2;//玩家2赢
         }

@@ -27,11 +27,16 @@ void SetupWidget::on_btnJoin_clicked()
     //初始筹码
     uint chips = ui->txtInitChip->text().toUInt();
 
+    uint compareTypeIndex = ui->comboBoxCompare->currentIndex();
+
     if(m_pTexasWidget){
         delete m_pTexasWidget;
     }
-    qDebug()<<QString("大盲注%1 是否为无限加注%2").arg(blind).arg(isNoLimit);
-    m_pTexasWidget = new TexasWidget(blind,isNoLimit,chips);
+    qDebug()<<QString("大盲注%1 是否为无限加注%2 比牌标准%3")
+              .arg(blind)
+              .arg(isNoLimit)
+              .arg(ui->comboBoxCompare->currentText());
+    m_pTexasWidget = new TexasWidget(blind,isNoLimit,chips,compareTypeIndex);
     m_pTexasWidget->show();
     this->close();
 }

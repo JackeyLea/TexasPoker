@@ -6,10 +6,11 @@
 
 #include <QMessageBox>
 
-TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, QWidget *parent)
+TexasWidget::TexasWidget(uint BB, bool isNoLimit, uint chips, uint compareType, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TexasWidget)
     , m_bNewGame(true)
+    , m_unCompareType(compareType)
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/resources/images/poker.svg"));

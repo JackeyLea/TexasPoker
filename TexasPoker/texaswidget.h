@@ -30,7 +30,7 @@ public:
     /// \brief TexasWidget
     /// \param parent
     ///
-    TexasWidget(uint BB,bool isNoLimit,uint chips,QWidget *parent = nullptr);
+    TexasWidget(uint BB,bool isNoLimit,uint chips,uint compareType,QWidget *parent = nullptr);
 
     ///
     /// 析构函数
@@ -94,5 +94,6 @@ private:
     TableInfo m_sTableInfo;//记录当前状态
 
     bool m_bNewGame;//是否是新游戏
+    uchar m_unCompareType;
 };
 #endif // TEXASWIDGET_H
