@@ -131,7 +131,7 @@ public:
             for(int j=i+1;j<5;j++){
                 if(cards.card[i].num()<cards.card[j].num()){
                     Card::Number t = cards.card[j].num();
-                    cards.card[j].num() = cards.card[i].num();
+                    cards.card[j].setNum(cards.card[i].num());
                     cards.card[i].setNum(t);
                 }//if
             }//for j
@@ -177,7 +177,6 @@ public:
 
     int CardsCompare(Cards cards1,Cards cards2,int compareType=CardNum);
 
-protected:
     ///////////////////////////牌型检测/////////////////////////
     /// 一副牌可能是对子也可能是三带二，至于哪个大不在此判断
     ///

@@ -26,8 +26,8 @@ Card Generator::getCard()
     do{
         int decor= QRandomGenerator::global()->bounded(0,4);
         int num = QRandomGenerator::global()->bounded(2,15);
-        c.CardDecor=(Decor)decor;
-        c.CardNum=(Number)num;
+        c.setDecor((Card::Decor)decor);
+        c.setNum((Card::Number)num);
         //qDebug()<<c.CardDecor<<c.CardNum;
         //qDebug()<<c.CardDecor<<c.CardNum;
     }while(checkExistCard(c));
@@ -68,8 +68,8 @@ bool Generator::checkExistCard(Card c)
     //花色和数值一样就是相同的牌
     for(int i=0;i<num;i++){
         Card temp = m_lExistCard.at(i);
-        if((temp.CardDecor==c.CardDecor)
-            && (temp.CardNum==c.CardNum)){
+        if((temp.decor()==c.decor())
+            && (temp.num()==c.num())){
             return true;
         }
     }

@@ -92,6 +92,12 @@ public:
     ///
     GamePlayer player(uint seatID);
 
+    /// 获取当前牌桌所有押注筹码数
+    /// \brief totalChips
+    /// \return
+    ///
+    uint totalChips();
+
     /// 重置牌桌信息
     /// \brief clear
     ///

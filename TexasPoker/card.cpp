@@ -22,7 +22,7 @@ void Card::setDecor(Decor dec)
     m_eDecor = dec;
 }
 
-void Card::setNum(Number num)
+void Card::Card::setNum(Number num)
 {
     m_eNumber = num;
 }

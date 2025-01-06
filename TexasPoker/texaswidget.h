@@ -12,7 +12,8 @@
 #include <QMap>
 #include <QList>
 
-#include "cardcommon.h"
+#include "card.h"
+#include "gametable.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -91,7 +92,7 @@ private:
     QLabel* m_pLabelUser2[2];//用户2
     QLabel* m_pLabelUser3[2];//用户3
 
-    TableInfo m_sTableInfo;//记录当前状态
+    GameTable m_sTableInfo;//记录当前状态
 
     bool m_bNewGame;//是否是新游戏
     uchar m_unCompareType;

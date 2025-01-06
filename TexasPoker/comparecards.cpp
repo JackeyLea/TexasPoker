@@ -206,7 +206,7 @@ int CompareCards::CardsCompare(Cards cards1, Cards cards2, int compareType)
             //如果仅仅是对比牌型
             if(compareType==CardsType){
                 return 0;
-            }else if(compareType == num()){
+            }else if(compareType == CardNum){
             // 不仅对比牌型还要对比数值
                 //同牌型要对比类型
                 switch(cards1.status){

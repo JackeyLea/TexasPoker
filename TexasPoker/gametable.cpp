@@ -65,6 +65,11 @@ GamePlayer GameTable::player(uint seatID)
     return player;
 }
 
+uint GameTable::totalChips()
+{
+    return m_unTotalChips;
+}
+
 void GameTable::clear()
 {
     m_lFlop.clear();
