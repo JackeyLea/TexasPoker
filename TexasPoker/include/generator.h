@@ -21,6 +21,11 @@ public:
     ///
     static Generator* instance();
 
+    /// 重新发牌
+    /// \brief startNewGame
+    ///
+    void startNewGame();
+
     ///
     /// 获取一张不重复的牌
     /// \brief getCard

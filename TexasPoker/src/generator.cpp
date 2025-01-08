@@ -14,13 +14,15 @@ Generator *Generator::instance()
     return s_instance;
 }
 
+void Generator::startNewGame()
+{
+    //开启新牌
+    qDebug()<<"new cards";
+    m_lExistCard.clear();
+}
+
 Card Generator::getCard()
 {
-    //当前牌不够数量的时候开启新牌
-    if(m_lExistCard.size()>=52){
-        qDebug()<<"new cards";
-        m_lExistCard.clear();
-    }
     Card c;
     c.clear();
     do{
