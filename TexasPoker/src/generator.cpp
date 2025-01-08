@@ -24,12 +24,12 @@ Card Generator::getCard()
     Card c;
     c.clear();
     do{
-        int decor= QRandomGenerator::global()->bounded(0,4);
+        int decor= QRandomGenerator::global()->bounded(1,5);
         int num = QRandomGenerator::global()->bounded(2,15);
         c.setDecor((Card::Decor)decor);
         c.setNum((Card::Number)num);
-        //qDebug()<<c.CardDecor<<c.CardNum;
-        //qDebug()<<c.CardDecor<<c.CardNum;
+        //qDebug()<<c.decor()<<c.num();
+        //qDebug()<<c.decor()<<c.num();
     }while(checkExistCard(c));
     m_lExistCard.append(c);
 
