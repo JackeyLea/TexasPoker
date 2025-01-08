@@ -54,32 +54,30 @@ QPair<int, int> TexasWidget::getNextAction()
 {
     //当前是盲注状态 下注值为[1,4] * bb
     //2张底牌
-    // Card c1 = m_sTableInfo.user[1].perflop1;
-    // Card c2 = m_sTableInfo.user[1].perflop2;
+    QList<Card> cards = m_sTableInfo.player(1).cards();
+    Card c1=cards[0],c2 = cards[1];
 
-    // //同花
-    // if(c1.CardDecor == c2.CardDecor){
-    //     //顺子
-    //     if(qAbs(c1.CardNum - c2.CardNum)==1){//可能是同花顺
-    //         if(c1.CardNum == Num_A || c2.CardNum == Num_A){//可能是皇家同花顺
-    //             return qMakePair(BigBlind,m_sTableInfo.bb);
-    //         }
-    //         return qMakePair(BigBlind,m_sTableInfo.bb);
-    //     }
-    //     //普通同花
-    //     return qMakePair(BigBlind,m_sTableInfo.bb);
-    // }else if(qAbs(c1.CardNum -c2.CardNum)==1){//顺子
-    //     return qMakePair(BigBlind,m_sTableInfo.bb);
-    // }else if(qAbs(c1.CardNum - c2.CardNum) <5){//可能凑顺子
-    //     return qMakePair(BigBlind,m_sTableInfo.bb);
-    // }else if((c1.CardNum - c2.CardNum)==0){//可能是一对 两对 三条 四条 葫芦
-    //     return qMakePair(BigBlind,m_sTableInfo.bb);
-    // }else{
-    //     //暂时无法判断，保守治疗，大盲注只能是bb或者更大
-    //     return qMakePair(BigBlind,m_sTableInfo.bb);
-    // }
-
-    return qMakePair(1,1);
+    //同花
+    if(c1.decor() == c2.decor()){
+        //顺子
+        if(qAbs(c1.num() - c2.num())==1){//可能是同花顺
+            if(c1.num() == Card::Num_A || c2.num() == Card::Num_A){//可能是皇家同花顺
+                return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+            }
+            return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+        }
+        //普通同花
+        return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+    }else if(qAbs(c1.num() -c2.num())==1){//顺子
+        return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+    }else if(qAbs(c1.num() - c2.num()) <5){//可能凑顺子
+        return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+    }else if((c1.num() - c2.num())==0){//可能是一对 两对 三条 四条 葫芦
+        return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+    }else{
+        //暂时无法判断，保守治疗，大盲注只能是bb或者更大
+        return qMakePair(GameTable::BigBlind,m_sTableInfo.bigBlind());
+    }
 }
 
 void TexasWidget::updateTableInfo()
@@ -94,15 +92,14 @@ void TexasWidget::updateTableInfo()
 
 void TexasWidget::updateUserBetInfo(int userId, int action, int value)
 {
-    // m_sTableInfo.user[userId].bet+=value;//用户下注
-    // m_sTableInfo.user[userId].chip -=value;//下注后筹码减少
-    // m_sTableInfo.bet += value;
-    // m_sTableInfo.actionList.append(qMakePair(1,qMakePair(action,value)));
+    m_sTableInfo.addBet(userId,value);//用户下注
+    m_sTableInfo.append(qMakePair(1,qMakePair(action,value)));
 }
 
 void TexasWidget::on_btnStart_clicked()
 {
     ////游戏开始
+    Generator::instance()->startNewGame();//发新牌
     m_sTableInfo.setGameStep(GameTable::NotStart);
     m_sTableInfo.setBetStep(GameTable::NoBet);
     ///发底牌
@@ -189,35 +186,35 @@ void TexasWidget::on_btnUser1Fold_clicked()
 
 void TexasWidget::on_btnUser1Bet_clicked()
 {
-    // uint unBetValue = ui->txtUser1Bet->text().toUInt();
-    // if(unBetValue==0){
-    //     QMessageBox::warning(this,tr("警告"),tr("请输入需要下注的数"));
-    //     return;
-    // }
-    // if(m_bNewGame){
-    //     unBetValue = (unBetValue <= m_sTableInfo.bb/2) ? (m_sTableInfo.bb/2) : unBetValue;
-    //     updateUserBetInfo(0,SmallBlind,unBetValue);
+    uint unBetValue = ui->txtUser1Bet->text().toUInt();
+    if(unBetValue==0){
+        QMessageBox::warning(this,tr("警告"),tr("请输入需要下注的数"));
+        return;
+    }
+    if(m_bNewGame){
+        unBetValue = (unBetValue <= m_sTableInfo.smallBlind()) ? (m_sTableInfo.smallBlind()) : unBetValue;
+        updateUserBetInfo(0,m_sTableInfo.smallBlind(),unBetValue);
 
-    //     //用户2 下大盲注
-    //     if(m_sTableInfo.bb > unBetValue){
-    //         //如果大盲注大于玩家1的下注，玩家2至少要持平
-    //         updateUserBetInfo(1,BigBlind,m_sTableInfo.bb);
-    //     }else if(m_sTableInfo.bb == unBetValue){
-    //         //这里进行概率计算
-    //         QPair<int,int> result = getNextAction();
-    //         updateUserBetInfo(1,result.first,result.second);
-    //         //如果下注大于
-    //     }else{
-    //         //如果大盲注小于玩家1下注，那就至少要持平
-    //         updateUserBetInfo(1,BigBlind,unBetValue);
-    //     }
-    //     //从小盲注到大盲注，这里有一次加注
-    //     m_sTableInfo.raiseCnt++;
-    //     m_sTableInfo.raiseLoop=1;
-    //     m_bNewGame=false;
-    // }else{
+        //用户2 下大盲注
+        if(m_sTableInfo.bigBlind() > unBetValue){
+            //如果大盲注大于玩家1的下注，玩家2至少要持平
+            updateUserBetInfo(1,m_sTableInfo.bigBlind(),m_sTableInfo.bigBlind());
+        }else if(m_sTableInfo.bigBlind() == unBetValue){
+            //这里进行概率计算
+            QPair<int,int> result = getNextAction();
+            updateUserBetInfo(1,result.first,result.second);
+            //如果下注大于
+        }else{
+            //如果大盲注小于玩家1下注，那就至少要持平
+            updateUserBetInfo(1,m_sTableInfo.bigBlind(),unBetValue);
+        }
+        //从小盲注到大盲注，这里有一次加注
+        //m_sTableInfo.raiseCnt++;
+        //m_sTableInfo.raiseLoop=1;
+        m_bNewGame=false;
+    }else{
 
-    // }
+    }
 
-    // updateTableInfo();
+    updateTableInfo();
 }

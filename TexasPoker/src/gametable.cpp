@@ -46,6 +46,11 @@ uint GameTable::bigBlind()
     return m_unBigBlind;
 }
 
+uint GameTable::smallBlind()
+{
+    return m_unBigBlind/2;
+}
+
 void GameTable::setNoLimitRaise(bool noLimit)
 {
     m_bNoLimitRaise = noLimit;
@@ -113,4 +118,13 @@ void GameTable::clear()
 void GameTable::append(QPair<int, QPair<int, int> > action)
 {
     m_lActions.append(action);
+}
+
+void GameTable::addBet(uint userId, uint chip)
+{
+    //玩家下注
+    player(userId).addBetChip(chip);
+    //桌面总筹码
+    m_unTotalChips += chip;
+    qDebug()<<"总数"<<m_unTotalChips;
 }

@@ -52,6 +52,11 @@ public:
     ///
     uint seatID();
 
+    /// 玩家押注
+    /// \brief addBetChip
+    ///
+    void addBetChip(uint chip);
+
     /// 获取当前已押上的筹码总数
     /// \brief betChip
     ///

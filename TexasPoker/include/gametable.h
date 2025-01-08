@@ -80,6 +80,12 @@ public:
     ///
     uint bigBlind();
 
+    /// 获取小盲注
+    /// \brief smallBlind
+    /// \return
+    ///
+    uint smallBlind();
+
     /// 设置是否无限加注
     /// \brief setNoLimitRaise
     /// \param noLimit
@@ -128,6 +134,13 @@ public:
     /// \param action
     ///
     void append(QPair<int,QPair<int, int>> action);
+
+    /// 玩家下注
+    /// \brief addBet
+    /// \param userId
+    /// \param chip
+    ///
+    void addBet(uint userId,uint chip);
 
 private:
     GameFlow m_eGameFlow;//当前游戏阶段

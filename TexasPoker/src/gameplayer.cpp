@@ -1,5 +1,7 @@
 #include "gameplayer.h"
 
+#include <QDebug>
+
 GamePlayer::GamePlayer()
     :m_unPlayerID(0)
     ,m_unSeatID(0)
@@ -60,6 +62,15 @@ uint GamePlayer::seatID()
     return m_unSeatID;
 }
 
+void GamePlayer::addBetChip(uint chip)
+{
+    m_unPreChip = chip;
+    m_unBetChip += chip;
+    //押注的同时自己拥有的筹码减少
+    m_unChips -=chip;
+    qDebug()<<m_unBetChip<<m_unChips;
+}
+
 uint GamePlayer::betChip()
 {
     return m_unBetChip;
@@ -77,5 +88,6 @@ void GamePlayer::setChips(uint count)
 
 uint GamePlayer::chips()
 {
+    qDebug()<<"player chips"<<this<<m_unChips;
     return m_unChips;
 }
