@@ -74,6 +74,12 @@ public:
     ///
     void setBigBlind(uint bb);
 
+    /// 获取大盲注
+    /// \brief bigBlind
+    /// \return
+    ///
+    uint bigBlind();
+
     /// 设置是否无限加注
     /// \brief setNoLimitRaise
     /// \param noLimit

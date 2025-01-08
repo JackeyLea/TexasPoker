@@ -124,20 +124,20 @@ void TexasWidget::on_btnStart_clicked()
     m_sTableInfo.player(1).setCards(cards2);
     m_sTableInfo.append(qMakePair(1,qMakePair(GameTable::Perflop,-1)));
 
-    // ///下盲注 TODO 开发初期使用默认值
-    // m_sTableInfo.eBetFlow = Bet;
-    // //用户1 需要手动操作
-    // ui->txtUser1Bet->setEnabled(true);
-    // ui->btnUser1Bet->setEnabled(true);
-    // ui->btnUser1Fold->setEnabled(true);
-    // ui->btnUser1Raise->setEnabled(true);
-    // //如果是新局 就是小盲注
-    // if(m_bNewGame){
-    //     ui->txtUser1Bet->setText(QString::number(m_sTableInfo.bb/2));//小盲注
-    // }
-    // // 等待用户操作
+    ///下盲注 TODO 开发初期使用默认值
+    m_sTableInfo.setBetStep(GameTable::Bet);
+    //用户1 需要手动操作
+    ui->txtUser1Bet->setEnabled(true);
+    ui->btnUser1Bet->setEnabled(true);
+    ui->btnUser1Fold->setEnabled(true);
+    ui->btnUser1Raise->setEnabled(true);
+    //如果是新局 就是小盲注
+    if(m_bNewGame){
+        ui->txtUser1Bet->setText(QString::number(m_sTableInfo.bigBlind()/2));//小盲注
+    }
+    // 等待用户操作
 
-    // updateTableInfo();
+    updateTableInfo();
 }
 
 void TexasWidget::on_btnUser1Call_clicked()

@@ -41,6 +41,11 @@ void GameTable::setBigBlind(uint bb)
     m_unBigBlind = bb;
 }
 
+uint GameTable::bigBlind()
+{
+    return m_unBigBlind;
+}
+
 void GameTable::setNoLimitRaise(bool noLimit)
 {
     m_bNoLimitRaise = noLimit;
