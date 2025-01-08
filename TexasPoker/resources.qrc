@@ -14,19 +14,6 @@
         <file>resources/images/314.svg</file>
         <file>resources/images/313.svg</file>
         <file>resources/images/back.svg</file>
-        <file>resources/images/02.svg</file>
-        <file>resources/images/03.svg</file>
-        <file>resources/images/04.svg</file>
-        <file>resources/images/05.svg</file>
-        <file>resources/images/06.svg</file>
-        <file>resources/images/07.svg</file>
-        <file>resources/images/08.svg</file>
-        <file>resources/images/09.svg</file>
-        <file>resources/images/010.svg</file>
-        <file>resources/images/011.svg</file>
-        <file>resources/images/012.svg</file>
-        <file>resources/images/013.svg</file>
-        <file>resources/images/014.svg</file>
         <file>resources/images/22.svg</file>
         <file>resources/images/23.svg</file>
         <file>resources/images/24.svg</file>
@@ -58,5 +45,18 @@
         <file>resources/images/fold.svg</file>
         <file>resources/images/player_man.svg</file>
         <file>resources/images/player_woman.svg</file>
+        <file>resources/images/42.svg</file>
+        <file>resources/images/43.svg</file>
+        <file>resources/images/44.svg</file>
+        <file>resources/images/45.svg</file>
+        <file>resources/images/46.svg</file>
+        <file>resources/images/47.svg</file>
+        <file>resources/images/48.svg</file>
+        <file>resources/images/49.svg</file>
+        <file>resources/images/410.svg</file>
+        <file>resources/images/411.svg</file>
+        <file>resources/images/412.svg</file>
+        <file>resources/images/413.svg</file>
+        <file>resources/images/414.svg</file>
     </qresource>
 </RCC>
