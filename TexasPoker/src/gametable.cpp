@@ -1,23 +1,37 @@
 #include "gametable.h"
 
 GameTable::GameTable()
-    :m_unBigBlind(0)
+    :m_eGameFlow(NotStart)
+    ,m_eBetFlow(NoBet)
+    ,m_unBigBlind(0)
     ,m_bNoLimitRaise(false)
     ,m_unRaiseTime(0)
     ,m_unRaiseLoop(0)
     ,m_unTotalChips(0)
 {
-    // NOTHING
+    m_lActions.clear();
 }
 
 GameTable::GameTable(uint bb, bool noLimit)
-    :m_unBigBlind(bb)
+    :m_eGameFlow(NotStart)
+    ,m_eBetFlow(NoBet)
+    ,m_unBigBlind(bb)
     ,m_bNoLimitRaise(noLimit)
     ,m_unRaiseTime(0)
     ,m_unRaiseLoop(0)
     ,m_unTotalChips(0)
 {
-    // NOTHING
+    m_lActions.clear();
+}
+
+void GameTable::setGameStep(GameFlow flow)
+{
+    m_eGameFlow = flow;
+}
+
+void GameTable::setBetStep(BetFlow flow)
+{
+    m_eBetFlow = flow;
 }
 
 void GameTable::setBigBlind(uint bb)
@@ -89,4 +103,9 @@ void GameTable::clear()
     m_lFlop.clear();
     m_lPlayers.clear();
     m_lActions.clear();
+}
+
+void GameTable::append(QPair<int, QPair<int, int> > action)
+{
+    m_lActions.append(action);
 }

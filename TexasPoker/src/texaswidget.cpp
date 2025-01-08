@@ -102,29 +102,27 @@ void TexasWidget::updateUserBetInfo(int userId, int action, int value)
 
 void TexasWidget::on_btnStart_clicked()
 {
-    // ////游戏开始
-    // m_sTableInfo.eGameFlow=NotStart;
-    // m_sTableInfo.eBetFlow=NoBet;
-    // ///发底牌
-    // m_sTableInfo.eGameFlow= Perflop;
-    // //用户1
-    // QList<Card> cards = Generator::instance()->get2Cards();
-    // assert(cards.size()==2);
-    // m_sTableInfo.user[0].perflop1 = cards[0];
-    // m_sTableInfo.user[0].perflop2 = cards[1];
-    // m_sTableInfo.actionList.append(qMakePair(0,qMakePair(Perflop,-1)));
-    // //用户1是自己，需要显示牌
-    // for(int i=0;i<2;i++){
-    //     Card c = cards[i];
-    //     QString path = QString(":/resources/images/%1%2.svg").arg(c.CardDecor).arg(c.CardNum);
-    //     m_pLabelUser2[i]->setPixmap(QPixmap(path));
-    // }
-    // //用户2
-    // QList<Card> cards2 = Generator::instance()->get2Cards();
-    // assert(cards2.size()==2);
-    // m_sTableInfo.user[1].perflop1 = cards2[0];
-    // m_sTableInfo.user[1].perflop2 = cards2[1];
-    // m_sTableInfo.actionList.append(qMakePair(1,qMakePair(Perflop,-1)));
+    ////游戏开始
+    m_sTableInfo.setGameStep(GameTable::NotStart);
+    m_sTableInfo.setBetStep(GameTable::NoBet);
+    ///发底牌
+    m_sTableInfo.setGameStep(GameTable::Perflop);
+    //用户1
+    QList<Card> cards = Generator::instance()->get2Cards();
+    assert(cards.size()==2);
+    m_sTableInfo.player(0).setCards(cards);
+    m_sTableInfo.append(qMakePair(0,qMakePair(GameTable::Perflop,-1)));
+    //用户1是自己，需要显示牌
+    for(int i=0;i<2;i++){
+        Card c = cards[i];
+        QString path = QString(":/resources/images/%1%2.svg").arg(c.decor()).arg(c.num());
+        m_pLabelUser2[i]->setPixmap(QPixmap(path));
+    }
+    //用户2
+    QList<Card> cards2 = Generator::instance()->get2Cards();
+    assert(cards2.size()==2);
+    m_sTableInfo.player(1).setCards(cards2);
+    m_sTableInfo.append(qMakePair(1,qMakePair(GameTable::Perflop,-1)));
 
     // ///下盲注 TODO 开发初期使用默认值
     // m_sTableInfo.eBetFlow = Bet;

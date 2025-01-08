@@ -56,6 +56,18 @@ public:
 
     GameTable(uint bb,bool noLimit);
 
+    /// 设置当前游戏阶段
+    /// \brief setGameStep
+    /// \param flow
+    ///
+    void setGameStep(GameFlow flow);
+
+    /// 设置下注阶段
+    /// \brief setBetStep
+    /// \param flow
+    ///
+    void setBetStep(BetFlow flow);
+
     /// 设置大盲注大小
     /// \brief setBigBlind
     /// \param bb
@@ -104,6 +116,12 @@ public:
     /// \brief clear
     ///
     void clear();
+
+    /// 添加操作记录
+    /// \brief append
+    /// \param action
+    ///
+    void append(QPair<int,QPair<int, int>> action);
 
 private:
     GameFlow m_eGameFlow;//当前游戏阶段
