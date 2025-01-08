@@ -85,7 +85,7 @@ GamePlayer GameTable::player(uint seatID)
 
     GamePlayer player;
     for(int i=0;i<m_lPlayers.size();i++){
-        GamePlayer player = m_lPlayers[i];
+        player = m_lPlayers[i];
         if(player.seatID() == seatID){
             break;
         }
