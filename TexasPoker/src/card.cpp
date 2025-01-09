@@ -19,21 +19,25 @@ Card::Card(Decor dec, Number num)
 
 void Card::setDecor(Decor dec)
 {
+    assert(dec != Decor::DecorNone);
     m_eDecor = dec;
 }
 
 void Card::Card::setNum(Number num)
 {
+    assert(num != Number::NumNone);
     m_eNumber = num;
 }
 
 Card::Number Card::num()
 {
+    assert(m_eNumber != Number::NumNone);
     return m_eNumber;
 }
 
 Card::Decor Card::decor()
 {
+    assert(m_eDecor != Decor::DecorNone);
     return m_eDecor;
 }
 
@@ -45,6 +49,9 @@ void Card::clear()
 
 QString Card::name()
 {
+    assert(m_eDecor != Decor::DecorNone);
+    assert(m_eNumber != Number::NumNone);
+
     QString name;
 
     switch(m_eDecor){

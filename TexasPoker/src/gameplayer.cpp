@@ -19,7 +19,7 @@ GamePlayer::GamePlayer(uint playerID, uint seatID, uint chips)
     ,m_unPreChip(0)
     ,m_unChips(chips)
 {
-    // NOTHING
+    assert(m_unChips!=0);
 }
 
 void GamePlayer::setCards(QList<Card> preflop)
@@ -39,6 +39,12 @@ void GamePlayer::setCards(QList<Card> preflop)
 
 QList<Card> GamePlayer::cards()
 {
+    //校验
+    assert(m_preflop.size()==2);//只能是2张
+    assert(m_preflop[0].decor()!=Card::DecorNone);
+    assert(m_preflop[0].num()!=Card::NumNone);
+    assert(m_preflop[1].decor()!=Card::DecorNone);
+    assert(m_preflop[1].num()!=Card::NumNone);
     return m_preflop;
 }
 
@@ -66,8 +72,12 @@ void GamePlayer::addBetChip(uint chip)
 {
     m_unPreChip = chip;
     m_unBetChip += chip;
-    //押注的同时自己拥有的筹码减少
-    m_unChips -=chip;
+    //押注的同时自己拥有的筹码减少，但是不能溢出
+    if(m_unChips<=chip){
+        m_unChips=0;
+    }else{
+        m_unChips -=chip;
+    }
     qDebug()<<m_unBetChip<<m_unChips;
 }
 
