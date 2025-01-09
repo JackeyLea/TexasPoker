@@ -7,6 +7,8 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include <QString>
+
 class Card
 {
 public:
@@ -74,6 +76,12 @@ public:
     /// \brief clear
     ///
     void clear();
+
+    /// 获取当前牌名称
+    /// \brief name
+    /// \return
+    ///
+    QString name();
 private:
     //牌 一张牌由花色和数字组成，比如黑桃A
     Decor  m_eDecor;//牌 花色

@@ -3,6 +3,14 @@
 #include "card.h"
 #include "comparecards.h"
 
+void TexasPokerTest::case_checkCardName()
+{
+    Card c;
+    c.setDecor(Card::Club);
+    c.setNum(Card::Num_10);
+    QVERIFY(c.name()=="梅花10");
+}
+
 void TexasPokerTest::case_checkGetBrandType()
 {
     CompareCards cc;

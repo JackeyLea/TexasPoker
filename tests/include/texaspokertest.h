@@ -15,6 +15,11 @@ class TexasPokerTest : public QObject
     Q_OBJECT
 
 private slots:
+    /// 检测牌名
+    /// \brief case_checkCardName
+    ///
+    void case_checkCardName();
+
     /// 检测getBrandType牌型检测函数
     /// \brief case_checkGetBrandType
     ///
