@@ -2,11 +2,6 @@
 
 B/S架构的德州扑克
 
-python texas_holdem_backend.py
-
-http://127.0.0.1:5000
-
-
 ## 结构
 
 ### 前端
@@ -26,3 +21,12 @@ http://127.0.0.1:5000
 ## 环境
 
 - python 3.14.3
+
+## 运行
+
+```bash
+# 后端
+python texas_holdem_backend.py
+
+# 前端 双击打开index.html
+```
