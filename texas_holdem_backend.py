@@ -751,7 +751,8 @@ def get_app_info():
 @app.route('/api/game/state', methods=['GET'])
 def get_game_state():
     """获取当前游戏状态"""
-    return jsonify(game.get_state())
+    player_id = request.args.get('player_id', type=int)
+    return jsonify(game.get_state(for_player_id=player_id))
 
 @app.route('/api/game/start', methods=['POST'])
 def start_game():

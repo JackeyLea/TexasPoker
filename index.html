@@ -817,7 +817,7 @@
 
         // 增强的游戏状态更新函数
         async function enhancedUpdateGameState() {
-            const data = await callApi('/game/state');
+            const data = await callApi('/game/state?player_id=0');  // 传递玩家ID=0，确保人类玩家手牌可见
             if (!data) return;
             
             renderGameState(data);
