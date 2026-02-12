@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德州扑克 (前端界面)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0a3d1f 0%, #1a5c2c 100%);
+            color: #f1f1f1;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 2px solid #D4AF37;
+        }
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-top: 0;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+        }
+        .game-status {
+            background-color: rgba(30, 60, 40, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.2em;
+            border: 1px solid #4CAF50;
+        }
+        .community-cards-section, .player-section {
+            background-color: rgba(40, 40, 40, 0.85);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #666;
+        }
+        h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            min-height: 120px;
+            padding: 15px;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        .card {
+            width: 80px;
+            height: 112px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 1px solid #ccc;
+            color: #333;
+        }
+        .card.red { color: #D22; }
+        .card.black { color: #222; }
+        .card.placeholder {
+            background-color: #2a2a2a;
+            color: #666;
+            border: 2px dashed #666;
+            font-size: 1.5em;
+        }
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: rgba(60, 80, 60, 0.7);
+            border-radius: 10px;
+        }
+        .player-name {
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        .player-stack, .player-bet, .player-status {
+            font-size: 1.1em;
+            color: #FFD700;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 140px;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+        #btn-fold { background-color: #f44336; color: white; }
+        #btn-check, #btn-call { background-color: #2196F3; color: white; }
+        #btn-bet, #btn-raise { background-color: #4CAF50; color: white; }
+        #btn-start, #btn-reset { background-color: #9C27B0; color: white; }
+        .bet-input-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        input[type="number"] {
+            padding: 12px;
+            font-size: 1.1em;
+            width: 150px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .log {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 25px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border: 1px solid #444;
+            color: #aaffaa;
+        }
+        .log p {
+            margin: 5px 0;
+        }
+        .log .info { color: #aaffaa; }
+        .log .action { color: #66ccff; }
+        .log .win { color: #FFD700; font-weight: bold; }
+        .log .error { color: #ff6666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
+
+        <div class="game-status">
+            <p>状态: <span id="game-state">等待游戏开始</span></p>
+            <p>当前底池: <span id="pot-amount">0</span> | 当前下注额: <span id="current-bet">0</span></p>
+            <p>行动玩家: <span id="active-player">-</span></p>
+        </div>
+
+        <div class="community-cards-section">
+            <h2>公共牌</h2>
+            <div class="cards-container" id="community-cards">
+                <!-- 公共牌将由JS动态生成 -->
+            </div>
+        </div>
+
+        <div class="player-section">
+            <h2>玩家</h2>
+            <div id="players-container">
+                <!-- 玩家信息将由JS动态生成 -->
+            </div>
+        </div>
+
+        <div class="bet-input-section" id="bet-controls" style="display: none;">
+            <label for="bet-amount">下注/加注额度:</label>
+            <input type="number" id="bet-amount" min="1" value="20">
+            <button id="btn-confirm-bet">确认下注</button>
+        </div>
+
+        <div class="controls">
+            <button id="btn-start">开始新游戏</button>
+            <button id="btn-fold">弃牌</button>
+            <button id="btn-check">过牌</button>
+            <button id="btn-bet">下注</button>
+            <button id="btn-call">跟注</button>
+            <button id="btn-raise">加注</button>
+            <button id="btn-reset">重置服务器</button>
+        </div>
+
+        <div class="log">
+            <h3>游戏日志</h3>
+            <div id="log-content">
+                <p class="info">前端已加载。请点击"开始新游戏"。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://127.0.0.1:5000/api'; // 后端API地址
+
+        // DOM 元素
+        const dom = {
+            gameState: document.getElementById('game-state'),
+            potAmount: document.getElementById('pot-amount'),
+            currentBet: document.getElementById('current-bet'),
+            activePlayer: document.getElementById('active-player'),
+            communityCards: document.getElementById('community-cards'),
+            playersContainer: document.getElementById('players-container'),
+            betControls: document.getElementById('bet-controls'),
+            betAmount: document.getElementById('bet-amount'),
+            btnConfirmBet: document.getElementById('btn-confirm-bet'),
+            logContent: document.getElementById('log-content')
+        };
+
+        // 按钮事件监听
+        document.getElementById('btn-start').addEventListener('click', startNewGame);
+        document.getElementById('btn-fold').addEventListener('click', () => takeAction('fold'));
+        document.getElementById('btn-check').addEventListener('click', () => takeAction('check'));
+        document.getElementById('btn-bet').addEventListener('click', showBetInput);
+        document.getElementById('btn-call').addEventListener('click', () => takeAction('call'));
+        document.getElementById('btn-raise').addEventListener('click', showBetInput);
+        document.getElementById('btn-reset').addEventListener('click', resetServer);
+        dom.btnConfirmBet.addEventListener('click', confirmBetAction);
+
+        // 工具函数：添加日志
+        function addLog(message, type = 'info') {
+            const p = document.createElement('p');
+            p.className = type;
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            dom.logContent.appendChild(p);
+            dom.logContent.scrollTop = dom.logContent.scrollHeight;
+        }
+
+        // 工具函数：API调用
+        async function callApi(endpoint, method = 'GET', body = null) {
+            const options = { method, headers: { 'Content-Type': 'application/json' } };
+            if (body) options.body = JSON.stringify(body);
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+                const data = await response.json();
+                if (!response.ok) {
+                    addLog(`API错误 (${response.status}): ${data.error || '未知错误'}`, 'error');
+                    return null;
+                }
+                return data;
+            } catch (error) {
+                addLog(`网络请求失败: ${error.message}`, 'error');
+                return null;
+            }
+        }
+
+        // 1. 获取并更新游戏状态
+        async function updateGameState() {
+            const data = await callApi('/game/state');
+            if (!data) return;
+            renderGameState(data);
+        }
+
+        // 2. 渲染游戏状态
+        function renderGameState(state) {
+            dom.gameState.textContent = state.game_state;
+            dom.potAmount.textContent = state.pot;
+            dom.currentBet.textContent = state.current_bet;
+            dom.activePlayer.textContent = state.players[state.active_player_index]?.name || '-';
+
+            // 渲染公共牌
+            dom.communityCards.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card';
+                if (state.community_cards[i]) {
+                    cardDiv.textContent = state.community_cards[i].symbol;
+                    cardDiv.classList.add(state.community_cards[i].color);
+                } else {
+                    cardDiv.textContent = '?';
+                    cardDiv.classList.add('placeholder');
+                }
+                dom.communityCards.appendChild(cardDiv);
+            }
+
+            // 渲染玩家信息
+            dom.playersContainer.innerHTML = '';
+            state.players.forEach((player, index) => {
+                const playerEl = document.createElement('div');
+                playerEl.className = 'player-info';
+                if (index === state.active_player_index) {
+                    playerEl.style.border = '3px solid #FFD700';
+                    playerEl.style.backgroundColor = 'rgba(100, 100, 60, 0.8)';
+                }
+                playerEl.innerHTML = `
+                    <div>
+                        <span class="player-name">${player.name}</span>
+                        <span> (手牌: ${player.hand?.map(c => c.symbol).join(', ') || '隐藏'})</span>
+                    </div>
+                    <div>
+                        <span class="player-stack">筹码: ${player.stack}</span> |
+                        <span class="player-bet">本轮下注: ${player.bet}</span> |
+                        <span class="player-status">状态: ${player.status}</span>
+                    </div>
+                `;
+                dom.playersContainer.appendChild(playerEl);
+            });
+            addLog(`游戏状态已更新: ${state.game_state}`, 'info');
+        }
+
+        // 3. 开始新游戏
+        async function startNewGame() {
+            addLog('请求开始新游戏...', 'action');
+            const data = await callApi('/game/start', 'POST');
+            if (data) {
+                addLog(`新游戏开始！玩家: ${data.players.map(p => p.name).join(', ')}`, 'info');
+                updateGameState();
+            }
+        }
+
+        // 4. 执行动作（弃牌、过牌、跟注）
+        async function takeAction(action) {
+            addLog(`执行动作: ${action}`, 'action');
+            const data = await callApi('/game/action', 'POST', { action });
+            if (data) {
+                addLog(`动作"${action}"成功。${data.message}`, 'info');
+                updateGameState();
+            }
+        }
+
+        // 5. 显示下注输入框
+        function showBetInput() {
+            dom.betControls.style.display = 'flex';
+            addLog('请输入下注/加注额度。', 'info');
+        }
+
+        // 6. 确认下注/加注
+        async function confirmBetAction() {
+            const amount = parseInt(dom.betAmount.value);
+            if (isNaN(amount) || amount <= 0) {
+                addLog('请输入有效的正数金额。', 'error');
+                return;
+            }
+            addLog(`执行下注/加注: ${amount}`, 'action');
+            const data = await callApi('/game/action', 'POST', { action: 'bet', amount });
+            if (data) {
+                addLog(`下注"${amount}"成功。${data.message}`, 'info');
+                dom.betControls.style.display = 'none';
+                updateGameState();
+            }
+        }
+
+        // 7. 重置服务器
+        async function resetServer() {
+            const confirmed = confirm('这将重置后端所有游戏数据。确定吗？');
+            if (!confirmed) return;
+            addLog('重置服务器...', 'action');
+            const data = await callApi('/reset', 'POST');
+            if (data) {
+                addLog('服务器已重置。', 'info');
+                renderGameState({
+                    game_state: '等待游戏开始',
+                    pot: 0,
+                    current_bet: 0,
+                    active_player_index: 0,
+                    community_cards: [],
+                    players: []
+                });
+            }
+        }
+
+        // 页面加载时尝试获取一次状态
+        window.onload = updateGameState;
+        // 每3秒自动更新一次状态（可选，可根据需要调整）
+        setInterval(updateGameState, 3000);
+    </script>
+</body>
+</html>
