@@ -49,23 +49,28 @@ class Suit(Enum):
 
 class Rank(Enum):
     """点数"""
-    TWO = ("2", 2)
-    THREE = ("3", 3)
-    FOUR = ("4", 4)
-    FIVE = ("5", 5)
-    SIX = ("6", 6)
-    SEVEN = ("7", 7)
-    EIGHT = ("8", 8)
-    NINE = ("9", 9)
-    TEN = ("10", 10)
-    JACK = ("J", 11)
-    QUEEN = ("Q", 12)
-    KING = ("K", 13)
-    ACE = ("A", 14)
+    TWO = 2
+    THREE = 3
+    FOUR = 4
+    FIVE = 5
+    SIX = 6
+    SEVEN = 7
+    EIGHT = 8
+    NINE = 9
+    TEN = 10
+    JACK = 11
+    QUEEN = 12
+    KING = 13
+    ACE = 14
 
-    def __init__(self, symbol: str, value: int):
-        self.symbol = symbol
-        self.value = value
+    @property
+    def symbol(self) -> str:
+        """获取牌面符号"""
+        symbol_map = {
+            2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",
+            11: "J", 12: "Q", 13: "K", 14: "A"
+        }
+        return symbol_map[self.value]
 
 class Card:
     """单张扑克牌"""
