@@ -309,16 +309,56 @@
         .seat-4 { top: 100px; left: 100px; }
         .seat-5 { top: 100px; right: 100px; }
 
+        /* 荷官区域 */
+        .dealer-area {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid #D4AF37;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .dealer-label {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* 公共牌区域 */
+        .community-cards-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid #D4AF37;
+            z-index: 5;
+        }
+
+        .community-cards {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+
         .game-layout {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
-        }
-
-        .community-cards-section {
-            width: 100%;
-            max-width: 600px;
+            gap: 40px;
+            position: relative;
         }
 
         @media (max-width: 768px) {
@@ -333,18 +373,38 @@
                 height: 70px;
                 font-size: 0.8em;
             }
+            
+            .community-cards-area {
+                width: 250px;
+                height: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
-
-        <div class="game-status">
-            <p>状态: <span id="game-state">等待游戏开始</span></p>
-            <p>当前底池: <span id="pot-amount">0</span> | 当前下注额: <span id="current-bet">0</span></p>
-            <p>行动玩家: <span id="active-player">-</span></p>
-        </div>
+        <div class="container">
+            <div class="game-header">
+                <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
+                
+                <div class="game-info">
+                    <div class="info-item">
+                        <span class="info-label">游戏状态:</span>
+                        <span class="info-value" id="game-state">等待游戏开始</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">当前底池:</span>
+                        <span class="info-value" id="pot-amount">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">当前下注额:</span>
+                        <span class="info-value" id="current-bet">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">行动玩家:</span>
+                        <span class="info-value" id="active-player">-</span>
+                    </div>
+                </div>
+            </div>
 
         <div id="winners-container" class="winners-section" style="display: none;">
             <h2>🏆 获胜者 🏆</h2>
@@ -354,15 +414,15 @@
         </div>
 
         <div class="game-layout">
-            <!-- 顶部玩家座位 -->
-            <div id="players-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <!-- 玩家座位将由JS动态生成 -->
-            </div>
-
             <div class="poker-table">
-                <!-- 牌桌中间的公共牌区域 -->
-                <div class="table-center">
-                    <div class="cards-container" id="community-cards" style="flex-direction: row; gap: 8px; min-height: auto;">
+                <!-- 荷官区域 -->
+                <div class="dealer-area">
+                    <div class="dealer-label">荷官</div>
+                </div>
+
+                <!-- 公共牌区域 -->
+                <div class="community-cards-area">
+                    <div class="community-cards" id="community-cards">
                         <!-- 公共牌将由JS动态生成 -->
                     </div>
                 </div>
@@ -568,11 +628,10 @@
                     seat.classList.add('robot');
                 }
 
-                // 构建手牌显示字符串
+                // 构建手牌显示：人类玩家始终可见，机器人只在摊牌阶段可见
                 let handDisplay = '??';
                 let handRevealed = false;
                 if (player.hand && player.hand.length > 0) {
-                    // 只有在摊牌阶段或当前玩家是人类玩家时才显示手牌
                     if (state.game_state === 'showdown' || state.game_state === 'ended' || index === 0) {
                         handDisplay = player.hand.map(c => c.symbol).join(' ');
                         handRevealed = true;
