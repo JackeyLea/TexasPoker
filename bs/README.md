@@ -18,6 +18,7 @@ B/S架构的德州扑克
 
 - python 3.14.3
 - Windows 10 Pro 22H2 19045.6466
+- DeepSeek
 
 ## 运行
 
