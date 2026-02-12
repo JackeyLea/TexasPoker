@@ -43,6 +43,19 @@
             font-size: 1.2em;
             border: 1px solid #4CAF50;
         }
+        .winners-section {
+            background-color: rgba(139, 0, 139, 0.8); /* 紫色背景表示胜利 */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 2px solid #FFD700;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px #FFD700; }
+            50% { box-shadow: 0 0 20px #FFD700; }
+            100% { box-shadow: 0 0 5px #FFD700; }
+        }
         .community-cards-section, .player-section {
             background-color: rgba(40, 40, 40, 0.85);
             padding: 20px;
@@ -81,6 +94,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             border: 1px solid #ccc;
             color: #333;
+            position: relative;
         }
         .card.red { color: #D22; }
         .card.black { color: #222; }
@@ -90,6 +104,10 @@
             border: 2px dashed #666;
             font-size: 1.5em;
         }
+        .card.winning-card {
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
         .player-info {
             display: flex;
             justify-content: space-between;
@@ -98,6 +116,11 @@
             padding: 10px 15px;
             background-color: rgba(60, 80, 60, 0.7);
             border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .player-info.winner {
+            background-color: rgba(139, 0, 139, 0.7);
+            border: 2px solid #FFD700;
         }
         .player-name {
             font-weight: bold;
@@ -106,6 +129,12 @@
         .player-stack, .player-bet, .player-status {
             font-size: 1.1em;
             color: #FFD700;
+        }
+        .player-hand-rank {
+            font-size: 1em;
+            color: #66ccff;
+            font-style: italic;
+            margin-left: 10px;
         }
         .controls {
             display: flex;
@@ -127,6 +156,11 @@
         button:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
         #btn-fold { background-color: #f44336; color: white; }
         #btn-check, #btn-call { background-color: #2196F3; color: white; }
@@ -165,6 +199,11 @@
         .log .action { color: #66ccff; }
         .log .win { color: #FFD700; font-weight: bold; }
         .log .error { color: #ff6666; }
+        .hand-details {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -175,6 +214,13 @@
             <p>状态: <span id="game-state">等待游戏开始</span></p>
             <p>当前底池: <span id="pot-amount">0</span> | 当前下注额: <span id="current-bet">0</span></p>
             <p>行动玩家: <span id="active-player">-</span></p>
+        </div>
+
+        <div id="winners-container" class="winners-section" style="display: none;">
+            <h2>🏆 获胜者 🏆</h2>
+            <div id="winners-list">
+                <!-- 获胜者信息将在这里显示 -->
+            </div>
         </div>
 
         <div class="community-cards-section">
@@ -199,11 +245,11 @@
 
         <div class="controls">
             <button id="btn-start">开始新游戏</button>
-            <button id="btn-fold">弃牌</button>
-            <button id="btn-check">过牌</button>
-            <button id="btn-bet">下注</button>
-            <button id="btn-call">跟注</button>
-            <button id="btn-raise">加注</button>
+            <button id="btn-fold" disabled>弃牌</button>
+            <button id="btn-check" disabled>过牌</button>
+            <button id="btn-bet" disabled>下注</button>
+            <button id="btn-call" disabled>跟注</button>
+            <button id="btn-raise" disabled>加注</button>
             <button id="btn-reset">重置服务器</button>
         </div>
 
@@ -226,20 +272,29 @@
             activePlayer: document.getElementById('active-player'),
             communityCards: document.getElementById('community-cards'),
             playersContainer: document.getElementById('players-container'),
+            winnersContainer: document.getElementById('winners-container'),
+            winnersList: document.getElementById('winners-list'),
             betControls: document.getElementById('bet-controls'),
             betAmount: document.getElementById('bet-amount'),
             btnConfirmBet: document.getElementById('btn-confirm-bet'),
-            logContent: document.getElementById('log-content')
+            logContent: document.getElementById('log-content'),
+            btnStart: document.getElementById('btn-start'),
+            btnFold: document.getElementById('btn-fold'),
+            btnCheck: document.getElementById('btn-check'),
+            btnBet: document.getElementById('btn-bet'),
+            btnCall: document.getElementById('btn-call'),
+            btnRaise: document.getElementById('btn-raise'),
+            btnReset: document.getElementById('btn-reset')
         };
 
         // 按钮事件监听
-        document.getElementById('btn-start').addEventListener('click', startNewGame);
-        document.getElementById('btn-fold').addEventListener('click', () => takeAction('fold'));
-        document.getElementById('btn-check').addEventListener('click', () => takeAction('check'));
-        document.getElementById('btn-bet').addEventListener('click', showBetInput);
-        document.getElementById('btn-call').addEventListener('click', () => takeAction('call'));
-        document.getElementById('btn-raise').addEventListener('click', showBetInput);
-        document.getElementById('btn-reset').addEventListener('click', resetServer);
+        dom.btnStart.addEventListener('click', startNewGame);
+        dom.btnFold.addEventListener('click', () => takeAction('fold'));
+        dom.btnCheck.addEventListener('click', () => takeAction('check'));
+        dom.btnBet.addEventListener('click', showBetInput);
+        dom.btnCall.addEventListener('click', () => takeAction('call'));
+        dom.btnRaise.addEventListener('click', showBetInput);
+        dom.btnReset.addEventListener('click', resetServer);
         dom.btnConfirmBet.addEventListener('click', confirmBetAction);
 
         // 工具函数：添加日志
@@ -285,17 +340,36 @@
 
             // 渲染公共牌
             dom.communityCards.innerHTML = '';
-            for (let i = 0; i < 5; i++) {
+            state.community_cards.forEach(card => {
                 const cardDiv = document.createElement('div');
-                cardDiv.className = 'card';
-                if (state.community_cards[i]) {
-                    cardDiv.textContent = state.community_cards[i].symbol;
-                    cardDiv.classList.add(state.community_cards[i].color);
-                } else {
-                    cardDiv.textContent = '?';
-                    cardDiv.classList.add('placeholder');
-                }
+                cardDiv.className = `card ${card.color}`;
+                cardDiv.textContent = card.symbol;
                 dom.communityCards.appendChild(cardDiv);
+            });
+            // 补充空位牌
+            for (let i = state.community_cards.length; i < 5; i++) {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'card placeholder';
+                cardDiv.textContent = '?';
+                dom.communityCards.appendChild(cardDiv);
+            }
+
+            // 渲染获胜者信息
+            if (state.winners && state.winners.length > 0) {
+                dom.winnersContainer.style.display = 'block';
+                dom.winnersList.innerHTML = '';
+                state.winners.forEach(winner => {
+                    const winnerDiv = document.createElement('div');
+                    winnerDiv.style.cssText = 'padding: 10px; margin: 5px 0; background-color: rgba(255, 215, 0, 0.2); border-radius: 5px;';
+                    winnerDiv.innerHTML = `
+                        <strong>${winner.player_name}</strong> 赢得 <span style="color: #FFD700">${winner.amount}</span> 筹码
+                        ${winner.hand_description ? `<br><span style="font-size: 0.9em; color: #66ccff">${winner.hand_description}</span>` : ''}
+                    `;
+                    dom.winnersList.appendChild(winnerDiv);
+                });
+                addLog(`游戏结束！${state.winners.map(w => w.player_name).join(', ')} 获胜！`, 'win');
+            } else {
+                dom.winnersContainer.style.display = 'none';
             }
 
             // 渲染玩家信息
@@ -307,10 +381,28 @@
                     playerEl.style.border = '3px solid #FFD700';
                     playerEl.style.backgroundColor = 'rgba(100, 100, 60, 0.8)';
                 }
+                
+                // 检查是否是获胜者
+                if (state.winners) {
+                    const isWinner = state.winners.some(w => w.player_id === player.id);
+                    if (isWinner) {
+                        playerEl.classList.add('winner');
+                    }
+                }
+                
+                // 构建手牌显示字符串
+                let handDisplay = '隐藏';
+                if (player.hand && player.hand.length > 0) {
+                    handDisplay = player.hand.map(c => c.symbol).join(' ');
+                }
+                
+                // 构建玩家信息HTML
                 playerEl.innerHTML = `
                     <div>
                         <span class="player-name">${player.name}</span>
-                        <span> (手牌: ${player.hand?.map(c => c.symbol).join(', ') || '隐藏'})</span>
+                        <span> (手牌: ${handDisplay})</span>
+                        ${player.hand_rank ? `<span class="player-hand-rank">[${player.hand_rank}]</span>` : ''}
+                        ${player.hand_description ? `<div class="hand-details">${player.hand_description}</div>` : ''}
                     </div>
                     <div>
                         <span class="player-stack">筹码: ${player.stack}</span> |
@@ -320,36 +412,58 @@
                 `;
                 dom.playersContainer.appendChild(playerEl);
             });
-            addLog(`游戏状态已更新: ${state.game_state}`, 'info');
+
+            // 更新按钮状态
+            updateButtonStates(state);
         }
 
-        // 3. 开始新游戏
+        // 3. 更新按钮状态
+        function updateButtonStates(state) {
+            const isGameActive = state.game_state !== 'ended' && state.game_state !== 'showdown';
+            const isPlayerTurn = state.players[state.active_player_index]?.status === 'active';
+            
+            // 启用/禁用动作按钮
+            dom.btnFold.disabled = !isGameActive || !isPlayerTurn;
+            dom.btnCheck.disabled = !isGameActive || !isPlayerTurn;
+            dom.btnBet.disabled = !isGameActive || !isPlayerTurn;
+            dom.btnCall.disabled = !isGameActive || !isPlayerTurn;
+            dom.btnRaise.disabled = !isGameActive || !isPlayerTurn;
+            
+            // 开始按钮状态
+            dom.btnStart.disabled = isGameActive && state.game_state !== 'idle';
+        }
+
+        // 4. 开始新游戏
         async function startNewGame() {
             addLog('请求开始新游戏...', 'action');
             const data = await callApi('/game/start', 'POST');
             if (data) {
-                addLog(`新游戏开始！玩家: ${data.players.map(p => p.name).join(', ')}`, 'info');
+                addLog(`新游戏开始！玩家: ${data.players.map(p => p).join(', ')}`, 'info');
                 updateGameState();
             }
         }
 
-        // 4. 执行动作（弃牌、过牌、跟注）
+        // 5. 执行动作（弃牌、过牌、跟注）
         async function takeAction(action) {
             addLog(`执行动作: ${action}`, 'action');
             const data = await callApi('/game/action', 'POST', { action });
             if (data) {
-                addLog(`动作"${action}"成功。${data.message}`, 'info');
+                if (data.success) {
+                    addLog(`动作"${action}"成功。${data.message}`, 'info');
+                } else {
+                    addLog(`动作失败: ${data.message}`, 'error');
+                }
                 updateGameState();
             }
         }
 
-        // 5. 显示下注输入框
+        // 6. 显示下注输入框
         function showBetInput() {
             dom.betControls.style.display = 'flex';
             addLog('请输入下注/加注额度。', 'info');
         }
 
-        // 6. 确认下注/加注
+        // 7. 确认下注/加注
         async function confirmBetAction() {
             const amount = parseInt(dom.betAmount.value);
             if (isNaN(amount) || amount <= 0) {
@@ -359,13 +473,17 @@
             addLog(`执行下注/加注: ${amount}`, 'action');
             const data = await callApi('/game/action', 'POST', { action: 'bet', amount });
             if (data) {
-                addLog(`下注"${amount}"成功。${data.message}`, 'info');
+                if (data.success) {
+                    addLog(`下注"${amount}"成功。${data.message}`, 'info');
+                } else {
+                    addLog(`下注失败: ${data.message}`, 'error');
+                }
                 dom.betControls.style.display = 'none';
                 updateGameState();
             }
         }
 
-        // 7. 重置服务器
+        // 8. 重置服务器
         async function resetServer() {
             const confirmed = confirm('这将重置后端所有游戏数据。确定吗？');
             if (!confirmed) return;
@@ -373,6 +491,8 @@
             const data = await callApi('/reset', 'POST');
             if (data) {
                 addLog('服务器已重置。', 'info');
+                // 重置显示状态
+                dom.winnersContainer.style.display = 'none';
                 renderGameState({
                     game_state: '等待游戏开始',
                     pot: 0,
@@ -386,7 +506,7 @@
 
         // 页面加载时尝试获取一次状态
         window.onload = updateGameState;
-        // 每3秒自动更新一次状态（可选，可根据需要调整）
+        // 每3秒自动更新一次状态
         setInterval(updateGameState, 3000);
     </script>
 </body>
