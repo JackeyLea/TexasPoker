@@ -18,6 +18,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
         .container {
             width: 90%;
@@ -204,6 +205,135 @@
             color: #aaa;
             margin-top: 5px;
         }
+
+        /* 牌桌布局样式 */
+        .poker-table {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(circle, #1a5c2c 0%, #0a3d1f 70%);
+            border-radius: 200px;
+            margin: 40px auto;
+            border: 8px solid #8B4513;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .table-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #D4AF37;
+        }
+
+        .player-seat {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            background: rgba(40, 40, 40, 0.9);
+            border-radius: 10px;
+            border: 2px solid #666;
+            padding: 10px;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .player-seat.active {
+            border: 3px solid #FFD700;
+            background: rgba(100, 100, 60, 0.8);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .player-seat.winner {
+            background: rgba(139, 0, 139, 0.7);
+            border: 3px solid #FFD700;
+        }
+
+        .player-seat.human {
+            border: 3px solid #4CAF50;
+            background: rgba(60, 80, 60, 0.8);
+        }
+
+        .player-name {
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .player-info-line {
+            font-size: 0.8em;
+            margin: 2px 0;
+            color: #FFD700;
+        }
+
+        .player-hand {
+            font-size: 0.7em;
+            color: #66ccff;
+            text-align: center;
+            margin-top: 5px;
+            font-family: monospace;
+        }
+
+        .player-status {
+            font-size: 0.7em;
+            text-align: center;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .player-robot {
+            color: #ff6b6b;
+        }
+
+        .player-human {
+            color: #4CAF50;
+        }
+
+        /* 6个玩家位置的定位 */
+        .seat-0 { bottom: 20px; left: 50%; transform: translateX(-50%); }
+        .seat-1 { top: 20px; left: 50%; transform: translateX(-50%); }
+        .seat-2 { top: 50%; left: 20px; transform: translateY(-50%); }
+        .seat-3 { top: 50%; right: 20px; transform: translateY(-50%); }
+        .seat-4 { top: 100px; left: 100px; }
+        .seat-5 { top: 100px; right: 100px; }
+
+        .game-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .community-cards-section {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .poker-table {
+                width: 90vw;
+                height: 60vw;
+                border-radius: 30vw;
+            }
+            
+            .player-seat {
+                width: 100px;
+                height: 70px;
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -223,17 +353,39 @@
             </div>
         </div>
 
-        <div class="community-cards-section">
-            <h2>公共牌</h2>
-            <div class="cards-container" id="community-cards">
-                <!-- 公共牌将由JS动态生成 -->
+        <div class="game-layout">
+            <!-- 顶部玩家座位 -->
+            <div id="players-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <!-- 玩家座位将由JS动态生成 -->
             </div>
-        </div>
 
-        <div class="player-section">
-            <h2>玩家</h2>
-            <div id="players-container">
-                <!-- 玩家信息将由JS动态生成 -->
+            <div class="poker-table">
+                <!-- 牌桌中间的公共牌区域 -->
+                <div class="table-center">
+                    <div class="cards-container" id="community-cards" style="flex-direction: row; gap: 8px; min-height: auto;">
+                        <!-- 公共牌将由JS动态生成 -->
+                    </div>
+                </div>
+
+                <!-- 围绕牌桌的玩家座位 -->
+                <div class="player-seat seat-0" id="seat-0">
+                    <!-- 玩家0（人类玩家） -->
+                </div>
+                <div class="player-seat seat-1" id="seat-1">
+                    <!-- 玩家1（机器人） -->
+                </div>
+                <div class="player-seat seat-2" id="seat-2">
+                    <!-- 玩家2（机器人） -->
+                </div>
+                <div class="player-seat seat-3" id="seat-3">
+                    <!-- 玩家3（机器人） -->
+                </div>
+                <div class="player-seat seat-4" id="seat-4">
+                    <!-- 玩家4（机器人） -->
+                </div>
+                <div class="player-seat seat-5" id="seat-5">
+                    <!-- 玩家5（机器人） -->
+                </div>
             </div>
         </div>
 
@@ -372,49 +524,73 @@
                 dom.winnersContainer.style.display = 'none';
             }
 
-            // 渲染玩家信息
-            dom.playersContainer.innerHTML = '';
+            // 渲染玩家信息（围绕牌桌布局）
+            renderPlayersAroundTable(state);
+
+            // 更新按钮状态
+            updateButtonStates(state);
+        }
+
+        // 2.1 渲染玩家围绕牌桌布局
+        function renderPlayersAroundTable(state) {
+            // 清空所有座位
+            for (let i = 0; i < 6; i++) {
+                const seat = document.getElementById(`seat-${i}`);
+                if (seat) {
+                    seat.innerHTML = '';
+                    seat.className = 'player-seat';
+                    seat.classList.add(`seat-${i}`);
+                }
+            }
+
+            // 渲染每个玩家
             state.players.forEach((player, index) => {
-                const playerEl = document.createElement('div');
-                playerEl.className = 'player-info';
+                const seat = document.getElementById(`seat-${index}`);
+                if (!seat) return;
+
+                // 设置座位状态
                 if (index === state.active_player_index) {
-                    playerEl.style.border = '3px solid #FFD700';
-                    playerEl.style.backgroundColor = 'rgba(100, 100, 60, 0.8)';
+                    seat.classList.add('active');
                 }
                 
                 // 检查是否是获胜者
                 if (state.winners) {
                     const isWinner = state.winners.some(w => w.player_id === player.id);
                     if (isWinner) {
-                        playerEl.classList.add('winner');
+                        seat.classList.add('winner');
                     }
                 }
-                
-                // 构建手牌显示字符串
-                let handDisplay = '隐藏';
-                if (player.hand && player.hand.length > 0) {
-                    handDisplay = player.hand.map(c => c.symbol).join(' ');
-                }
-                
-                // 构建玩家信息HTML
-                playerEl.innerHTML = `
-                    <div>
-                        <span class="player-name">${player.name}</span>
-                        <span> (手牌: ${handDisplay})</span>
-                        ${player.hand_rank ? `<span class="player-hand-rank">[${player.hand_rank}]</span>` : ''}
-                        ${player.hand_description ? `<div class="hand-details">${player.hand_description}</div>` : ''}
-                    </div>
-                    <div>
-                        <span class="player-stack">筹码: ${player.stack}</span> |
-                        <span class="player-bet">本轮下注: ${player.bet}</span> |
-                        <span class="player-status">状态: ${player.status}</span>
-                    </div>
-                `;
-                dom.playersContainer.appendChild(playerEl);
-            });
 
-            // 更新按钮状态
-            updateButtonStates(state);
+                // 设置玩家类型（人类/机器人）
+                if (index === 0) {
+                    seat.classList.add('human');
+                } else {
+                    seat.classList.add('robot');
+                }
+
+                // 构建手牌显示字符串
+                let handDisplay = '??';
+                let handRevealed = false;
+                if (player.hand && player.hand.length > 0) {
+                    // 只有在摊牌阶段或当前玩家是人类玩家时才显示手牌
+                    if (state.game_state === 'showdown' || state.game_state === 'ended' || index === 0) {
+                        handDisplay = player.hand.map(c => c.symbol).join(' ');
+                        handRevealed = true;
+                    }
+                }
+
+                // 构建玩家信息HTML
+                seat.innerHTML = `
+                    <div class="player-name ${index === 0 ? 'player-human' : 'player-robot'}">
+                        ${player.name} ${index === 0 ? '(你)' : '(机器人)'}
+                    </div>
+                    <div class="player-info-line">筹码: ${player.stack}</div>
+                    <div class="player-info-line">下注: ${player.bet}</div>
+                    <div class="player-hand">${handDisplay}</div>
+                    <div class="player-status">${player.status}</div>
+                    ${player.hand_rank && handRevealed ? `<div class="player-hand-rank">${player.hand_description}</div>` : ''}
+                `;
+            });
         }
 
         // 3. 更新按钮状态
@@ -504,10 +680,113 @@
             }
         }
 
+        // 机器人AI逻辑
+        async function robotAI(playerIndex, state) {
+            const player = state.players[playerIndex];
+            if (!player || player.status !== 'active') return;
+
+            // 等待一段时间让玩家看到机器人思考
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // 简单的AI策略
+            const callAmount = state.current_bet - player.bet;
+            const canCall = callAmount <= player.stack;
+            
+            // 随机决策，基于手牌强度
+            const handStrength = calculateHandStrength(player, state);
+            const randomFactor = Math.random();
+
+            let action = 'fold';
+            let amount = 0;
+
+            if (handStrength > 0.7) {
+                // 强牌：加注或跟注
+                if (randomFactor < 0.7 && player.stack > state.current_bet * 2) {
+                    action = 'bet';
+                    amount = Math.min(player.stack, Math.max(state.current_bet * 2, 50));
+                } else if (canCall) {
+                    action = 'call';
+                } else {
+                    action = 'fold';
+                }
+            } else if (handStrength > 0.4) {
+                // 中等牌：跟注或过牌
+                if (state.current_bet === player.bet) {
+                    action = 'check';
+                } else if (canCall) {
+                    action = 'call';
+                } else {
+                    action = 'fold';
+                }
+            } else {
+                // 弱牌：弃牌或过牌
+                if (state.current_bet === player.bet) {
+                    action = 'check';
+                } else if (callAmount <= player.stack * 0.1) {
+                    // 小额跟注
+                    action = 'call';
+                } else {
+                    action = 'fold';
+                }
+            }
+
+            addLog(`机器人 ${player.name} 执行动作: ${action}${amount > 0 ? ' ' + amount : ''}`, 'action');
+            
+            const data = await callApi('/game/action', 'POST', { action, amount });
+            if (data && data.success) {
+                addLog(`机器人 ${player.name} ${action} 成功`, 'info');
+            }
+        }
+
+        // 计算手牌强度（简化版）
+        function calculateHandStrength(player, state) {
+            if (!player.hand || player.hand.length < 2) return 0;
+            
+            const card1 = player.hand[0];
+            const card2 = player.hand[1];
+            
+            // 基础手牌强度
+            let strength = 0;
+            
+            // 对子
+            if (card1.value === card2.value) strength += 0.3;
+            
+            // 同花
+            if (card1.suit === card2.suit) strength += 0.2;
+            
+            // 高牌
+            strength += (Math.max(card1.value, card2.value) - 2) * 0.02;
+            
+            // 连牌潜力
+            const gap = Math.abs(card1.value - card2.value);
+            if (gap <= 1) strength += 0.2;
+            else if (gap <= 2) strength += 0.1;
+            
+            return Math.min(strength, 1);
+        }
+
+        // 增强的游戏状态更新函数
+        async function enhancedUpdateGameState() {
+            const data = await callApi('/game/state');
+            if (!data) return;
+            
+            renderGameState(data);
+            
+            // 如果是机器人的回合，自动执行动作
+            const activePlayerIndex = data.active_player_index;
+            if (activePlayerIndex > 0 && data.game_state !== 'ended' && data.game_state !== 'showdown') {
+                const activePlayer = data.players[activePlayerIndex];
+                if (activePlayer && activePlayer.status === 'active') {
+                    // 延迟执行机器人动作
+                    setTimeout(() => robotAI(activePlayerIndex, data), 1000);
+                }
+            }
+        }
+
         // 页面加载时尝试获取一次状态
-        window.onload = updateGameState;
+        window.onload = enhancedUpdateGameState;
         // 每3秒自动更新一次状态
-        setInterval(updateGameState, 3000);
+        setInterval(enhancedUpdateGameState, 3000);
     </script>
 </body>
 </html>

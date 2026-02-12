@@ -141,7 +141,7 @@ class HandEvaluation:
 
 class Player:
     """玩家"""
-    def __init__(self, name: str, player_id: int, initial_stack: int = 1000):
+    def __init__(self, name: str, player_id: int, initial_stack: int = 1000, is_robot: bool = False):
         self.id = player_id
         self.name = name
         self.stack = initial_stack
@@ -150,6 +150,7 @@ class Player:
         self.status = "active"  # active, folded, all_in, busted
         self.has_acted = False
         self.hand_evaluation: Optional[HandEvaluation] = None
+        self.is_robot = is_robot  # 是否是机器人
     
     def to_dict(self, reveal_hand: bool = False) -> Dict[str, Any]:
         """转换为字典，用于API返回。reveal_hand控制是否暴露手牌。"""
@@ -191,12 +192,13 @@ class PokerGame:
         random.shuffle(self.deck)
         logger.debug(f"创建并洗牌，剩余{len(self.deck)}张牌")
     
-    def add_player(self, name: str) -> Player:
+    def add_player(self, name: str, player_id: Optional[int] = None, initial_stack: int = 1000, is_robot: bool = False) -> Player:
         """添加玩家"""
-        player_id = len(self.players)
-        player = Player(name, player_id)
+        if player_id is None:
+            player_id = len(self.players)
+        player = Player(name, player_id, initial_stack, is_robot)
         self.players.append(player)
-        logger.info(f"添加玩家: {name} (ID: {player_id})")
+        logger.info(f"添加玩家: {name} (ID: {player_id}, {'机器人' if is_robot else '人类'})")
         return player
     
     def start_new_hand(self) -> None:
@@ -597,6 +599,83 @@ class PokerGame:
         winner_names = [p.name for p in winning_players]
         logger.info(f"获胜玩家: {', '.join(winner_names)}，手牌: {best_hand}")
     
+    def robot_ai_action(self, player_id: int) -> Dict[str, Any]:
+        """机器人AI自动行动"""
+        player = self.players[player_id]
+        
+        if not player.is_robot or player.status != "active":
+            return {"success": False, "message": "不是机器人玩家或不能行动"}
+        
+        # 计算手牌强度
+        hand_strength = self._calculate_hand_strength(player)
+        call_amount = self.current_bet - player.bet
+        can_call = call_amount <= player.stack
+        
+        import random
+        random_factor = random.random()
+        
+        action = "fold"
+        amount = 0
+        
+        if hand_strength > 0.7:
+            # 强牌：加注或跟注
+            if random_factor < 0.7 and player.stack > self.current_bet * 2:
+                action = "bet"
+                amount = min(player.stack, max(self.current_bet * 2, 50))
+            elif can_call:
+                action = "call"
+            else:
+                action = "fold"
+        elif hand_strength > 0.4:
+            # 中等牌：跟注或过牌
+            if self.current_bet == player.bet:
+                action = "check"
+            elif can_call:
+                action = "call"
+            else:
+                action = "fold"
+        else:
+            # 弱牌：弃牌或过牌
+            if self.current_bet == player.bet:
+                action = "check"
+            elif call_amount <= player.stack * 0.1:
+                action = "call"
+            else:
+                action = "fold"
+        
+        logger.info(f"机器人 {player.name} AI决策: {action}, 金额: {amount}")
+        return self.player_action(player_id, action, amount)
+    
+    def _calculate_hand_strength(self, player: Player) -> float:
+        """计算手牌强度（简化版）"""
+        if not player.hand or len(player.hand) < 2:
+            return 0.0
+        
+        card1 = player.hand[0]
+        card2 = player.hand[1]
+        
+        strength = 0.0
+        
+        # 对子
+        if card1.value == card2.value:
+            strength += 0.3
+        
+        # 同花
+        if card1.suit == card2.suit:
+            strength += 0.2
+        
+        # 高牌
+        strength += (max(card1.value, card2.value) - 2) * 0.02
+        
+        # 连牌潜力
+        gap = abs(card1.value - card2.value)
+        if gap <= 1:
+            strength += 0.2
+        elif gap <= 2:
+            strength += 0.1
+        
+        return min(strength, 1.0)
+    
     def get_state(self, for_player_id: Optional[int] = None) -> Dict[str, Any]:
         """获取游戏状态。for_player_id用于决定向哪个玩家显示手牌。"""
         reveal_hand_to_all = (self.game_state == "showdown" or self.game_state == "ended")
@@ -651,10 +730,13 @@ def get_hand_description(hand_eval: HandEvaluation) -> str:
 
 # ========== 全局游戏实例 ==========
 game = PokerGame()
-# 添加几个示例玩家
-game.add_player("玩家A")
-game.add_player("玩家B")
-game.add_player("玩家C")
+# 添加玩家：玩家0为人类，其他为机器人
+game.add_player("你", 0, 1000, False)  # 人类玩家
+game.add_player("机器人1", 1, 1000, True)
+game.add_player("机器人2", 2, 1000, True)
+game.add_player("机器人3", 3, 1000, True)
+game.add_player("机器人4", 4, 1000, True)
+game.add_player("机器人5", 5, 1000, True)
 
 # ========== Flask API 路由 ==========
 @app.route('/')
@@ -705,14 +787,36 @@ def player_action():
         logger.error(f"玩家动作执行失败: {str(e)}")
         return jsonify({"success": False, "error": str(e)}), 400
 
+@app.route('/api/game/robot_action', methods=['POST'])
+def robot_action():
+    """机器人自动执行动作"""
+    data = request.get_json()
+    if not data:
+        return jsonify({"success": False, "error": "需要JSON数据"}), 400
+    
+    player_id = data.get('player_id')
+    if player_id is None:
+        return jsonify({"success": False, "error": "需要玩家ID"}), 400
+    
+    try:
+        result = game.robot_ai_action(player_id)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"机器人动作执行失败: {str(e)}")
+        return jsonify({"success": False, "error": str(e)}), 400
+
 @app.route('/api/reset', methods=['POST'])
 def reset_game():
     """重置游戏（用于调试）"""
     global game
     game = PokerGame()
-    game.add_player("玩家A")
-    game.add_player("玩家B")
-    game.add_player("玩家C")
+    # 重新添加相同的玩家配置
+    game.add_player("你", 0, 1000, False)  # 人类玩家
+    game.add_player("机器人1", 1, 1000, True)
+    game.add_player("机器人2", 2, 1000, True)
+    game.add_player("机器人3", 3, 1000, True)
+    game.add_player("机器人4", 4, 1000, True)
+    game.add_player("机器人5", 5, 1000, True)
     logger.info("游戏已重置")
     return jsonify({"success": True, "message": "游戏已重置"})
 
