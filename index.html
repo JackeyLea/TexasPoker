@@ -36,7 +36,7 @@
             text-align: center;
             color: #FFD700;
             margin-top: 0;
-            margin-bottom: 25px;
+            margin-bottom: 15px;  /* 减少底部边距 */
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             font-size: 2.5em;
             font-weight: 800;
@@ -196,13 +196,22 @@
             font-style: italic;
             margin-left: 10px;
         }
-        /* 标题下方控制按钮 - 上下排列，左对齐 */
+        /* 标题区域布局 - 按钮在标题左侧 */
+        .game-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
         .header-controls {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
             gap: 10px;
-            margin-top: 20px;
+            left: 10px;
+            position: relative;
         }
 
         .header-controls button {
@@ -599,7 +608,7 @@
             position: relative;
             width: 100%;
             max-width: 900px;
-            margin: 0 auto;
+            margin: 10px auto;  /* 减少顶部边距 */
             padding-bottom: 120px;  /* 增加底部间距，确保玩家与按钮不重叠 */
         }
 
@@ -627,11 +636,11 @@
 <body>
         <div class="container">
             <div class="game-header">
-                <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
                 <div class="header-controls">
                     <button id="btn-start">开始新游戏</button>
                     <button id="btn-reset">重置服务器</button>
                 </div>
+                <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
             </div>
 
         <div id="winners-container" class="winners-section" style="display: none;">
