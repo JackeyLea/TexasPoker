@@ -97,20 +97,27 @@
             border: 1px solid #4CAF50;
         }
         .winners-section {
-            background: linear-gradient(135deg, rgba(139, 0, 139, 0.9), rgba(75, 0, 130, 0.9));
-            padding: 20px;
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, rgba(139, 0, 139, 0.95), rgba(75, 0, 130, 0.95));
+            padding: 15px 25px;
             border-radius: 15px;
-            margin-bottom: 30px;
             border: 3px solid #FFD700;
             animation: pulse 2s infinite;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            z-index: 15;
+            min-width: 350px;
+            max-width: 450px;
         }
         .winners-section h2 {
             text-align: center;
             margin-top: 0;
+            margin-bottom: 10px;
             color: #FFD700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-            font-size: 1.8em;
+            font-size: 1.6em;
         }
         @keyframes pulse {
             0% { box-shadow: 0 0 5px #FFD700; }
@@ -649,15 +656,16 @@
                 <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
             </div>
 
-        <div id="winners-container" class="winners-section" style="display: none;">
-            <h2>🏆 获胜者 🏆</h2>
-            <div id="winners-list">
-                <!-- 获胜者信息将在这里显示 -->
-            </div>
-        </div>
-
         <div class="game-layout">
             <div class="poker-table">
+                <!-- 获胜信息 - 浮在荷官区域上方 -->
+                <div id="winners-container" class="winners-section" style="display: none;">
+                    <h2>🏆 获胜者 🏆</h2>
+                    <div id="winners-list">
+                        <!-- 获胜者信息将在这里显示 -->
+                    </div>
+                </div>
+
                 <!-- 荷官区域 - 整合游戏信息 -->
                 <div class="dealer-area">
                     <div class="dealer-label">荷官</div>
