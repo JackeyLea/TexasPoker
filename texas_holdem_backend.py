@@ -730,13 +730,10 @@ def get_hand_description(hand_eval: HandEvaluation) -> str:
 
 # ========== 全局游戏实例 ==========
 game = PokerGame()
-# 添加玩家：玩家0为人类，其他为机器人
-game.add_player("你", 0, 1000, False)  # 人类玩家
-game.add_player("机器人1", 1, 1000, True)
-game.add_player("机器人2", 2, 1000, True)
-game.add_player("机器人3", 3, 1000, True)
-game.add_player("机器人4", 4, 1000, True)
-game.add_player("机器人5", 5, 1000, True)
+# 添加玩家：1个人类玩家（下方）+ 2个机器人（左右两侧）
+game.add_player("你", 0, 1000, False)  # 人类玩家 - 下方
+game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
+game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
 
 # ========== Flask API 路由 ==========
 @app.route('/')
@@ -811,13 +808,10 @@ def reset_game():
     """重置游戏（用于调试）"""
     global game
     game = PokerGame()
-    # 重新添加相同的玩家配置
-    game.add_player("你", 0, 1000, False)  # 人类玩家
-    game.add_player("机器人1", 1, 1000, True)
-    game.add_player("机器人2", 2, 1000, True)
-    game.add_player("机器人3", 3, 1000, True)
-    game.add_player("机器人4", 4, 1000, True)
-    game.add_player("机器人5", 5, 1000, True)
+# 重新添加相同的玩家配置（1人类+2机器人）
+game.add_player("你", 0, 1000, False)  # 人类玩家
+game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
+game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
     logger.info("游戏已重置")
     return jsonify({"success": True, "message": "游戏已重置"})
 

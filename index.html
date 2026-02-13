@@ -383,13 +383,10 @@
             color: #4CAF50;
         }
 
-        /* 优化后的6个玩家位置 - 玩家全部在牌桌外侧 */
-        .seat-0 { bottom: -140px; left: 50%; transform: translateX(-50%); z-index: 30; }
-        .seat-1 { top: -140px; left: 50%; transform: translateX(-50%); }
-        .seat-2 { top: 50%; left: -150px; transform: translateY(-50%); }
-        .seat-3 { top: 50%; right: -150px; transform: translateY(-50%); }
-        .seat-4 { top: 0px; left: 20px; }
-        .seat-5 { top: 0px; right: 20px; }
+        /* 优化后的3个玩家位置 - 下方人类玩家，左右机器人 */
+        .seat-0 { bottom: -140px; left: 50%; transform: translateX(-50%); z-index: 30; }  /* 人类玩家 - 下方 */
+        .seat-1 { top: 50%; left: -150px; transform: translateY(-50%); }  /* 机器人 - 左侧 */
+        .seat-2 { top: 50%; right: -150px; transform: translateY(-50%); }  /* 机器人 - 右侧 */
 
         /* 荷官区域 */
         .dealer-area {
@@ -513,22 +510,13 @@
 
                 <!-- 围绕牌桌的玩家座位 -->
                 <div class="player-seat seat-0" id="seat-0">
-                    <!-- 玩家0（人类玩家） -->
+                    <!-- 玩家0（人类玩家 - 下方） -->
                 </div>
                 <div class="player-seat seat-1" id="seat-1">
-                    <!-- 玩家1（机器人） -->
+                    <!-- 玩家1（机器人 - 左侧） -->
                 </div>
                 <div class="player-seat seat-2" id="seat-2">
-                    <!-- 玩家2（机器人） -->
-                </div>
-                <div class="player-seat seat-3" id="seat-3">
-                    <!-- 玩家3（机器人） -->
-                </div>
-                <div class="player-seat seat-4" id="seat-4">
-                    <!-- 玩家4（机器人） -->
-                </div>
-                <div class="player-seat seat-5" id="seat-5">
-                    <!-- 玩家5（机器人） -->
+                    <!-- 玩家2（机器人 - 右侧） -->
                 </div>
             </div>
         </div>
@@ -677,8 +665,8 @@
 
         // 2.1 渲染玩家围绕牌桌布局
         function renderPlayersAroundTable(state) {
-            // 清空所有座位
-            for (let i = 0; i < 6; i++) {
+            // 清空所有座位（3个玩家：0=人类，1-2=机器人）
+            for (let i = 0; i < 3; i++) {
                 const seat = document.getElementById(`seat-${i}`);
                 if (seat) {
                     seat.innerHTML = '';
@@ -711,6 +699,11 @@
                 } else {
                     seat.classList.add('robot');
                 }
+                
+                // 根据位置设置玩家标签
+                const positionLabel = index === 0 ? '(你)' : 
+                                     index === 1 ? '(机器人-左)' :
+                                     '(机器人-右)';
 
                 // 构建手牌显示：人类玩家始终可见，机器人只在摊牌阶段可见
                 let handDisplay = '??';
@@ -725,7 +718,7 @@
                 // 构建玩家信息HTML
                 seat.innerHTML = `
                     <div class="player-name ${index === 0 ? 'player-human' : 'player-robot'}">
-                        ${player.name} ${index === 0 ? '(你)' : '(机器人)'}
+                        ${player.name} ${positionLabel}
                     </div>
                     <div class="player-info-line">筹码: ${player.stack}</div>
                     <div class="player-info-line">下注: ${player.bet}</div>
