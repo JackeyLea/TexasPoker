@@ -388,19 +388,20 @@
         .seat-1 { top: 50%; left: 0px; transform: translateY(-50%); }  /* 玩家1：机器人 - 左侧，向外移动避免重叠 */
         .seat-2 { top: 50%; right: 0px; transform: translateY(-50%); }  /* 玩家2：机器人 - 右侧，向外移动避免重叠 */
 
-        /* 荷官区域 */
+        /* 荷官区域 - 整合游戏信息 */
         .dealer-area {
             position: absolute;
-            top: -80px;
+            top: -120px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.9);
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 25px;
             border: 3px solid #D4AF37;
             text-align: center;
             z-index: 10;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            min-width: 400px;
         }
 
         .dealer-label {
@@ -408,6 +409,34 @@
             font-weight: bold;
             font-size: 1.2em;
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .dealer-game-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .dealer-info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dealer-info-label {
+            font-size: 0.8em;
+            color: #4CAF50;
+            margin-bottom: 2px;
+        }
+
+        .dealer-info-value {
+            font-size: 0.9em;
+            color: #FFD700;
+            font-weight: bold;
         }
 
         /* 公共牌区域 */
@@ -468,25 +497,6 @@
         <div class="container">
             <div class="game-header">
                 <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
-                
-                <div class="game-info">
-                    <div class="info-item">
-                        <span class="info-label">游戏状态:</span>
-                        <span class="info-value" id="game-state">等待游戏开始</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">当前底池:</span>
-                        <span class="info-value" id="pot-amount">0</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">当前下注额:</span>
-                        <span class="info-value" id="current-bet">0</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">行动玩家:</span>
-                        <span class="info-value" id="active-player">-</span>
-                    </div>
-                </div>
             </div>
 
         <div id="winners-container" class="winners-section" style="display: none;">
@@ -498,9 +508,27 @@
 
         <div class="game-layout">
             <div class="poker-table">
-                <!-- 荷官区域 -->
+                <!-- 荷官区域 - 整合游戏信息 -->
                 <div class="dealer-area">
                     <div class="dealer-label">荷官</div>
+                    <div class="dealer-game-info">
+                        <div class="dealer-info-item">
+                            <span class="dealer-info-label">游戏状态</span>
+                            <span class="dealer-info-value" id="game-state">等待游戏开始</span>
+                        </div>
+                        <div class="dealer-info-item">
+                            <span class="dealer-info-label">当前底池</span>
+                            <span class="dealer-info-value" id="pot-amount">0</span>
+                        </div>
+                        <div class="dealer-info-item">
+                            <span class="dealer-info-label">下注额</span>
+                            <span class="dealer-info-value" id="current-bet">0</span>
+                        </div>
+                        <div class="dealer-info-item">
+                            <span class="dealer-info-label">行动玩家</span>
+                            <span class="dealer-info-value" id="active-player">-</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 公共牌区域 -->
