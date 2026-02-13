@@ -237,18 +237,13 @@ class PokerGame:
                 if player.status == "active":
                     player.hand.append(self.deck.pop())
         
-        # 确定庄家和小盲、大盲位置
-        active_players = [p for p in self.players if p.status == "active"]
+        # 对于3人桌，固定庄家位置为右侧玩家（玩家2），实现顺时针操作
+        # 顺时针顺序：右侧机器人(2) -> 下方人类(0) -> 左侧机器人(1)
+        self.dealer_position = 2  # 右侧机器人作为庄家（荷官位）
         
-        # 找到下一个活跃玩家作为庄家
-        for _ in range(len(self.players)):
-            self.dealer_position = (self.dealer_position + 1) % len(self.players)
-            if self.players[self.dealer_position].status == "active":
-                break
-        
-        # 找到小盲和大盲位置
-        sb_index = self._find_next_active_player(self.dealer_position)
-        bb_index = self._find_next_active_player(sb_index)
+        # 找到小盲和大盲位置（从庄家顺时针）
+        sb_index = self._find_next_active_player(self.dealer_position)  # 左侧机器人
+        bb_index = self._find_next_active_player(sb_index)  # 下方人类玩家
         
         # 收取盲注
         sb_player = self.players[sb_index]
@@ -265,7 +260,7 @@ class PokerGame:
             logger.info(f"大盲 {bb_player.name} 下注 {bb_bet}")
         
         self.current_bet = self.big_blind
-        # 设置行动玩家（大盲位下一位活跃玩家）
+        # 设置行动玩家（大盲位下一位，即庄家右侧机器人）
         self.active_player_index = self._find_next_active_player(bb_index)
         self.game_state = "preflop"
         
@@ -731,9 +726,10 @@ def get_hand_description(hand_eval: HandEvaluation) -> str:
 # ========== 全局游戏实例 ==========
 game = PokerGame()
 # 添加玩家：1个人类玩家（下方）+ 2个机器人（左右两侧）
-game.add_player("你", 0, 1000, False)  # 人类玩家 - 下方
-game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
-game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
+# 操作顺序（顺时针）：右侧机器人(2) -> 下方人类(0) -> 左侧机器人(1)
+game.add_player("你", 0, 1000, False)  # 人类玩家 - 下方（座位0）
+game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧（座位1）
+game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧（座位2，庄家位）
 
 # ========== Flask API 路由 ==========
 @app.route('/')
@@ -808,10 +804,10 @@ def reset_game():
     """重置游戏（用于调试）"""
     global game
     game = PokerGame()
-# 重新添加相同的玩家配置（1人类+2机器人）
-game.add_player("你", 0, 1000, False)  # 人类玩家
-game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
-game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
+        # 重新添加相同的玩家配置（1人类+2机器人）- 注意顺序：0=下方人类，1=左侧机器人，2=右侧机器人
+        game.add_player("你", 0, 1000, False)  # 人类玩家 - 下方
+        game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
+        game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
     logger.info("游戏已重置")
     return jsonify({"success": True, "message": "游戏已重置"})
 
