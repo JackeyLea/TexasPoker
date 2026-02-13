@@ -804,10 +804,10 @@ def reset_game():
     """重置游戏（用于调试）"""
     global game
     game = PokerGame()
-        # 重新添加相同的玩家配置（1人类+2机器人）- 注意顺序：0=下方人类，1=左侧机器人，2=右侧机器人
-        game.add_player("你", 0, 1000, False)  # 人类玩家 - 下方
-        game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
-        game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
+    # 重新添加相同的玩家配置（1人类+2机器人）- 注意顺序：0=下方人类，1=左侧机器人，2=右侧机器人
+    game.add_player("你", 0, 1000, False)  # 人类玩家 - 下方
+    game.add_player("机器人1", 1, 1000, True)  # 机器人 - 左侧
+    game.add_player("机器人2", 2, 1000, True)  # 机器人 - 右侧
     logger.info("游戏已重置")
     return jsonify({"success": True, "message": "游戏已重置"})
 
