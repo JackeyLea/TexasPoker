@@ -439,6 +439,116 @@
             font-weight: bold;
         }
 
+        /* 用户操作面板 - 放置在用户右侧 */
+        .player-action-panel {
+            position: absolute;
+            bottom: 100px;
+            right: 120px;
+            z-index: 25;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid #D4AF37;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            min-width: 200px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .action-buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .action-buttons button:hover:not(:disabled) {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .action-buttons button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .action-buttons #btn-fold {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .action-buttons #btn-fold:hover:not(:disabled) {
+            background: linear-gradient(135deg, #d32f2f, #f44336);
+        }
+
+        .action-buttons #btn-check, .action-buttons #btn-call {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .action-buttons #btn-check:hover:not(:disabled), 
+        .action-buttons #btn-call:hover:not(:disabled) {
+            background: linear-gradient(135deg, #1976D2, #2196F3);
+        }
+
+        .action-buttons #btn-bet, .action-buttons #btn-raise {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+
+        .action-buttons #btn-bet:hover:not(:disabled), 
+        .action-buttons #btn-raise:hover:not(:disabled) {
+            background: linear-gradient(135deg, #F57C00, #FF9800);
+        }
+
+        .bet-input-section {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .bet-input-section label {
+            display: block;
+            color: #FFD700;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .bet-input-section input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #D4AF37;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .bet-input-section #btn-confirm-bet {
+            width: 100%;
+            padding: 8px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .bet-input-section #btn-confirm-bet:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+
         /* 公共牌区域 */
         .community-cards-area {
             position: absolute;
@@ -542,6 +652,23 @@
                 <div class="player-seat seat-0" id="seat-0">
                     <!-- 玩家0（人类玩家 - 下方） -->
                 </div>
+                
+                <!-- 用户操作面板 - 放置在用户右侧 -->
+                <div class="player-action-panel" id="player-action-panel">
+                    <div class="action-buttons">
+                        <button id="btn-fold" disabled>弃牌</button>
+                        <button id="btn-check" disabled>过牌</button>
+                        <button id="btn-call" disabled>跟注</button>
+                        <button id="btn-bet" disabled>下注</button>
+                        <button id="btn-raise" disabled>加注</button>
+                    </div>
+                    <div class="bet-input-section" id="bet-controls" style="display: none;">
+                        <label for="bet-amount">下注/加注额度:</label>
+                        <input type="number" id="bet-amount" min="1" value="20">
+                        <button id="btn-confirm-bet">确认下注</button>
+                    </div>
+                </div>
+                
                 <div class="player-seat seat-1" id="seat-1">
                     <!-- 玩家1（机器人 - 左侧） -->
                 </div>
@@ -559,11 +686,6 @@
 
         <div class="controls">
             <button id="btn-start">开始新游戏</button>
-            <button id="btn-fold" disabled>弃牌</button>
-            <button id="btn-check" disabled>过牌</button>
-            <button id="btn-bet" disabled>下注</button>
-            <button id="btn-call" disabled>跟注</button>
-            <button id="btn-raise" disabled>加注</button>
             <button id="btn-reset">重置服务器</button>
         </div>
 
