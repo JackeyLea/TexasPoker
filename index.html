@@ -21,13 +21,14 @@
             overflow-x: hidden;
         }
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 95%;
+            max-width: 1400px;
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 20px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
             border: 2px solid #D4AF37;
+            overflow: visible;
         }
         h1 {
             text-align: center;
@@ -216,9 +217,7 @@
             margin: 40px auto;
             border: 12px solid #8B4513;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            z-index: 1;
         }
 
         .player-seat {
@@ -230,7 +229,7 @@
             border: 3px solid #666;
             padding: 12px;
             transition: all 0.3s ease;
-            z-index: 1;
+            z-index: 20;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
@@ -290,17 +289,17 @@
         }
 
         /* 优化后的6个玩家位置 - 避免与公共牌重叠 */
-        .seat-0 { bottom: 30px; left: 50%; transform: translateX(-50%); }
-        .seat-1 { top: 30px; left: 50%; transform: translateX(-50%); }
-        .seat-2 { top: 50%; left: 40px; transform: translateY(-50%); }
-        .seat-3 { top: 50%; right: 40px; transform: translateY(-50%); }
-        .seat-4 { top: 120px; left: 150px; }
-        .seat-5 { top: 120px; right: 150px; }
+        .seat-0 { bottom: -45px; left: 50%; transform: translateX(-50%); }
+        .seat-1 { top: -45px; left: 50%; transform: translateX(-50%); }
+        .seat-2 { top: 50%; left: -20px; transform: translateY(-50%); }
+        .seat-3 { top: 50%; right: -20px; transform: translateY(-50%); }
+        .seat-4 { top: 80px; left: 100px; }
+        .seat-5 { top: 80px; right: 100px; }
 
         /* 荷官区域 */
         .dealer-area {
             position: absolute;
-            top: -100px;
+            top: -80px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.9);
@@ -325,10 +324,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 350px;
-            height: 140px;
+            width: 380px;
+            height: 120px;
             background: rgba(0, 0, 0, 0.6);
-            border-radius: 70px;
+            border-radius: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -345,11 +344,10 @@
         }
 
         .game-layout {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
             position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         @media (max-width: 768px) {
