@@ -383,10 +383,10 @@
             color: #4CAF50;
         }
 
-        /* 优化后的3个玩家位置 - 下方人类玩家，左右机器人 */
-        .seat-0 { bottom: -80px; left: 50%; transform: translateX(-50%); z-index: 30; }  /* 玩家0：人类 - 下方，靠近牌桌 */
-        .seat-1 { top: 50%; left: -150px; transform: translateY(-50%); }  /* 玩家1：机器人 - 左侧 */
-        .seat-2 { top: 50%; right: -150px; transform: translateY(-50%); }  /* 玩家2：机器人 - 右侧，庄家位 */
+        /* 优化后的3个玩家位置 - 位于公共牌和牌桌边缘中间 */
+        .seat-0 { bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 30; }  /* 玩家0：人类 - 下方，位于公共牌和牌桌边缘中间 */
+        .seat-1 { top: 50%; left: 40px; transform: translateY(-50%); }  /* 玩家1：机器人 - 左侧，位于公共牌和牌桌边缘中间 */
+        .seat-2 { top: 50%; right: 40px; transform: translateY(-50%); }  /* 玩家2：机器人 - 右侧，位于公共牌和牌桌边缘中间 */
 
         /* 荷官区域 */
         .dealer-area {
