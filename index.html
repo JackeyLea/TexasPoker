@@ -196,16 +196,37 @@
             font-style: italic;
             margin-left: 10px;
         }
-        .controls {
+        /* 标题下方控制按钮 - 上下排列，左对齐 */
+        .header-controls {
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 80px;  /* 增加顶部间距，远离玩家区域 */
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .header-controls button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+            min-width: 120px;
+        }
+
+        .header-controls button:hover {
+            background: linear-gradient(135deg, #7B1FA2, #9C27B0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .header-controls button:active {
+            transform: translateY(0);
         }
         button {
             padding: 16px 32px;
@@ -607,6 +628,10 @@
         <div class="container">
             <div class="game-header">
                 <h1>♠️ ♥️ 德州扑克 ♣️ ♦️</h1>
+                <div class="header-controls">
+                    <button id="btn-start">开始新游戏</button>
+                    <button id="btn-reset">重置服务器</button>
+                </div>
             </div>
 
         <div id="winners-container" class="winners-section" style="display: none;">
@@ -678,16 +703,7 @@
             </div>
         </div>
 
-        <div class="bet-input-section" id="bet-controls" style="display: none;">
-            <label for="bet-amount">下注/加注额度:</label>
-            <input type="number" id="bet-amount" min="1" value="20">
-            <button id="btn-confirm-bet">确认下注</button>
-        </div>
 
-        <div class="controls">
-            <button id="btn-start">开始新游戏</button>
-            <button id="btn-reset">重置服务器</button>
-        </div>
 
         <div class="log">
             <h3>游戏日志</h3>
