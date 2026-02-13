@@ -22,25 +22,26 @@
             background-attachment: fixed;
         }
         .container {
-            width: 95%;
-            max-width: 1400px;
+            width: 98%;
+            max-width: 1200px;
             background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border: 3px solid #D4AF37;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+            border: 2px solid #D4AF37;
             overflow: visible;
             backdrop-filter: blur(5px);
+            margin: 10px auto;
         }
         h1 {
             text-align: center;
             color: #FFD700;
             margin-top: 0;
-            margin-bottom: 15px;  /* 减少底部边距 */
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            font-size: 2.5em;
-            font-weight: 800;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            font-size: 2.2em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             background: linear-gradient(to right, #FFD700, #FFA500);
             -webkit-background-clip: text;
             background-clip: text;
@@ -141,17 +142,17 @@
             border-radius: 10px;
         }
         .card {
-            width: 80px;
-            height: 112px;
+            width: 70px;
+            height: 98px;
             background-color: white;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-size: 2.2em;
+            font-size: 1.8em;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
             border: 1px solid #ccc;
             color: #333;
             position: relative;
@@ -201,31 +202,31 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 20px;
+            gap: 25px;
+            margin-bottom: 15px;
             position: relative;
         }
 
         .header-controls {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            left: 10px;
+            gap: 8px;
+            left: 5px;
             position: relative;
         }
 
         .header-controls button {
-            padding: 12px 25px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             background: linear-gradient(135deg, #9C27B0, #7B1FA2);
             color: white;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9em;
-            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
-            min-width: 120px;
+            font-size: 0.85em;
+            box-shadow: 0 3px 8px rgba(156, 39, 176, 0.3);
+            min-width: 100px;
         }
 
         .header-controls button:hover {
@@ -238,15 +239,15 @@
             transform: translateY(0);
         }
         button {
-            padding: 16px 32px;
-            font-size: 1.1em;
+            padding: 12px 24px;
+            font-size: 1em;
             font-weight: bold;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            min-width: 150px;
-            letter-spacing: 0.5px;
+            min-width: 120px;
+            letter-spacing: 0.3px;
             position: relative;
             overflow: hidden;
         }
@@ -334,27 +335,27 @@
         /* 牌桌布局样式 */
         .poker-table {
             position: relative;
-            width: 800px;
-            height: 500px;
+            width: 700px;
+            height: 450px;
             background: radial-gradient(ellipse at center, #2a6c3c 0%, #0a3d1f 60%, #051f14 100%);
-            border-radius: 250px;
-            margin: 40px auto;
-            border: 15px solid #8B4513;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            border-radius: 225px;
+            margin: 25px auto;
+            border: 12px solid #8B4513;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
             z-index: 1;
         }
 
         .player-seat {
             position: absolute;
-            width: 180px;
-            height: 130px;
+            width: 160px;
+            height: 115px;
             background: linear-gradient(135deg, rgba(40, 40, 40, 0.95), rgba(30, 30, 30, 0.95));
-            border-radius: 15px;
-            border: 3px solid #666;
-            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #666;
+            padding: 10px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 20;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
 
         .player-seat.active {
@@ -414,24 +415,24 @@
         }
 
         /* 优化后的3个玩家位置 - 调整以避免与公共牌重叠 */
-        .seat-0 { bottom: 20px; left: 40%; transform: translateX(-40%); z-index: 30; }  /* 玩家0：人类 - 下方，略微下移 */
-        .seat-1 { top: 50%; left: 0px; transform: translateY(-50%); }  /* 玩家1：机器人 - 左侧，向外移动避免重叠 */
-        .seat-2 { top: 50%; right: 0px; transform: translateY(-50%); }  /* 玩家2：机器人 - 右侧，向外移动避免重叠 */
+        .seat-0 { bottom: 15px; left: 40%; transform: translateX(-40%); z-index: 30; }  /* 玩家0：人类 - 下方，略微下移 */
+        .seat-1 { top: 50%; left: -10px; transform: translateY(-50%); }  /* 玩家1：机器人 - 左侧，向外移动避免重叠 */
+        .seat-2 { top: 50%; right: -10px; transform: translateY(-50%); }  /* 玩家2：机器人 - 右侧，向外移动避免重叠 */
 
         /* 荷官区域 - 整合游戏信息，位于牌桌和公共牌中间 */
         .dealer-area {
             position: absolute;
-            top: 5%;
+            top: 3%;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.9);
-            padding: 15px 30px;
-            border-radius: 25px;
-            border: 3px solid #D4AF37;
+            padding: 12px 25px;
+            border-radius: 20px;
+            border: 2px solid #D4AF37;
             text-align: center;
             z-index: 10;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-            min-width: 400px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+            min-width: 350px;
         }
 
         .dealer-label {
@@ -472,16 +473,16 @@
         /* 用户操作面板 - 放置在界面右下角 */
         .player-action-panel {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             z-index: 25;
             background: rgba(0, 0, 0, 0.9);
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 12px;
             border: 2px solid #D4AF37;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
-            min-width: 200px;
+            min-width: 180px;
         }
 
         .action-buttons {
@@ -585,16 +586,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 520px;  /* 放大宽度以容纳5张牌 */
-            height: 160px; /* 放大高度以容纳牌的高度 */
+            width: 450px;  /* 缩小宽度以容纳5张牌 */
+            height: 140px; /* 缩小高度以容纳牌的高度 */
             background: rgba(0, 0, 0, 0.6);
-            border-radius: 80px;
+            border-radius: 70px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 4px solid #D4AF37;
+            border: 3px solid #D4AF37;
             z-index: 5;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .community-cards {
