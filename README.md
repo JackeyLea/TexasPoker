@@ -26,20 +26,17 @@ B/S架构的德州扑克
 
 ## 运行
 
-### H5版本
-```bash
-# 后端
-python texas_holdem_backend.py
-
-# 前端：双击打开 index.html
-```
-
 ### Vue版本（推荐）
 ```bash
-# 1. 启动后端
+# 方式1：使用启动脚本（推荐）
+# Windows: 双击 start_game.bat
+# Linux/Mac: ./start_game.sh
+
+# 方式2：手动启动
+# 终端1：启动后端
 python texas_holdem_backend.py
 
-# 2. 在另一个终端，启动前端
+# 终端2：启动前端
 cd frontend
 npm install
 npm run dev
@@ -55,6 +52,22 @@ npm run dev
 - ✅ 更好的开发体验（热重载、调试工具）
 - ✅ 现代化构建工具（Vite）
 - ✅ 与原版功能完全兼容
+
+## 版本历史
+
+### 2026.04.06
+- **重大更新**：移除H5版本，全面迁移到Vue 3架构
+- 使用Vite作为构建工具
+- 提升开发体验和代码可维护性
+- 添加自动化启动脚本
+
+### 2026.02.12
+- 删除Qt版代码
+- 基于前后端架构，使用Python+H5开发新版本
+
+### 2024.08.20
+- 添加玩家5张牌牌型检测功能
+- 添加两个玩家牌型对比功能
 
 ## TODO
 
