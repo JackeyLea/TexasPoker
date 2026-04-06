@@ -64,3 +64,6 @@ Thumbs.db
 *.temp
 .cache/
 .parcel-cache/
+
+# java
+target/
