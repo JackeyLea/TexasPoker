@@ -23,14 +23,7 @@
 
 ## 项目结构对比
 
-### H5版本
-```
-TexasPoker/
-├── index.html              # 所有代码在一个文件
-└── texas_holdem_backend.py # 后端
-```
-
-### Vue版本
+### Vue版本（当前）
 ```
 TexasPoker/
 ├── frontend/               # Vue前端项目
@@ -43,11 +36,18 @@ TexasPoker/
 │   ├── package.json          # 依赖管理
 │   ├── vite.config.js        # 构建配置
 │   └── README.md             # 前端文档
-├── index.html              # 保留H5版本
 ├── texas_holdem_backend.py # 后端
 ├── start_game.bat          # Windows启动脚本
 ├── start_game.sh           # Linux/Mac启动脚本
-└── MIGRATION_GUIDE.md      # 迁移指南
+├── MIGRATION_GUIDE.md      # 迁移指南
+└── VUE_MIGRATION_SUMMARY.md # 迁移总结
+```
+
+### H5版本（已移除）
+```
+TexasPoker/
+├── index.html              # 所有代码在一个文件（已删除）
+└── texas_holdem_backend.py # 后端
 ```
 
 ## 核心功能迁移说明
