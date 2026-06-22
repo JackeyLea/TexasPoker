@@ -1,2 +1,3 @@
-# TexasPoker
-德州扑克
+# Games
+
+通用游戏框架
